@@ -1,0 +1,10 @@
+# NPM Ignore
+
+# Examples
+#
+#   node_modules/
+#   .git/
+#
+node_modules/
+.git/
+sources/
