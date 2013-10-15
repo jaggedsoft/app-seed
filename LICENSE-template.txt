@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2013 Fatih Cetinkaya (http://github.com/cmfatih/app-seed)
+Copyright (c) 2013 Author (Url)
 
 Permission is hereby granted, free of charge, to any person obtaining a 
 copy of this software and associated documentation files (the "Software"), 
