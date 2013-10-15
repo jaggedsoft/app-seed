@@ -1,23 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="app">
 <head>
   <title>App</title>
   <meta name="description" content="App" />
-  <meta charset='utf-8' />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Language" content="en" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
-  <link rel="stylesheet" href="css/app.css" type="text/css" />
+  <link href="/favicon.ico" rel="icon" type="image/x-icon" />
 
+  <!-- for IE support of html5 elements and media queries -->
   <!--[if lt IE 9]>
-  <script src="lib/html5shiv/html5shiv.js"></script>
-  <script src="lib/respond/respond.min.js"></script>
+  <script src="lib/misc/html5shiv.js"></script>
+  <script src="lib/misc/respond.min.js"></script>
   <![endif]-->
-  <script type="text/javascript" src="js/app.js"></script>
+
+  <!-- for production
+  <link href="lib/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+  -->
+  <link href="lib/bootstrap/3.0.0/css/bootstrap.css" rel="stylesheet" />
+  <link href="css/app.css" rel="stylesheet" />
+
+  <!-- for production
+  <script src="lib/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+  <script src="lib/angular/1.2.0-rc.2/angular.min.js"></script>
+  <script src="lib/angular/1.2.0-rc.2/angular.route.min.js"></script>
+  <script src="lib/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  -->
+  <script src="lib/jquery/1.10.2/jquery-1.10.2.js"></script>
+  <script src="lib/angular/1.2.0-rc.2/angular.js"></script>
+  <script src="lib/angular/1.2.0-rc.2/angular-route.js"></script>
+  <script src="lib/bootstrap/3.0.0/js/bootstrap.js"></script>
+  <script src="js/app.js"></script>
 </head>
 <body>
+  <!-- header -->
 
+  <!-- body -->
+  <div data-ng-view=""></div>
+
+  <!-- footer -->
 </body>
 </html>
