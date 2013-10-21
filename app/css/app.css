@@ -25,3 +25,11 @@ body {
 /* for portrait small phones */
 @media (max-width: 320px) {
 }
+
+/* responsive common */
+@media (max-width: 480px) {
+  body {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
