@@ -6,3 +6,6 @@ rem For the full copyright and license information, please view the LICENSE.txt 
 rem Init reqs
 cls
 setlocal
+
+rem Init vars
+set SCRIPT_DIR=%~dp0
