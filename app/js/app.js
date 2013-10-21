@@ -26,11 +26,15 @@ app.gResolves = [
     key: 'sessInit',
     factory: ['$http', '$q', '$location', function($http, $q, $location) {
 
+      //console.log('location.path:' + $location.path());               // for debug
+
       // Init vars
       var defer = $q.defer();
 
       // Init session
-      // session code
+      
+      /* session code */
+
       defer.resolve();
 
       return defer.promise;
@@ -41,7 +45,7 @@ app.gResolves = [
 // App providers
 
 // App config
-app.config(['$routeProvider', function ($routeProvider) {
+app.config(['$routeProvider', function($routeProvider) {
 
   // Init vars
   var tRoutes       = app.gRoutes,
