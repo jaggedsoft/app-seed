@@ -24,6 +24,7 @@ git clone https://github.com/cmfatih/app-seed.git
   * Keep It Simple, Stupid (KISS)
   * Do One Thing, and do it well (DOT)
   * Don't Repeat Yourself (DRY)
+  * Don't Make It Complicated, for a little benefit. (DMIC)
 
 #### Permissions
 
