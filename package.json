@@ -1,0 +1,36 @@
+{
+  "name": "app-seed",
+  "version": "0.0.1",
+  "description": "App Seed is an application skeleton for web apps. It is still under heavy development.",
+  "keywords": [
+    "web",
+    "app",
+    "angularjs",
+    "bootstrap",
+    "jquery"
+  ],
+  "homepage": "http://github.com/cmfatih/app-seed",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cmfatih/app-seed.git"
+  },
+  "bugs": {
+    "url": "http://github.com/cmfatih/app-seed/issues"
+  },
+  "license": "MIT",
+  "private": false,
+  "author": {
+    "name": "cmfatih",
+    "url": "http://github.com/cmfatih"
+  },
+  "contributors": [],
+  "main": "",
+  "scripts": {
+    "test": "node ./test/test-all.js"
+  },
+  "engines": [
+    "node >= 0.8.0"
+  ],
+  "dependencies": {
+  }
+}
