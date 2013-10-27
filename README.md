@@ -68,6 +68,7 @@ sudo chmod 755 scripts/app.sh
 |   |- app.bat                : default shell script for WIN platform
 |   |- app.sh                 : default shell script for POSIX platforms
 |- test                       : test files
+|   |- test-all.js            : default test file
 |- .gitattributes             : attributes for GIT
 |- .gitignore                 : ignore settings for GIT
 |- .jshintrc                  : config for JSHint
