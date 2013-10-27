@@ -74,10 +74,16 @@ sudo chmod 755 scripts/app.sh
 |- .jshintrc                  : config for JSHint
 |- .npmignore                 : ignore settings for NPM
 |- LICENSE.txt                : license file
+|- package.json               : package file for NPM
 |- README.md                  : readme file
 ```
 
 ### Changelog
+
+  * 20131026
+    * the version declaration: 0.0.1
+    * package.json
+    * test-all.js
 
   * 20131020
     * README file
