@@ -42,8 +42,6 @@ app.gResolves = [
   }
 ];
 
-// App providers
-
 // App config
 app.config(['$routeProvider', function($routeProvider) {
 
@@ -91,6 +89,56 @@ app.config(['$routeProvider', function($routeProvider) {
   // Default route
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
+
+// App providers
+
+// Util provider
+app.provider('util', function() {
+  // return for factory
+  return {
+    $get: ['$injector', function($injector) {
+      return {
+        gotoUrl: function(iUrl, iParam) {
+          console.log(iUrl);
+          // Check params
+          if(iUrl == undefined) return false;
+
+          // Init vars
+          var iTarget         = 'self',
+              iConfirm        = false,
+              iConfirmMsg     = ''
+          ;
+
+          // Init params
+          if(iParam != undefined) {
+            if(iParam.target != undefined)      iTarget     = iParam.target;
+            if(iParam.confirm != undefined)     iConfirm    = iParam.confirm;
+            if(iParam.confirmMsg != undefined)  iConfirmMsg = iParam.confirmMsg;
+          }
+
+          // Confirmation
+          if(iConfirm == true) {
+            var TCM = confirm(iConfirmMsg);
+
+            if(TCM == false) {
+              return false;
+            }
+          }
+
+          // window open
+          if(iTarget == '_blank') {
+            window.open(iUrl, '_blank');
+          }
+          else {
+            window.open(iUrl, '_self');
+          }
+
+          return true;
+        }
+      }
+    }]
+  }
+});
 
 // App controllers
 
