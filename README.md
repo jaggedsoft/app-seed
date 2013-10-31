@@ -83,6 +83,7 @@ sudo chmod 755 scripts/app.sh
 
   * 20131030
     * scripts/app.js
+    * Bootstrap 3.0.1
 
   * 20131026
     * the version declaration: 0.0.1
