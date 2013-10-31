@@ -66,6 +66,7 @@ sudo chmod 755 scripts/app.sh
 |   |- app.log                : default app log file
 |- scripts                    : script files for shell, cron, js, etc...
 |   |- app.bat                : default shell script for WIN platform
+|   |- app.js                 : default shell script for Node.js
 |   |- app.sh                 : default shell script for POSIX platforms
 |- test                       : test files
 |   |- test-all.js            : default test file
@@ -79,6 +80,9 @@ sudo chmod 755 scripts/app.sh
 ```
 
 ### Changelog
+
+  * 20131030
+    * scripts/app.js
 
   * 20131026
     * the version declaration: 0.0.1
