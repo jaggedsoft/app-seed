@@ -24,8 +24,9 @@
     "url": "http://github.com/cmfatih"
   },
   "contributors": [],
-  "main": "",
+  "main": "./scripts/app.js",
   "scripts": {
+    "start": "node ./scripts/app.js",
     "test": "node ./test/test-all.js"
   },
   "engines": [
