@@ -77,6 +77,8 @@ sudo chmod 755 scripts/app.sh
 |- LICENSE.txt                : license file
 |- package.json               : package file for NPM
 |- README.md                  : readme file
+|- template-LICENSE.txt       : template license file
+|- template-README.md         : template readme file
 ```
 
 ### Changelog
