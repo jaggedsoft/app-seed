@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // Init reqs
 var mFS         = require('fs'),    // fs module
     mHapi       = require('hapi'),  // hapi module

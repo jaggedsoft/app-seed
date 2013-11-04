@@ -33,11 +33,12 @@ npm start
 #### Permissions
 
 ```
-sudo find . -type f -exec chmod 644 {} +
-sudo find . -type d -exec chmod 755 {} +
-sudo chmod 775 logs/
-sudo chmod 664 logs/app.log
-sudo chmod 755 scripts/app.sh
+find . -type f -exec chmod 644 {} +
+find . -type d -exec chmod 755 {} +
+chmod 775 logs/
+chmod 664 logs/app.log
+chmod 755 scripts/app.sh
+chmod 755 scripts/app.js
 ```
 
 #### File Structure
