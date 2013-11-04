@@ -7,10 +7,14 @@
 ### Installation
 
 ```
-git clone https://github.com/cmfatih/app-seed.git
+npm app-seed
 ```
 
 ### Usage
+
+```
+npm start
+```
 
 ### Notes
 
@@ -82,6 +86,10 @@ sudo chmod 755 scripts/app.sh
 ```
 
 ### Changelog
+
+  * 20131104
+    * Simple http server (scripts/app.js)
+    * npm start
 
   * 20131030
     * scripts/app.js

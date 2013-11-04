@@ -1,10 +1,12 @@
 // Init reqs
-var mFS         = require('fs'),  // fs module
-    mPath       = require('path') // path module
+var mFS         = require('fs'),    // fs module
+    mHapi       = require('hapi'),  // hapi module
+    mPath       = require('path')   // path module
 ;
 
 // Init global vars
 var gPathCur,     // current path
+    gPathScrDir,  // script path
     gConfig,      // config
     gConfigError, // config error
     gArgs,        // arguments
@@ -13,6 +15,7 @@ var gPathCur,     // current path
 ;
 
 gPathCur        = mFS.realpathSync('.') + mPath.sep;
+gPathScrDir     = __dirname;
 gConfig         = {"configFile": null};
 gConfigError    = null;
 gArgs           = process.argv;
@@ -39,7 +42,7 @@ if(gArgsCnt > 2) {
 if(gConfig.configFile !== null) {
   if(mFS.existsSync(gConfig.configFile)) {
     try {
-      gConfig       = JSON.parse(mFS.readFileSync(gConfig.configFile, encoding='utf8'));
+      gConfig       = JSON.parse(mFS.readFileSync(gConfig.configFile, encoding='utf8')); //+++ Check exists members of gConfig
     }
     catch(e) {
       gConfigError  = 'Invalid configuration file. (' + e + ')';
@@ -51,7 +54,7 @@ if(gConfig.configFile !== null) {
 }
 
 if(gConfigError === null) {
-  // Check config paramaters
+  // Check config paramaters such as server port etc...
 }
 
 if(gConfigError !== null) {
@@ -75,6 +78,62 @@ function logConsole(iStr) {
   return console.log(returnRes);
 }
 
-// Code begin
+// Global config
+gConfig = {
+  hapi: {
+    server: {
+      port: 12080
+    },
+    yar: {
+      options: {
+        name: 'appsess',
+        maxCookieSize: 0,
+        cookieOptions: {
+          password: 'cOOkIEPaSSWoRD',
+          isSecure: false //+++ Take from env or config file
+        }
+      }
+    }
+  }
+};
 
-logConsole('done!');
+// Create server
+gServer = new mHapi.createServer('localhost', gConfig.hapi.server.port);
+
+// Init yar plugin
+gServer.pack.allow({ext: true}).require('yar', gConfig.hapi.yar.options, function(err) {
+  if(err) {
+    logConsole('Yar plugin could not be initialized! (' + err + ')');
+    throw err;
+  }
+});
+
+// Init server routes
+
+// Default route for static files
+gRoutes = [
+  {
+    method: 'GET',
+    path: '/{path*}',
+    handler: {
+      directory: {
+        listing: false,
+        index: true,
+        path: function(request) {
+
+          //logConsole('request.params:' + JSON.stringify(request.params));  // for debug
+          //logConsole('request.path:' + JSON.stringify(request.path));      // for debug
+
+          return gPathScrDir + '/../app';
+        }
+      }
+    }
+  }
+];
+
+// Start server
+gServer.route(gRoutes);
+
+gServer.start(function() {
+  logConsole('Server is listening on port ' + gConfig.hapi.server.port);
+});
