@@ -7,7 +7,7 @@
 ### Installation
 
 ```
-npm app-seed
+npm install app-seed
 ```
 
 ### Usage
