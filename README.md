@@ -18,7 +18,7 @@ npm start
 
 ### Notes
 
-#### App, design and coding goals
+#### App Design goals
 
   * Use JavaScript
   * Use Node.js
@@ -29,6 +29,23 @@ npm start
   * Do One Thing, and do it well (DOT)
   * Don't Repeat Yourself (DRY)
   * Don't Make It Complicated, for a little benefit. (DMIC)
+
+#### Coding
+
+  * For closures; named function expressions used due benefits such as recursion.
+  * Variables (including closures) defined first due hoisting.
+  * "m" prefix used for module variables.
+  * "g" prefix used for global variables.
+  * "t" prefix used for temp (has generic name) variables.
+  * "i" prefix used for function (global) arguments.
+  * to string:
+    - `(var + '')`
+    - `.toString()`
+  * is array:
+    - `!(var instanceof Array)`
+    - `(Object.prototype.toString.call(var) === '[object Array]')`
+  * is function:
+    - `(var !== undefined && typeof var === 'function')`
 
 #### Permissions
 
@@ -90,16 +107,13 @@ chmod 755 scripts/app.js
 
   * 20131104
     * Simple http server (scripts/app.js)
-    * npm start
 
   * 20131030
-    * scripts/app.js
     * Bootstrap 3.0.1
 
   * 20131026
     * the version declaration: 0.0.1
     * package.json
-    * test-all.js
 
   * 20131020
     * README file
