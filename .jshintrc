@@ -1,5 +1,3 @@
-# JSHint Configuration
-
 {
   "node": true,
   "eqeqeq": true,
