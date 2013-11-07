@@ -105,6 +105,9 @@ chmod 755 scripts/app.js
 
 ### Changelog
 
+  * 20131106
+    * Bootstrap 3.0.2
+
   * 20131104
     * Simple http server (scripts/app.js)
 
