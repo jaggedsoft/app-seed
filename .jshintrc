@@ -1,5 +1,12 @@
+//JSHint Configuration
+
 {
   "node": true,
   "eqeqeq": true,
-  "trailing": true
+  "trailing": true,
+  "strict": false,
+
+  "sub": true,        // Tolerate using `[]` notation
+  "-W065": false,     // Missing radix parameter.
+  "-W110": false      // Mixed double and single quotes.
 }
