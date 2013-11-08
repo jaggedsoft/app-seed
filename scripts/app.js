@@ -13,7 +13,9 @@ var gPathCur,     // current path
     gConfigError, // config error
     gArgs,        // arguments
     gArgsCnt,     // arguments count
-    gEnvNode      // environment
+    gEnvNode,     // environment
+    gServer,      // http server
+    gRoutes       // routes
 ;
 
 gPathCur        = mFS.realpathSync('.') + mPath.sep;
@@ -44,7 +46,7 @@ if(gArgsCnt > 2) {
 if(gConfig.configFile !== null) {
   if(mFS.existsSync(gConfig.configFile)) {
     try {
-      gConfig       = JSON.parse(mFS.readFileSync(gConfig.configFile, encoding='utf8')); //+++ Check exists members of gConfig
+      gConfig       = JSON.parse(mFS.readFileSync(gConfig.configFile)); //+++ Check exists members of gConfig
     }
     catch(e) {
       gConfigError  = 'Invalid configuration file. (' + e + ')';
@@ -75,7 +77,7 @@ function timeTidy() {
 // Console log
 function logConsole(iStr) {
   var returnRes         = {"source":"app.js", "time": timeTidy(), "message": null};
-      returnRes.message = (iStr && typeof console != "undefined") ? iStr : null;
+      returnRes.message = (iStr && typeof console !== "undefined") ? iStr : null;
 
   return console.log(returnRes);
 }
