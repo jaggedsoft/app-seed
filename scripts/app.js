@@ -70,16 +70,16 @@ if(gConfigError !== null) {
 // Init global funcs
 
 // Tidy time
-function timeTidy() {
+function tidyTime() {
   return new Date(new Date().toISOString().replace("Z", "+0" + (new Date().getTimezoneOffset()/60) + ":00")).toISOString().replace("T", " ").substr(0, 19);
 }
 
 // Console log
-function logConsole(iStr) {
-  var returnRes         = {"source":"app.js", "time": timeTidy(), "message": null};
+function tidyLog(iStr, iOut) {
+  var returnRes         = {"time": tidyTime(), "message": null};
       returnRes.message = (iStr && typeof console !== "undefined") ? iStr : null;
 
-  return console.log(returnRes);
+  return (iOut === undefined || iOut === true) ? console.log(returnRes) : returnRes;
 }
 
 // Global config
@@ -107,7 +107,7 @@ gServer = new mHapi.createServer('localhost', gConfig.hapi.server.port);
 // Init yar plugin
 gServer.pack.allow({ext: true}).require('yar', gConfig.hapi.yar.options, function(err) {
   if(err) {
-    logConsole('Yar plugin could not be initialized! (' + err + ')');
+    tidyLog('Yar plugin could not be initialized! (' + err + ')');
     throw err;
   }
 });
@@ -124,9 +124,8 @@ gRoutes = [
         listing: false,
         index: true,
         path: function(request) {
-
-          //logConsole('request.params:' + JSON.stringify(request.params));  // for debug
-          //logConsole('request.path:' + JSON.stringify(request.path));      // for debug
+          //tidyLog('request.params:' + JSON.stringify(request.params));  // for debug
+          //tidyLog('request.path:' + JSON.stringify(request.path));      // for debug
 
           return gPathScrDir + '/../app';
         }
@@ -139,5 +138,5 @@ gRoutes = [
 gServer.route(gRoutes);
 
 gServer.start(function() {
-  logConsole('Server is listening on port ' + gConfig.hapi.server.port);
+  tidyLog('Server is listening on port ' + gConfig.hapi.server.port);
 });
