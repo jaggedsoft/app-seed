@@ -8,6 +8,7 @@ var mFS         = require('fs'),    // fs module
 
 // Init global vars
 var gPathCur,     // current path
+    gPathScrFile, // script file path
     gPathScrDir,  // script path
     gConfig,      // config
     gConfigError, // config error
@@ -19,6 +20,7 @@ var gPathCur,     // current path
 ;
 
 gPathCur        = mFS.realpathSync('.') + mPath.sep;
+gPathScrFile    = __filename;
 gPathScrDir     = __dirname;
 gConfig         = {"configFile": null};
 gConfigError    = null;
