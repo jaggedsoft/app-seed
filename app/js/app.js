@@ -26,7 +26,7 @@ app.gResolves = [
     key: 'sessInit',
     factory: ['$http', '$q', '$location', function($http, $q, $location) {
 
-      //console.log('location.path:' + $location.path());               // for debug
+      //console.log('location.path:' + $location.path()); // for debug
 
       // Init vars
       var defer = $q.defer();
@@ -74,7 +74,7 @@ app.config(['$routeProvider', function($routeProvider) {
           if(tRouteOpt.resolve === undefined) tRouteOpt.resolve = {};
           tRouteOpt.resolve[tResolves[j].key] = tResolves[j].factory;
         }
-      };
+      }
 
       // Init route
       $routeProvider.when(tRoute, {
@@ -84,7 +84,7 @@ app.config(['$routeProvider', function($routeProvider) {
         resolve: tRouteOpt.resolve
       });
     }
-  };
+  }
 
   // Default route
   $routeProvider.otherwise({redirectTo: '/'});
@@ -101,7 +101,7 @@ app.provider('util', function() {
         gotoUrl: function(iUrl, iParam) {
           console.log(iUrl);
           // Check params
-          if(iUrl == undefined) return false;
+          if(iUrl === undefined) return false;
 
           // Init vars
           var iTarget         = 'self',
@@ -110,17 +110,17 @@ app.provider('util', function() {
           ;
 
           // Init params
-          if(iParam != undefined) {
-            if(iParam.target != undefined)      iTarget     = iParam.target;
-            if(iParam.confirm != undefined)     iConfirm    = iParam.confirm;
-            if(iParam.confirmMsg != undefined)  iConfirmMsg = iParam.confirmMsg;
+          if(iParam !== undefined) {
+            if(iParam.target !== undefined)     iTarget     = iParam.target;
+            if(iParam.confirm !== undefined)    iConfirm    = iParam.confirm;
+            if(iParam.confirmMsg !== undefined) iConfirmMsg = iParam.confirmMsg;
           }
 
           // Confirmation
-          if(iConfirm == true) {
+          if(iConfirm === true) {
             var TCM = confirm(iConfirmMsg);
 
-            if(TCM == false) {
+            if(TCM === false) {
               return false;
             }
           }
@@ -135,9 +135,9 @@ app.provider('util', function() {
 
           return true;
         }
-      }
+      };
     }]
-  }
+  };
 });
 
 // App controllers
