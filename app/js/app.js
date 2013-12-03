@@ -87,7 +87,7 @@ app.config(['$routeProvider', function($routeProvider) {
   }
 
   // Default route
-  $routeProvider.otherwise({redirectTo: '/'});
+  //$routeProvider.otherwise({redirectTo: '/'});
 }]);
 
 // App providers
