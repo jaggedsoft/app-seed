@@ -25,7 +25,7 @@
   },
   "contributors": [],
   "scripts": {
-    "start": "node ./scripts/app.js",
+    "start": "node ./services/httpd/httpd.js",
     "test": "node ./test/test-all.js"
   },
   "engines": [
@@ -33,6 +33,7 @@
   ],
   "dependencies": {
     "hapi": "1.x",
-    "yar": "0.4.x"
+    "yar": "0.4.x",
+    "googleapis": "0.4.x"
   }
 }
