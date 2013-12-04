@@ -93,9 +93,11 @@ chmod 755 scripts/app.js
 |- .gitignore                 : ignore settings for GIT
 |- .jshintrc                  : config for JSHint
 |- .npmignore                 : ignore settings for NPM
-|- LICENSE.txt                : license file
 |- package.json               : package file for NPM
+|- CHANGELOG.md               : changelog file
+|- LICENSE.txt                : license file
 |- README.md                  : readme file
+|- template-CHANGELOG.md      : template changelog file
 |- template-LICENSE.txt       : template license file
 |- template-README.md         : template readme file
 ```
