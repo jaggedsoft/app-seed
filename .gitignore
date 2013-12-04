@@ -16,4 +16,4 @@ logs/*
 
 config/*
 !config/.gitkeep
-!config/default.json
+!config/app.json
