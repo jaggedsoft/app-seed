@@ -1,24 +1,25 @@
 #!/usr/bin/env node
 
 // Init reqs
-var mFS           = require('fs'),          // fs module
-    mPath         = require('path'),        // path module
-    mHapi         = require('hapi'),        // hapi module
-    mGoogleAPIs   = require('googleapis')   // googleapis module
+var mFS             = require('fs'),            // fs module
+    mPath           = require('path'),          // path module
+    mHapi           = require('hapi'),          // hapi module
+    mGoogleAPIs     = require('googleapis')     // googleapis module
 ;
 
 // Init global vars
-var gPathSep      = mPath.sep,              // path separator
-    gPathCur      = mFS.realpathSync('.'),  // current path
-    gPathScrFile  = __filename,             // script file path
-    gPathScrDir   = __dirname,              // script path
-    gConfig       = {"configFile": null},   // config
-    gConfigError  = null,                   // config error
-    gArgs         = process.argv,           // arguments
-    gArgsCnt      = gArgs.length,           // arguments count
-    gServer       = null,                   // http server
-    gRoutes       = null,                   // routes
-    gEnvNode      = (process.env.NODE_ENV !== undefined) ? process.env.NODE_ENV : null // environment
+var gPathSep        = mPath.sep,                // path separator
+    gPathCur        = mFS.realpathSync('.'),    // current path
+    gPathScrFile    = __filename,               // script file path
+    gPathScrDir     = __dirname,                // script path
+    gConfig         = {"configFile": null},     // config
+    gConfigError    = null,                     // config error
+    gArgs           = process.argv,             // arguments
+    gArgsCnt        = gArgs.length,             // arguments count
+    gServer         = null,                     // http server
+    gRoutes         = null,                     // routes
+    gOAuth2Client   = mGoogleAPIs.OAuth2Client, // oauth2 client
+    gEnvNode        = (process.env.NODE_ENV !== undefined) ? process.env.NODE_ENV : null // environment
 ;
 
 // Init Argv
