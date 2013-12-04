@@ -113,7 +113,7 @@ Notable changes
                 services/httpd
 ```
 
-for all notable changes see [CHANGELOG.md](blob/master/CHANGELOG.md)
+for all notable changes see [CHANGELOG.md](CHANGELOG.md)
 
 ### License
 
