@@ -17,6 +17,11 @@ app.gRoutes = [
     route: '/',
     templateUrl: 'template/home.html',
     controller: 'homeCtrl'
+  },
+  {
+    route: '/login',
+    templateUrl: 'template/login.html',
+    controller: 'loginCtrl'
   }
 ];
 
@@ -152,4 +157,9 @@ app.factory('util', function() {
 // Home controller
 app.controller('homeCtrl', ['$scope', function($scope) {
   $scope.message = "Home Controller";
+}]);
+
+// Login controller
+app.controller('loginCtrl', ['$scope', function($scope, sess, util) {
+  $scope.signInLink = "";
 }]);
