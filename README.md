@@ -102,22 +102,16 @@ chmod 755 scripts/app.js
 
 ### Changelog
 
+Notable changes
+
 ```
   * 20131204 -  Bootstrap removed
-  * 20131203 -  AngularJS 1.2.3
+                CHANGELOG.md
+  * 20131204 -  AngularJS 1.2.3
                 services/httpd
-  * 20131109 -  AngularJS 1.2.0
-  * 20131104 -  Simple http server
-  * 20131026 -  the version declaration: 0.0.1
-                package.json
-  * 20131020 -  README file
-                Default config files.
-  * 20131014 -  AngularJS 1.2.0-rc.2
-                jQuery 1.10.2
-                html5shiv
-                respond
-                README and LICENSE files
 ```
+
+for all notable changes see [CHANGELOG.md](blob/master/CHANGELOG.md)
 
 ### License
 
