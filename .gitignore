@@ -9,3 +9,11 @@
 #
 node_modules/
 sources/
+
+logs/*
+!logs/.gitkeep
+!logs/app.log
+
+config/*
+!config/.gitkeep
+!config/default.json

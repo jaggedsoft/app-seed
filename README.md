@@ -80,11 +80,8 @@ chmod 755 scripts/app.js
 |   |- index.html             : index HTML file for app layout
 |- config                     : config files
 |   |- app.json               : default config file
-|   |- dev.json               : config file for development environment
-|   |- prod.json              : config file for production environment
-|   |- test.json              : config file for test environment
 |- logs                       : log files
-|   |- app.log                : default app log file
+|   |- app.log                : default log file
 |- scripts                    : script files for shell, cron, js, etc...
 |   |- app.bat                : default shell script for WIN platform
 |   |- app.js                 : default shell script for Node.js
