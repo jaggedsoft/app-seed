@@ -70,7 +70,6 @@ chmod 755 scripts/app.js
 |   |   |- app.js             : default JS file
 |   |- lib                    : 3rd party libraries
 |   |   |- angular
-|   |   |- bootstrap
 |   |   |- jquery
 |   |   |- misc
 |   |- template               : template files
@@ -104,18 +103,16 @@ chmod 755 scripts/app.js
 ### Changelog
 
 ```
+  * 20131204 -  Bootstrap removed
   * 20131203 -  AngularJS 1.2.3
                 services/httpd
   * 20131109 -  AngularJS 1.2.0
-  * 20131106 -  Bootstrap 3.0.2
   * 20131104 -  Simple http server
-  * 20131030 -  Bootstrap 3.0.1
   * 20131026 -  the version declaration: 0.0.1
                 package.json
   * 20131020 -  README file
                 Default config files.
   * 20131014 -  AngularJS 1.2.0-rc.2
-                Bootstrap 3.0.0
                 jQuery 1.10.2
                 html5shiv
                 respond
