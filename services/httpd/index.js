@@ -17,10 +17,31 @@ var gPathSep        = mPath.sep,                // path separator
     gArgs           = process.argv,             // arguments
     gArgsCnt        = gArgs.length,             // arguments count
     gServer         = null,                     // http server
-    gRoutes         = null,                     // routes
+    gRoutes         = [],                       // routes
+    gRouteOpts      = [],                       // route options
     gOAuth2Client   = mGoogleAPIs.OAuth2Client, // oauth2 client
     gEnvNode        = (process.env.NODE_ENV !== undefined) ? process.env.NODE_ENV : null // environment
 ;
+
+// Init global funcs
+
+// Tidy time
+function tidyTime() {
+  return new Date(new Date().toISOString().replace("Z", "+0" + (new Date().getTimezoneOffset()/60) + ":00")).toISOString().replace("T", " ").substr(0, 19);
+}
+
+// Console log
+function tidyLog(iStr, iOut) {
+  var returnRes         = {"time": tidyTime(), "message": null};
+      returnRes.message = (iStr && typeof console !== "undefined") ? iStr : null;
+
+  return (iOut === undefined || iOut === true) ? console.log(returnRes) : returnRes;
+}
+
+// Console clear
+function tidyClear() {
+  console.log('\u001B[2J\u001B[0;0f');
+}
 
 // Init Argv
 if(gArgsCnt > 2) {
@@ -63,27 +84,6 @@ if(gConfigError !== null) {
   process.exit(0);
 }
 
-// Init global funcs
-
-// Tidy time
-function tidyTime() {
-  return new Date(new Date().toISOString().replace("Z", "+0" + (new Date().getTimezoneOffset()/60) + ":00")).toISOString().replace("T", " ").substr(0, 19);
-}
-
-// Console log
-function tidyLog(iStr, iOut) {
-  var returnRes         = {"time": tidyTime(), "message": null};
-      returnRes.message = (iStr && typeof console !== "undefined") ? iStr : null;
-
-  return (iOut === undefined || iOut === true) ? console.log(returnRes) : returnRes;
-}
-
-// Console clear
-function tidyClear() {
-  console.log('\u001B[2J\u001B[0;0f');
-}
-
-
 // Global config
 gConfig = {
   hapi: {
@@ -115,6 +115,26 @@ gServer.pack.allow({ext: true}).require('yar', gConfig.hapi.yar.options, functio
 });
 
 // Init server routes
+
+// Route options
+gRouteOpts = [
+  {
+    route: '/home',
+    match: '/template/home.html',
+    auth: {
+      roles: ['user'],
+      noIsLogin: false
+    }
+  },
+  {
+    route: '/login',
+    match: '/template/login.html',
+    auth: {
+      roles: [],
+      noIsLogin: true
+    }
+  }
+];
 
 // Default route for static files
 gRoutes = [
