@@ -109,6 +109,8 @@ Notable changes
 ```
   * 20131204 -  Bootstrap removed
                 CHANGELOG.md
+                Respond.js v1.4.0
+
   * 20131204 -  AngularJS 1.2.3
                 services/httpd
 ```

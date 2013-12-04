@@ -4,6 +4,7 @@
 
 * Bootstrap removed
 * CHANGELOG.md
+* Respond.js v1.4.0
 
 ### 0.0.1 (20131203)
 
