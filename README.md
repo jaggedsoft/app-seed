@@ -73,10 +73,9 @@ chmod 755 scripts/app.js
 |   |   |- bootstrap
 |   |   |- jquery
 |   |   |- misc
-|   |       |- html5shiv.js 
-|   |       |- respond.js
 |   |- template               : template files
 |   |   |- home.html          : partial HTML file for home page
+|   |   |- login.html         : partial HTML file for login page
 |   |- favicon.ico            : icon file for browser / bookmarks
 |   |- index.html             : index HTML file for app layout
 |- config                     : config files
@@ -90,6 +89,8 @@ chmod 755 scripts/app.js
 |   |- app.bat                : default shell script for WIN platform
 |   |- app.js                 : default shell script for Node.js
 |   |- app.sh                 : default shell script for POSIX platforms
+|- services                   : services
+|   |- httpd                  : httpd service
 |- test                       : test files
 |   |- test-all.js            : default test file
 |- .gitattributes             : attributes for GIT
