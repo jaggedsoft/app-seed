@@ -25,7 +25,7 @@
   },
   "contributors": [],
   "scripts": {
-    "start": "node ./services/httpd/httpd.js",
+    "start": "node ./services/httpd/index.js",
     "test": "node ./test/test-all.js"
   },
   "engines": [
