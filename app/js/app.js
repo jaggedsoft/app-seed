@@ -5,50 +5,18 @@
  */
 
 // Init reqs
-var app = angular.module('app', ['ngRoute']);
+'use strict';
 
 // Init global vars
+var app;
 
 // Init global funcs
 
-// App routes
-app.gRoutes = [
-  {
-    route: '/',
-    templateUrl: 'template/home.html',
-    controller: 'homeCtrl'
-  },
-  {
-    route: '/login',
-    templateUrl: 'template/login.html',
-    controller: 'loginCtrl'
-  }
-];
-
-// App resolves
-app.gResolves = [
-  {
-    key: 'sessInit',
-    factory: ['$http', '$q', '$location', function($http, $q, $location) {
-
-      //console.log('location.path:' + $location.path()); // for debug
-
-      // Init vars
-      var defer = $q.defer();
-
-      // Init session
-      
-      /* session code */
-
-      defer.resolve();
-
-      return defer.promise;
-    }]
-  }
-];
+// Init App
+app = angular.module('app', ['ngRoute', 'app.providers', 'app.controllers']);
 
 // App config
-app.config(['$routeProvider', function($routeProvider) {
+angular.module('app').config(['$routeProvider', function($routeProvider) {
 
   // Init vars
   var tRoutes       = app.gRoutes,
@@ -56,7 +24,7 @@ app.config(['$routeProvider', function($routeProvider) {
       tResolves     = app.gResolves,
       tResolvesCnt  = tResolves.length
   ;
-  
+
   // Init routes
   for(var i = 0; i < tRoutesCnt; i++) {
 
@@ -95,71 +63,38 @@ app.config(['$routeProvider', function($routeProvider) {
   //$routeProvider.otherwise({redirectTo: '/'});
 }]);
 
-// App providers
+// App routes
+app.gRoutes = [
+  {
+    route: '/',
+    templateUrl: 'template/home.html',
+    controller: 'homeCtrl'
+  },
+  {
+    route: '/login',
+    templateUrl: 'template/login.html',
+    controller: 'loginCtrl'
+  }
+];
 
-// Util provider
-app.factory('util', function() {
-  // return for factory
-  return {
-    
-    // Tidy time
-    tidyTime: function tidyTime() {
-      return new Date(new Date().toISOString().replace("Z", "+0" + (new Date().getTimezoneOffset()/60) + ":00")).toISOString().replace("T", " ").substr(0, 19);
-    },
+// App resolves
+app.gResolves = [
+  {
+    key: 'sessInit',
+    factory: ['$http', '$q', '$location', function($http, $q, $location) {
 
-    // Tidy log
-    tidyLog: function tidyLog(iStr, iOut) {
-      var returnRes         = {"time": this.tidyTime(), "message": null};
-          returnRes.message = (iStr && typeof console !== "undefined") ? iStr : null;
-
-      return (iOut === undefined || iOut === true) ? console.log(returnRes) : returnRes;
-    },
-
-    // Goto url
-    gotoUrl: function gotoUrl(iUrl, iParam) {
-
-      // Check params
-      if(iUrl === undefined) return false;
+      //console.log('location.path:' + $location.path()); // for debug
 
       // Init vars
-      var iTarget         = 'self',
-          iConfirm        = false,
-          iConfirmMsg     = ''
-      ;
+      var defer = $q.defer();
 
-      // Init params
-      if(iParam !== undefined) {
-        if(iParam.target !== undefined)     iTarget     = iParam.target;
-        if(iParam.confirm !== undefined)    iConfirm    = iParam.confirm;
-        if(iParam.confirmMsg !== undefined) iConfirmMsg = iParam.confirmMsg;
-      }
+      // Init session
+      
+      /* session code */
 
-      // Confirmation
-      if(iConfirm === true) {
-        if(!confirm(iConfirmMsg)) return false;
-      }
+      defer.resolve();
 
-      // goto url
-      if(iTarget == '_blank') {
-        window.open(iUrl, '_blank');
-      }
-      else {
-        document.location.href = iUrl;
-      }
-
-      return true;
-    }
-  };
-});
-
-// App controllers
-
-// Home controller
-app.controller('homeCtrl', ['$scope', function($scope) {
-  $scope.message = "Home Controller";
-}]);
-
-// Login controller
-app.controller('loginCtrl', ['$scope', function($scope, sess, util) {
-  $scope.signInLink = "";
-}]);
+      return defer.promise;
+    }]
+  }
+];
