@@ -108,7 +108,6 @@ chmod 755 scripts/app.js
 ```
   * 20131203 -  AngularJS 1.2.3
                 services/httpd
-                Google APIs Client Library
   * 20131109 -  AngularJS 1.2.0
   * 20131106 -  Bootstrap 3.0.2
   * 20131104 -  Simple http server
