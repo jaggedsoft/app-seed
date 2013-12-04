@@ -6,5 +6,12 @@
 #   .git/
 #
 node_modules/
-.git/
 sources/
+
+logs/*
+!logs/.gitkeep
+!logs/app.log
+
+config/*
+!config/.gitkeep
+!config/app.json
