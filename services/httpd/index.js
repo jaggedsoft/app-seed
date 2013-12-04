@@ -100,6 +100,15 @@ gConfig = {
         }
       }
     }
+  },
+  auth: {
+    oauth2Client: {
+      clientId: 'CLIENTID',
+      clientSecret: 'CLIENTSECRET',
+      redirectUrl: 'REDIRECTURL',
+      requestUrl: null,
+      approvalPrompt: 'auto'
+    }
   }
 };
 
