@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 // Init reqs
-var mFS           = require('fs'),    // fs module
-    mHapi         = require('hapi'),  // hapi module
-    mPath         = require('path')   // path module
+var mFS           = require('fs'),          // fs module
+    mPath         = require('path'),        // path module
+    mHapi         = require('hapi'),        // hapi module
+    mGoogleAPIs   = require('googleapis')   // googleapis module
 ;
 
 // Init global vars
