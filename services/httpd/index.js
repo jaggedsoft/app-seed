@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 // Init reqs
 var mFS             = require('fs'),            // fs module
     mPath           = require('path'),          // path module
