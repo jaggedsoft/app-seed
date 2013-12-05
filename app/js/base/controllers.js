@@ -5,11 +5,17 @@
 angular.module('app.controllers', []);
 
 // Home controller
-angular.module('app.controllers').controller('appHomeCtrl', ['$scope', function($scope) {
-  $scope.message = "Home Controller";
+angular.module('app.controllers').controller('appHomeCtrl', ['$scope', 'appSess', function($scope, appSess) {
+  // Init vars
+  var sessData      = (!appSess.error()) ? appSess.data() : null;
+
+  $scope.message    = "Home Controller";
 }]);
 
 // Login controller
-angular.module('app.controllers').controller('appLoginCtrl', ['$scope', function($scope) {
-  $scope.signInLink = "Login Controller";
+angular.module('app.controllers').controller('appLoginCtrl', ['$scope', 'appSess', function($scope, appSess) {
+  // Init vars
+  var sessData    = (!appSess.error()) ? appSess.data() : null;
+
+  $scope.message  = "Login Controller";
 }]);
