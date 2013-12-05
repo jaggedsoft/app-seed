@@ -94,7 +94,7 @@ angular.module('app.services').factory('appSess', ['$injector', '$http', '$locat
               sessInited  = true;
 
               // Re-init session due first request
-              if(hit1Trig == false && sessData.hit && sessData.hit == 1) {
+              if(hit1Trig === false && sessData.hit && sessData.hit === 1) {
                 hit1Trig = true;
                 return this_.init(iCallback);
               }
