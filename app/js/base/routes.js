@@ -27,7 +27,7 @@ angular.module('app.routes').constant('appRoutesResolves', [
       var defer = $q.defer();
      
       // Init session
-/*      appSess.init(function(err, data) {
+      appSess.init(function(err, data) {
         if(!err) {
           appSess.tasker(function(err, data) {
             if(!err) {
@@ -43,7 +43,7 @@ angular.module('app.routes').constant('appRoutesResolves', [
           $location.path('error/sess/init/unexpected');
           defer.reject();
         }
-      });*/
+      });
 
       defer.resolve();
 
