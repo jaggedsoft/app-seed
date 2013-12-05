@@ -7,21 +7,23 @@
 // Init reqs
 'use strict';
 
-// Init global vars
+// Init vars
 var app;
 
-// Init global funcs
+// Init funcs
 
 // Init App
-app = angular.module('app', ['ngRoute', 'app.providers', 'app.controllers']);
-
-// App config
-angular.module('app').config(['$routeProvider', function($routeProvider) {
+angular.module('app', [
+  'ngRoute',
+  'app.routes',
+  'app.services',
+  'app.controllers'
+]).config(['$routeProvider', 'appRoutes', 'appRoutesResolves', function($routeProvider, appRoutes, appRoutesResolves) {
 
   // Init vars
-  var tRoutes       = app.gRoutes,
+  var tRoutes       = appRoutes,
       tRoutesCnt    = tRoutes.length,
-      tResolves     = app.gResolves,
+      tResolves     = appRoutesResolves,
       tResolvesCnt  = tResolves.length
   ;
 
@@ -62,39 +64,3 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
   // Default route
   //$routeProvider.otherwise({redirectTo: '/'});
 }]);
-
-// App routes
-app.gRoutes = [
-  {
-    route: '/',
-    templateUrl: 'template/home.html',
-    controller: 'homeCtrl'
-  },
-  {
-    route: '/login',
-    templateUrl: 'template/login.html',
-    controller: 'loginCtrl'
-  }
-];
-
-// App resolves
-app.gResolves = [
-  {
-    key: 'sessInit',
-    factory: ['$http', '$q', '$location', function($http, $q, $location) {
-
-      //console.log('location.path:' + $location.path()); // for debug
-
-      // Init vars
-      var defer = $q.defer();
-
-      // Init session
-      
-      /* session code */
-
-      defer.resolve();
-
-      return defer.promise;
-    }]
-  }
-];

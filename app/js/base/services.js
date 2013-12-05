@@ -1,13 +1,11 @@
 // Init reqs
 'use strict';
 
-// App providers
+// App services
+angular.module('app.services', []);
 
-// Main provider
-angular.module('app.providers', []);
-
-// Util provider
-angular.module('app.providers').factory('util', function() {
+// Util service
+angular.module('app.services').factory('appUtil', function() {
   // return for factory
   return {
     

@@ -4,7 +4,7 @@
   "node": true,
   "eqeqeq": true,
   "trailing": true,
-  "strict": true,
+  "strict": false,
   
   "sub": true,        // Tolerate using `[]` notation
   "laxbreak": true,   // Tolerate possibly unsafe line breakings

@@ -7,7 +7,7 @@ var mFS             = require('fs'),            // fs module
     mGoogleAPIs     = require('googleapis')     // googleapis module
 ;
 
-// Init global vars
+// Init vars
 var gPathSep        = mPath.sep,                // path separator
     gPathCur        = mFS.realpathSync('.'),    // current path
     gPathScrFile    = __filename,               // script file path
@@ -23,7 +23,7 @@ var gPathSep        = mPath.sep,                // path separator
     gEnvNode        = (process.env.NODE_ENV !== undefined) ? process.env.NODE_ENV : null // environment
 ;
 
-// Init global funcs
+// Init funcs
 
 // Tidy time
 function tidyTime() {
