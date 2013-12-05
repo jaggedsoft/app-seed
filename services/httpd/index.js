@@ -20,8 +20,9 @@ var gPathSep        = mPath.sep,                // path separator
     gPathCur        = mFS.realpathSync('.'),    // current path
     gPathScrFile    = __filename,               // script file path
     gPathScrDir     = __dirname,                // script path
-    gConfig         = {"configFile": null},     // config
+    gConfig         = {},                       // config
     gConfigError    = null,                     // config error
+    gConfigFile     = null,                     // config file
     gArgs           = process.argv,             // arguments
     gArgsCnt        = gArgs.length,             // arguments count
     gServer         = null,                     // http server
@@ -39,7 +40,7 @@ if(gArgsCnt > 2) {
     switch(gArgs[i]) {
       case "-c":
       case "--configFile":
-        gConfig.configFile  = (gArgs[++i] + '').trim();
+        gConfigFile  = (gArgs[++i] + '').trim();
         break;
       default:
         console.log("Invalid argument! (" + gArgs[i] + ")");
@@ -50,10 +51,14 @@ if(gArgsCnt > 2) {
 }
 
 // Check config
-if(gConfig.configFile !== null) {
-  if(mFS.existsSync(gConfig.configFile)) {
+if(!gConfigFile) {
+  gConfigFile = gPathScrDir + gPathSep + '/def-config.json';
+}
+
+if(gConfigFile) {
+  if(mFS.existsSync(gConfigFile)) {
     try {
-      gConfig       = JSON.parse(mFS.readFileSync(gConfig.configFile)); //+++ Check exists members of gConfig
+      gConfig       = JSON.parse(mFS.readFileSync(gConfigFile));
     }
     catch(e) {
       gConfigError  = 'Invalid configuration file. (' + e + ')';
@@ -65,7 +70,20 @@ if(gConfig.configFile !== null) {
 }
 
 if(gConfigError === null) {
-  // Check config paramaters such as server port etc...
+  
+  // Check config
+  if(!gConfig.hapi || !gConfig.hapi.server) {
+    // hapi server
+    gConfigError = 'Invalid hapi server configuration (' + JSON.stringify(gConfig.hapi) + ')';
+  }
+  else if(!gConfig.auth || !gConfig.auth.oauth2Client) {
+    // oauth2
+    gConfigError = 'Invalid oauth2 client configuration (' + JSON.stringify(gConfig.auth) + ')';
+  }
+  else if(!gConfig.hapi.server.port || isNaN(gConfig.hapi.server.port) || gConfig.hapi.server.port <= 0) {
+    // Server http port
+    gConfigError = 'Invalid http port! (' + gConfig.hapi.server.port + ')';
+  }
 }
 
 if(gConfigError !== null) {
@@ -73,42 +91,6 @@ if(gConfigError !== null) {
 
   process.exit(0);
 }
-
-// Global config
-gConfig = {
-  hapi: {
-    server: {
-      port: 12080,
-      options: {
-        state: {
-          cookies: {
-            failAction: 'log',
-            clearInvalid: true
-          }
-        }
-      }
-    },
-    yar: {
-      options: {
-        name: 'appsess',
-        maxCookieSize: 0,
-        cookieOptions: {
-          password: 'cOOkIEPaSSWoRD',
-          isSecure: false
-        }
-      }
-    }
-  },
-  auth: {
-    oauth2Client: {
-      clientId: 'CLIENTID',
-      clientSecret: 'CLIENTSECRET',
-      redirectUrl: 'REDIRECTURL',
-      requestUrl: null,
-      approvalPrompt: 'auto'
-    }
-  }
-};
 
 // Create server
 gServer = new mHapi.createServer('localhost', gConfig.hapi.server.port, gConfig.hapi.server.options);
@@ -205,16 +187,21 @@ gSessIniter = function(request, next, isHandlerCall) {
     }
   };
 
+  // Generate login url
   if(userIsLogin === false) {
+    if(!gConfig.auth.oauth2Client.redirectUrl) gConfig.auth.oauth2Client.redirectUrl = gServer.info.uri + '/auth/google/callback';
+
     var oAuth2ClientInst = new gOAuth2Client(gConfig.auth.oauth2Client.clientId, gConfig.auth.oauth2Client.clientSecret, gConfig.auth.oauth2Client.redirectUrl);
 
-    gConfig.auth.oauth2Client.requestUrl = oAuth2ClientInst.generateAuthUrl({
-      response_type: 'code',
-      access_type: 'offline',
-      approval_prompt: gConfig.auth.oauth2Client.approvalPrompt,
-      state: '/login',
-      scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
-    });
+    if(!gConfig.auth.oauth2Client.requestUrl) {
+      gConfig.auth.oauth2Client.requestUrl  = oAuth2ClientInst.generateAuthUrl({
+        response_type: 'code',
+        access_type: 'offline',
+        approval_prompt: gConfig.auth.oauth2Client.approvalPrompt,
+        state: '/login',
+        scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
+      });
+    }
 
     requestReply.user.loginUrl = gConfig.auth.oauth2Client.requestUrl;
   }
@@ -422,5 +409,5 @@ gServer.on('response', function(request) {
 gServer.route(gRoutes);
 
 gServer.start(function() {
-  mUtil.tidyLog('Server is listening on port ' + gConfig.hapi.server.port);
+  mUtil.tidyLog('Server is listening on port ' + gServer.info.port);
 });
