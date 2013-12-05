@@ -6,8 +6,14 @@
 
 ### Installation
 
+For latest published version
 ```
 npm install app-seed
+```
+
+or for HEAD version
+```
+git clone https://github.com/cmfatih/app-seed.git
 ```
 
 ### Usage
