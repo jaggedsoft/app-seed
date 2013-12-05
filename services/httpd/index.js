@@ -5,11 +5,14 @@
  */
 
 // Init reqs
+'use strict';
+
 var mFS             = require('fs'),            // fs module
     mPath           = require('path'),          // path module
-    mUtil           = require('util'),          // util module
     mHapi           = require('hapi'),          // hapi module
-    mGoogleAPIs     = require('googleapis')     // googleapis module
+    mGoogleAPIs     = require('googleapis'),    // googleapis module
+
+    mUtil           = require('./util')         // util module
 ;
 
 // Init vars
@@ -113,7 +116,7 @@ gServer = new mHapi.createServer('localhost', gConfig.hapi.server.port, gConfig.
 // Init yar plugin
 gServer.pack.allow({ext: true}).require('yar', gConfig.hapi.yar.options, function(err) {
   if(err) {
-    tidyLog('Yar plugin could not be initialized! (' + err + ')');
+    mUtil.tidyLog('Yar plugin could not be initialized! (' + err + ')');
     throw err;
   }
 });
@@ -216,8 +219,8 @@ gSessIniter = function(request, next, isHandlerCall) {
     requestReply.user.loginUrl = gConfig.auth.oauth2Client.requestUrl;
   }
 
-  //tidyLog("request.session:" + JSON.stringify(request.session)); // for debug
-  //tidyLog("requestReply:" + JSON.stringify(requestReply));       // for debug
+  //mUtil.tidyLog("request.session:" + JSON.stringify(request.session)); // for debug
+  //mUtil.tidyLog("requestReply:" + JSON.stringify(requestReply));       // for debug
 
   // Reply
   if(isHandlerCall === undefined || isHandlerCall !== false) {
@@ -265,8 +268,8 @@ gRoutes = [
         listing: false,
         index: true,
         path: function(request) {
-          //tidyLog('request.params:' + JSON.stringify(request.params));  // for debug
-          //tidyLog('request.path:' + JSON.stringify(request.path));      // for debug
+          //mUtil.tidyLog('request.params:' + JSON.stringify(request.params));  // for debug
+          //mUtil.tidyLog('request.path:' + JSON.stringify(request.path));      // for debug
 
           // Check only if it is template
           if(((request.path + '').indexOf('/template/') === 0) === true) {
@@ -355,7 +358,7 @@ gRoutes = [
                     }
                   };
 
-                  //tidyLog('task:' + JSON.stringify(task));  // for debug
+                  //mUtil.tidyLog('task:' + JSON.stringify(task));  // for debug
 
                   request.session.set('task', task);
                   request.reply(mHapi.error.forbidden('You are already login.'));
@@ -394,24 +397,24 @@ gRoutes = [
 //+++ Should be control by config
 
 gServer.on('log', function(event, tags) {
-  tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
+  mUtil.tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
 });
 
 gServer.on('internalError', function(request, err) {
-  tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
+  mUtil.tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
 });
 
 /*
 gServer.on('request', function(request, event, tags) {
   if(tags.error) {
-    tidyLog('gServer.on.request:error: ' + request.id + ' - ' + JSON.stringify(event));
+    mUtil.tidyLog('gServer.on.request:error: ' + request.id + ' - ' + JSON.stringify(event));
   }
 });
 */
 
 /*
 gServer.on('response', function(request) {
-  tidyLog('gServer.on.response: ' + request.id);
+  mUtil.tidyLog('gServer.on.response: ' + request.id);
 });
 */
 
@@ -419,5 +422,5 @@ gServer.on('response', function(request) {
 gServer.route(gRoutes);
 
 gServer.start(function() {
-  tidyLog('Server is listening on port ' + gConfig.hapi.server.port);
+  mUtil.tidyLog('Server is listening on port ' + gConfig.hapi.server.port);
 });
