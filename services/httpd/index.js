@@ -400,29 +400,23 @@ gRoutes = [
 
 //+++ Should be control by config
 
-/*
+gServer.on('log', function(event, tags) {
+  tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
+});
+
+gServer.on('internalError', function(request, err) {
+  tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
+});
+
 gServer.on('request', function(request, event, tags) {
-  if(tags.received) {
+  if(tags.error) {
     tidyLog('gServer.on.request: ' + JSON.stringify(event.data));
   }
 });
-*/
 
 /*
 gServer.on('response', function(request) {
   tidyLog('gServer.on.response: ' + request.id);
-});
-*/
-
-/*
-gServer.on('log', function(event, tags) {
-  tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
-});
-*/
-
-/*
-gServer.on('internalError', function(request, err) {
-  tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
 });
 */
 
