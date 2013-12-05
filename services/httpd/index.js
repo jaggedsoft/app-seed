@@ -97,7 +97,7 @@ gConfig = {
         name: 'appsess',
         maxCookieSize: 0,
         cookieOptions: {
-          password: 'cOOkIEPaSSWoRD',
+          password: 'cOOkIEPaSSWoRDx',
           isSecure: false
         }
       }
@@ -399,7 +399,7 @@ gServer.on('log', function(event, tags) {
 
 gServer.on('request', function(request, event, tags) {
   if(tags.received) {
-    tidyLog('gServer.on.request: ' + event.id);
+    tidyLog('gServer.on.request: ' + JSON.stringify(event.data));
   }
 });
 
