@@ -90,14 +90,22 @@ if(gConfigError !== null) {
 gConfig = {
   hapi: {
     server: {
-      port: 12080
+      port: 12080,
+      options: {
+        state: {
+          cookies: {
+            failAction: 'log',
+            clearInvalid: true
+          }
+        }
+      }
     },
     yar: {
       options: {
         name: 'appsess',
         maxCookieSize: 0,
         cookieOptions: {
-          password: 'cOOkIEPaSSWoRDx',
+          password: 'cOOkIEPaSSWoRD',
           isSecure: false
         }
       }
@@ -115,7 +123,7 @@ gConfig = {
 };
 
 // Create server
-gServer = new mHapi.createServer('localhost', gConfig.hapi.server.port);
+gServer = new mHapi.createServer('localhost', gConfig.hapi.server.port, gConfig.hapi.server.options);
 
 // Init yar plugin
 gServer.pack.allow({ext: true}).require('yar', gConfig.hapi.yar.options, function(err) {
@@ -390,23 +398,29 @@ gRoutes = [
 
 // Init server events
 
-/*
-gServer.on('log', function(event, tags) {
-  if(tags.error) {
-    tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
-  }
-});
+//+++ Should be control by config
 
+/*
 gServer.on('request', function(request, event, tags) {
   if(tags.received) {
     tidyLog('gServer.on.request: ' + JSON.stringify(event.data));
   }
 });
+*/
 
+/*
 gServer.on('response', function(request) {
   tidyLog('gServer.on.response: ' + request.id);
 });
+*/
 
+/*
+gServer.on('log', function(event, tags) {
+  tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
+});
+*/
+
+/*
 gServer.on('internalError', function(request, err) {
   tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
 });
