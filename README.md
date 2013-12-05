@@ -67,6 +67,10 @@ chmod 755 scripts/app.js
 |   |- img                    : image files
 |   |   |- favicon.ico        : icon file for browser / bookmarks
 |   |- js                     : JS files
+|   |   |- base               : base modules
+|   |   |-  |- controller.js  : module for controllers
+|   |   |-  |- routes.js      : module for routes
+|   |   |-  |- services.js    : module for services
 |   |   |- app.js             : default JS file
 |   |- lib                    : 3rd party libraries
 |   |   |- angular
@@ -110,6 +114,7 @@ Notable changes
 * 20131204 -  Bootstrap removed
               CHANGELOG.md added
               Respond.js v1.4.0
+              Base modules (app/js/base)
 ```
 
 for all notable changes see [CHANGELOG.md](CHANGELOG.md)

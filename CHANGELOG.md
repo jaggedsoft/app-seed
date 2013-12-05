@@ -6,6 +6,7 @@
 * 20131204 -  Bootstrap removed
               CHANGELOG.md added
               Respond.js v1.4.0
+              Base modules (app/js/base)
 * 20131203 -  AngularJS 1.2.3
               services/httpd
 * 20131109 -  AngularJS 1.2.0
