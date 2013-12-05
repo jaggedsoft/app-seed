@@ -388,6 +388,30 @@ gRoutes = [
   }
 ];
 
+// Init server events
+
+/*
+gServer.on('log', function(event, tags) {
+  if(tags.error) {
+    tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
+  }
+});
+
+gServer.on('request', function(request, event, tags) {
+  if(tags.received) {
+    tidyLog('gServer.on.request: ' + event.id);
+  }
+});
+
+gServer.on('response', function(request) {
+  tidyLog('gServer.on.response: ' + request.id);
+});
+
+gServer.on('internalError', function(request, err) {
+  tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
+});
+*/
+
 // Start server
 gServer.route(gRoutes);
 
