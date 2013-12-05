@@ -108,16 +108,7 @@ chmod 755 scripts/app.js
 
 ### Changelog
 
-Notable changes
-
-```
-* 20131204 -  Bootstrap removed
-              CHANGELOG.md added
-              Respond.js v1.4.0
-              Base modules (app/js/base)
-```
-
-for all notable changes see [CHANGELOG.md](CHANGELOG.md)
+For all notable changes see [CHANGELOG.md](CHANGELOG.md)
 
 ### License
 
