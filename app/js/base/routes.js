@@ -15,6 +15,11 @@ angular.module('app.routes').constant('appRoutes', [
     route: '/login',
     templateUrl: 'template/login.html',
     controller: 'appLoginCtrl'
+  },
+  {
+    route: '/account',
+    templateUrl: 'template/account.html',
+    controller: 'appAccountCtrl'
   }
 ]);
 
