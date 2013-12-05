@@ -25,5 +25,5 @@ angular.module('app.controllers').controller('appAccountCtrl', ['$scope', 'appSe
   // Init vars
   var sessData      = (!appSess.error()) ? appSess.data() : null;
 
-  $scope.sessData   = sessData;
+  $scope.tidySData  = JSON.stringify(sessData, null, 2);
 }]);
