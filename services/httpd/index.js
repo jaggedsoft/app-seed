@@ -354,7 +354,7 @@ gRoutes = [
                     }
                   };
 
-                  tidyLog('task:' + JSON.stringify(task));  // for debug
+                  //tidyLog('task:' + JSON.stringify(task));  // for debug
 
                   request.session.set('task', task);
                   request.reply(mHapi.error.forbidden('You are already login.'));
