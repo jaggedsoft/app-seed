@@ -19,3 +19,11 @@ angular.module('app.controllers').controller('appLoginCtrl', ['$scope', 'appSess
 
   $scope.loginUrl   = (sessData && sessData.user && sessData.user.loginUrl) ? sessData.user.loginUrl : '#/error/login/url/unexpected';
 }]);
+
+// Account controller
+angular.module('app.controllers').controller('appAccountCtrl', ['$scope', 'appSess', 'appUtil', function($scope, appSess, appUtil) {
+  // Init vars
+  var sessData      = (!appSess.error()) ? appSess.data() : null;
+
+  $scope.sessData   = sessData;
+}]);
