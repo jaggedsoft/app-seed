@@ -1,6 +1,13 @@
+/*
+ * App Seed
+ * Copyright (c) 2013 Fatih Cetinkaya (http://github.com/cmfatih/app-seed)  
+ * For the full copyright and license information, please view the LICENSE.txt file.
+ */
+
 // Init reqs
 var mFS             = require('fs'),            // fs module
     mPath           = require('path'),          // path module
+    mUtil           = require('util'),          // util module
     mHapi           = require('hapi'),          // hapi module
     mGoogleAPIs     = require('googleapis')     // googleapis module
 ;
@@ -22,26 +29,6 @@ var gPathSep        = mPath.sep,                // path separator
     gOAuth2Client   = mGoogleAPIs.OAuth2Client, // oauth2 client
     gEnvNode        = (process.env.NODE_ENV !== undefined) ? process.env.NODE_ENV : null // environment
 ;
-
-// Init funcs
-
-// Tidy time
-function tidyTime() {
-  return new Date(new Date().toISOString().replace("Z", "+0" + (new Date().getTimezoneOffset()/60) + ":00")).toISOString().replace("T", " ").substr(0, 19);
-}
-
-// Console log
-function tidyLog(iStr, iOut) {
-  var returnRes         = {"time": tidyTime(), "message": null};
-      returnRes.message = (iStr && typeof console !== "undefined") ? iStr : null;
-
-  return (iOut === undefined || iOut === true) ? console.log(returnRes) : returnRes;
-}
-
-// Console clear
-function tidyClear() {
-  console.log('\u001B[2J\u001B[0;0f');
-}
 
 // Init Argv
 if(gArgsCnt > 2) {

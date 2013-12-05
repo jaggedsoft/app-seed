@@ -1,3 +1,9 @@
+/*
+ * App Seed
+ * Copyright (c) 2013 Fatih Cetinkaya (http://github.com/cmfatih/app-seed)  
+ * For the full copyright and license information, please view the LICENSE.txt file.
+ */
+
 // Init reqs
 'use strict';
 

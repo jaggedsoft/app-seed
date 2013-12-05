@@ -122,5 +122,5 @@ For all notable changes see [CHANGELOG.md](CHANGELOG.md)
 ### License
 
 Copyright (c) 2013 Fatih Cetinkaya (http://github.com/cmfatih/app-seed)  
-Licensed under The MIT License (MIT)  
-For the full copyright and license information, please view the LICENSE.txt file.
+For the full copyright and license information, please view the LICENSE.txt file.  
+Licensed under The MIT License (MIT)
