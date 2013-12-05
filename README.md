@@ -31,6 +31,7 @@ npm start
   * Make it standalone.
   * Choose best community supported framework, lib, etc. if necessary.
   * Stay away from dependency for fundamental features.
+  * Keep origin conventions of external libs for consistency.
   * Keep It Simple, Stupid (KISS)
   * Do One Thing, and do it well (DOT)
   * Don't Repeat Yourself (DRY)
@@ -38,6 +39,8 @@ npm start
 
 #### Coding
 
+  * For naming convention; camelCase capitalization used
+  * For file naming; words separated by `-` instead of `_`
   * For closures; named function expressions used due benefits such as recursion.
   * Variables (including closures) defined first due hoisting.
   * "m" prefix used for module variables.
