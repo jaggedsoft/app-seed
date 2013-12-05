@@ -84,7 +84,7 @@ chmod 755 scripts/app.js
 |   |- lib                    : 3rd party libraries
 |   |   |- angular
 |   |   |- jquery
-|   |   |- misc
+|   |   |- misc               : html5shiv, respond.js
 |   |- template               : template files
 |   |   |- home.html          : partial HTML file for home page
 |   |   |- login.html         : partial HTML file for login page
