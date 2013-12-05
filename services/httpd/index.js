@@ -416,11 +416,13 @@ gServer.on('internalError', function(request, err) {
   tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
 });
 
+/*
 gServer.on('request', function(request, event, tags) {
   if(tags.error) {
-    tidyLog('gServer.on.request:error: ' + JSON.stringify(event.data));
+    tidyLog('gServer.on.request:error: ' + request.id + ' - ' + JSON.stringify(event));
   }
 });
+*/
 
 /*
 gServer.on('response', function(request) {
