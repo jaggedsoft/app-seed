@@ -8,6 +8,7 @@
 #   /symlink*
 #
 node_modules/
+npm-debug.log
 sources/
 
 logs/*
