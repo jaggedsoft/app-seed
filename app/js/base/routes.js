@@ -45,8 +45,6 @@ angular.module('app.routes').constant('appRoutesResolves', [
         }
       });
 
-      defer.resolve();
-
       return defer.promise;
     }]
   }
