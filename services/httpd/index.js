@@ -52,7 +52,7 @@ if(gArgsCnt > 2) {
 
 // Check config
 if(!gConfigFile) {
-  gConfigFile = gPathScrDir + gPathSep + '/def-config.json';
+  gConfigFile = gPathScrDir + gPathSep + 'def-config.json';
 }
 
 if(gConfigFile) {
@@ -61,11 +61,11 @@ if(gConfigFile) {
       gConfig       = JSON.parse(mFS.readFileSync(gConfigFile));
     }
     catch(e) {
-      gConfigError  = 'Invalid configuration file. (' + e + ')';
+      gConfigError  = 'Invalid configuration file. (' + gConfigFile + ') (' + e + ')';
     }
   }
   else {
-    gConfigError    = 'Configuration file could not be read.';
+    gConfigError    = 'Configuration file could not be read. (' + gConfigFile + ')';
   }
 }
 
@@ -87,9 +87,8 @@ if(gConfigError === null) {
 }
 
 if(gConfigError !== null) {
-  console.log('Configuraton error! (' + gConfigError + ')');
-
-  process.exit(0);
+  mUtil.tidyLog(gConfigError);
+  throw gConfigError;
 }
 
 // Create server
