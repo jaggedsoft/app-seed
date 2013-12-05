@@ -13,9 +13,12 @@ angular.module('app.controllers').controller('appHomeCtrl', ['$scope', 'appSess'
 }]);
 
 // Login controller
-angular.module('app.controllers').controller('appLoginCtrl', ['$scope', 'appSess', function($scope, appSess) {
+angular.module('app.controllers').controller('appLoginCtrl', ['$scope', 'appSess', 'appUtil', function($scope, appSess, appUtil) {
   // Init vars
-  var sessData    = (!appSess.error()) ? appSess.data() : null;
+  var sessData      = (!appSess.error()) ? appSess.data() : null;
 
-  $scope.message  = "Login Controller";
+  $scope.loginUrl   = (sessData && sessData.user && sessData.user.loginUrl) ? sessData.user.loginUrl : '#/error/login/url/unexpected';
+  $scope.loginClick = function() {
+    appUtil.gotoUrl($scope.loginUrl);
+  };
 }]);
