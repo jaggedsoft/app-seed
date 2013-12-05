@@ -141,7 +141,7 @@ gRoutesOpts = [
     route: '/home',
     match: '/template/home.html',
     auth: {
-      roles: ['user'],
+      roles: [],
       noIsLogin: false
     }
   },
@@ -151,6 +151,14 @@ gRoutesOpts = [
     auth: {
       roles: [],
       noIsLogin: true
+    }
+  },
+  {
+    route: '/account',
+    match: '/template/account.html',
+    auth: {
+      roles: ['user'],
+      noIsLogin: false
     }
   }
 ];
@@ -410,7 +418,7 @@ gServer.on('internalError', function(request, err) {
 
 gServer.on('request', function(request, event, tags) {
   if(tags.error) {
-    tidyLog('gServer.on.request: ' + JSON.stringify(event.data));
+    tidyLog('gServer.on.request:error: ' + JSON.stringify(event.data));
   }
 });
 
