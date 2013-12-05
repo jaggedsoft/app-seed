@@ -22,16 +22,28 @@ angular.module('app.routes').constant('appRoutes', [
 angular.module('app.routes').constant('appRoutesResolves', [
   {
     key: 'sessInit',
-    factory: ['$http', '$q', '$location', function($http, $q, $location) {
-
-      //console.log('location.path:' + $location.path()); // for debug
-
+    factory: ['$http', '$q', '$location', 'appSess', function($http, $q, $location, appSess) {
       // Init vars
       var defer = $q.defer();
-
+     
       // Init session
-      
-      /* session code */
+/*      appSess.init(function(err, data) {
+        if(!err) {
+          appSess.tasker(function(err, data) {
+            if(!err) {
+              defer.resolve();
+            }
+            else {
+              $location.path('error/sess/tasker/unexpected');
+              defer.reject();
+            }
+          });
+        }
+        else {
+          $location.path('error/sess/init/unexpected');
+          defer.reject();
+        }
+      });*/
 
       defer.resolve();
 

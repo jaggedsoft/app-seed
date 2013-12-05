@@ -1,6 +1,6 @@
 ## Changelog
 
-### HEAD 
+### HEAD
 
 ```
 * 20131204 -  Bootstrap removed
