@@ -2,6 +2,8 @@
 
   [app-seed](http://github.com/cmfatih/app-seed) is an application skeleton for web apps.  
 
+  app-seed on [NPM Registry](http://npmjs.org/package/app-seed)
+
   **!!! APP-SEED IS STILL UNDER HEAVY DEVELOPMENT !!!**  
 
 ### Installation
