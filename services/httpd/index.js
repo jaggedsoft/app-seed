@@ -11,7 +11,7 @@ var mFS             = require('fs'),            // fs module
     mPath           = require('path'),          // path module
     mHapi           = require('hapi'),          // hapi module
 
-    mUtil           = require('./util'),        // util module
+    mUtilex         = require('./utilex'),      // util module
     mRoute          = require('./route'),       // route module
     mOAuth2         = require('./oauth2'),      // oauth2 module
     mEvent          = require('./event')        // event module
@@ -87,7 +87,7 @@ if(gConfigError === null) {
 }
 
 if(gConfigError !== null) {
-  mUtil.tidyLog(gConfigError);
+  mUtilex.tidyLog(gConfigError);
   throw gConfigError;
 }
 
@@ -97,7 +97,7 @@ gServer = new mHapi.createServer('localhost', gConfig.hapi.server.port, gConfig.
 // Init server plugins
 gServer.pack.allow({ext: true}).require('yar', gConfig.hapi.yar.options, function(err) {
   if(err) {
-    mUtil.tidyLog('Yar plugin could not be initialized! (' + err + ')');
+    mUtilex.tidyLog('Yar plugin could not be initialized! (' + err + ')');
     throw err;
   }
 });
@@ -113,5 +113,5 @@ gServer.route(gRoute.serverRoutes);
 
 // Start server
 gServer.start(function() {
-  mUtil.tidyLog('Server is listening on port ' + gServer.info.port);
+  mUtilex.tidyLog('Server is listening on port ' + gServer.info.port);
 });

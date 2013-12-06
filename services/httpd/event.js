@@ -17,7 +17,7 @@
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var mUtil               = require('./util'), // util module
+  var mUtilex             = require('./utilex'), // util module
 
       iServer             = (iParam && iParam.server) ? iParam.server : null,
       iIsOnLog            = (iParam && iParam.isOnLog === true)           ? true : false,
@@ -33,14 +33,14 @@ exports = module.exports = function(iParam) {
     // log
     if(iIsOnLog === true) {
       server.on('log', function(event, tags) {
-        mUtil.tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
+        mUtilex.tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
       });
     }
 
     // internal error
     if(iIsOnInternalError === true) {
       server.on('internalError', function(request, err) {
-        mUtil.tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
+        mUtilex.tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
       });
     }
 
@@ -48,7 +48,7 @@ exports = module.exports = function(iParam) {
     if(iIsOnRequest === true) {
       server.on('request', function(request, event, tags) {
         if(tags.error) {
-          mUtil.tidyLog('gServer.on.request:error: ' + request.id + ' - ' + JSON.stringify(event));
+          mUtilex.tidyLog('gServer.on.request:error: ' + request.id + ' - ' + JSON.stringify(event));
         }
       });
     }
@@ -56,7 +56,7 @@ exports = module.exports = function(iParam) {
     // response
     if(iIsOnResponse === true) {
       server.on('response', function(request) {
-        mUtil.tidyLog('gServer.on.response: ' + request.id);
+        mUtilex.tidyLog('gServer.on.response: ' + request.id);
       });
     }
   }
