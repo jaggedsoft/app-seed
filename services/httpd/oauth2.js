@@ -24,7 +24,6 @@ exports = module.exports = function(iParam) {
   ;
 
   if(configAuthClient) {
-
     // Redirect url
     if(!configAuthClient.redirectUrl) {
       configAuthClient.redirectUrl = (serverInfo) ? serverInfo.uri + '/auth/google/callback' : null;
