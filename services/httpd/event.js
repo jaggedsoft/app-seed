@@ -17,15 +17,15 @@
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var mUtilex             = require('./utilex'), // utilex module
+  var mUtilex         = require('./utilex'), // utilex module
 
-      iServer             = (iParam && iParam.server) ? iParam.server : null,
-      iIsOnLog            = (iParam && iParam.isOnLog === true)           ? true : false,
-      iIsOnInternalError  = (iParam && iParam.isOnInternalError === true) ? true : false,
-      iIsOnRequest        = (iParam && iParam.isOnRequest === true)       ? true : false,
-      iIsOnResponse       = (iParam && iParam.isOnResponse === true)      ? true : false,
+      iServer         = (iParam && iParam.server)                     ? iParam.server : null,
+      iIsOnLog        = (iParam && iParam.isOnLog === true)           ? true : false,
+      iIsOnIntrlError = (iParam && iParam.isOnInternalError === true) ? true : false,
+      iIsOnRequest    = (iParam && iParam.isOnRequest === true)       ? true : false,
+      iIsOnResponse   = (iParam && iParam.isOnResponse === true)      ? true : false,
 
-      server              = (iServer && iServer.on) ? iServer : null
+      server          = (iServer && iServer.on) ? iServer : null
   ;
 
   // Init server events
@@ -38,7 +38,7 @@ exports = module.exports = function(iParam) {
     }
 
     // internal error
-    if(iIsOnInternalError === true) {
+    if(iIsOnIntrlError === true) {
       server.on('internalError', function(request, err) {
         mUtilex.tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
       });
