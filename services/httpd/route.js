@@ -18,7 +18,7 @@ exports = module.exports = function(iParam) {
   var iConfig       = (iParam && iParam.config)     ? iParam.config     : null,
       iServer       = (iParam && iParam.server)     ? iParam.server     : null,
       iPathScrDir   = (iParam && iParam.pathScrDir) ? iParam.pathScrDir : null,
-      oauth2Client,
+      oauth2,
       defaultHandler,
       sessIniter,
       sessTasker
@@ -26,7 +26,7 @@ exports = module.exports = function(iParam) {
 
   // Check vars
   if(iConfig && iServer) {
-    oauth2Client = mOAuth2({config: iConfig, server:iServer});
+    oauth2 = mOAuth2({config: iConfig, server:iServer});
   }
 
   // Route handler for default route
@@ -161,8 +161,8 @@ exports = module.exports = function(iParam) {
 
     // If not login
     if(userIsLogin === false) {
-      if(oauth2Client && oauth2Client.requestUrl && typeof oauth2Client.requestUrl === 'function') {
-        userLoginUrl = oauth2Client.requestUrl();
+      if(oauth2 && oauth2.requestUrl && typeof oauth2.requestUrl === 'function') {
+        userLoginUrl = oauth2.requestUrl();
       }
     }
 

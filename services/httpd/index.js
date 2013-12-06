@@ -27,6 +27,7 @@ var gPathSep        = mPath.sep,                // path separator
     gArgs           = process.argv,             // arguments
     gArgsCnt        = gArgs.length,             // arguments count
     gServer         = null,                     // http server
+    gRoute          = null,                     // route handler
     gEnvNode        = null                      // environment mode
 ;
 
@@ -99,8 +100,8 @@ gServer.pack.allow({ext: true}).require('yar', gConfig.hapi.yar.options, functio
   }
 });
 
-// Init other modules
-mRoute = mRoute({config: gConfig, server:gServer, pathScrDir: gPathScrDir});
+// Init route helper
+gRoute = mRoute({config: gConfig, server:gServer, pathScrDir: gPathScrDir});
 
 // Init server routes
 gServer.route([
@@ -111,7 +112,7 @@ gServer.route([
       directory: {
         listing: false,
         index: true,
-        path: mRoute.defaultHandler
+        path: gRoute.defaultHandler
       }
     }
   },
@@ -120,7 +121,7 @@ gServer.route([
     path: '/sess/init',
     config: {
       jsonp: 'callback',
-      handler: mRoute.sessIniter
+      handler: gRoute.sessIniter
     }
   },
   {
@@ -128,7 +129,7 @@ gServer.route([
     path: '/sess/tasker',
     config: {
       jsonp: 'callback',
-      handler: mRoute.sessTasker
+      handler: gRoute.sessTasker
     }
   }
 ]);

@@ -26,9 +26,9 @@ exports = module.exports = function(iParam) {
 
   // Request url
   if(!iConfig.auth.oauth2Client.requestUrl) {
-    var oauth2ClientInst = new mGoogleAPIs.OAuth2Client(iConfig.auth.oauth2Client.clientId, iConfig.auth.oauth2Client.clientSecret, iConfig.auth.oauth2Client.redirectUrl);
+    var oauth2Client = new mGoogleAPIs.OAuth2Client(iConfig.auth.oauth2Client.clientId, iConfig.auth.oauth2Client.clientSecret, iConfig.auth.oauth2Client.redirectUrl);
 
-    iConfig.auth.oauth2Client.requestUrl = oauth2ClientInst.generateAuthUrl({
+    iConfig.auth.oauth2Client.requestUrl = oauth2Client.generateAuthUrl({
       response_type: 'code',
       access_type: 'offline',
       approval_prompt: iConfig.auth.oauth2Client.approvalPrompt,
