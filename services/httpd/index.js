@@ -18,19 +18,14 @@ var mFS             = require('fs'),            // fs module
 ;
 
 // Init vars
-var gPathSep        = mPath.sep,                // path separator
-    gPathCur        = mFS.realpathSync('.'),    // current path
-    gPathScrFile    = __filename,               // script file path
-    gPathScrDir     = __dirname,                // script path
-    gConfig         = {},                       // config
+var gConfig         = {},                       // config
     gConfigError    = null,                     // config error
     gConfigFile     = null,                     // config file
     gArgs           = process.argv,             // arguments
     gArgsCnt        = gArgs.length,             // arguments count
     gServer         = null,                     // http server
     gRoute          = null,                     // route helper
-    gEvent          = null,                     // event helper
-    gEnvNode        = null                      // environment mode
+    gEvent          = null                      // event helper
 ;
 
 // Init Argv
@@ -50,10 +45,8 @@ if(gArgsCnt > 2) {
 }
 
 // Check config
-gEnvNode = (process.env.NODE_ENV !== undefined) ? process.env.NODE_ENV : null; // environment
-
 if(!gConfigFile) {
-  gConfigFile       = gPathScrDir + gPathSep + 'def-config.json';
+  gConfigFile       = __dirname + mUtilex.pathSep + 'def-config.json';
 }
 
 if(gConfigFile) {
@@ -103,7 +96,7 @@ gServer.pack.allow({ext: true}).require('yar', gConfig.hapi.yar.options, functio
 });
 
 // Init route helper
-gRoute = mRoute({config: gConfig, server:gServer, pathScrDir: gPathScrDir});
+gRoute = mRoute({config: gConfig, server:gServer, pathScrDir: __dirname});
 
 // Init event helper
 gEvent = mEvent({server:gServer, isOnLog: true, isOnInternalError: true, isOnRequest: false, isOnResponse: false});

@@ -11,9 +11,15 @@
 exports = module.exports = function() {
 
   // Init vars
-  var tidyTime,
-      tidyLog,
-      tidyClear
+  var mFS           = require('fs'),    // fs module
+      mPath         = require('path'),  // path module
+
+      tidyTime,     // tidy time stamp
+      tidyLog,      // tidy log message
+      tidyClear,    // clear console
+      pathSep,      // system path separator
+      pathCur,       // current path
+      envMode       // environment mode
   ;
 
   // Returns tidy time stamp
@@ -21,7 +27,7 @@ exports = module.exports = function() {
     return new Date(new Date().toISOString().replace("Z", "+0" + (new Date().getTimezoneOffset()/60) + ":00")).toISOString().replace("T", " ").substr(0, 19);
   };
 
-  // Returns or output tidy console log message
+  // Returns or output tidy log message
   tidyLog = function tidyLog(iStr, iOut) {
     var returnRes         = {"time": tidyTime(), "message": null};
         returnRes.message = (iStr && typeof console !== "undefined") ? iStr : null;
@@ -34,10 +40,28 @@ exports = module.exports = function() {
     console.log('\u001B[2J\u001B[0;0f');
   };
 
+  // Returns system path separator
+  pathSep = function pathSep() {
+    return mPath.sep;
+  }();
+
+  // Returns current path
+  pathCur = function pathCur() {
+    return mFS.realpathSync('.');
+  }();
+
+  // Returns current path
+  envMode = function envMode() {
+    return (process.env.NODE_ENV !== undefined) ? process.env.NODE_ENV : null;
+  }();
+
   // Return
   return {
     tidyTime: tidyTime,
     tidyLog: tidyLog,
-    tidyClear: tidyClear
+    tidyClear: tidyClear,
+    pathSep: pathSep,
+    pathCur: pathCur,
+    envMode: envMode
   };
 }();
