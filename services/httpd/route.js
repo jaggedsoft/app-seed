@@ -7,15 +7,14 @@
 // Init reqs
 'use strict';
 
-var mOAuth2 = require('./oauth2'), // oauth2 module
-    mHapi   = require('hapi')      // hapi module
-;
-
 // Init the module
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var iConfig       = (iParam && iParam.config)     ? iParam.config     : null,
+  var mOAuth2       = require('./oauth2'),  // oauth2 module
+      mHapi         = require('hapi'),      // hapi module
+
+      iConfig       = (iParam && iParam.config)     ? iParam.config     : null,
       iServer       = (iParam && iParam.server)     ? iParam.server     : null,
       iPathScrDir   = (iParam && iParam.pathScrDir) ? iParam.pathScrDir : null,
       oauth2,
