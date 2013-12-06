@@ -11,40 +11,47 @@
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var mGoogleAPIs   = require('googleapis'), // googleapis module
+  var mGoogleAPIs       = require('googleapis'), // googleapis module
 
-      iConfig       = (iParam && iParam.config) ? iParam.config : null,
-      iServer       = (iParam && iParam.server) ? iParam.server : null,
+      iConfig           = (iParam && iParam.config) ? iParam.config : null,
+      iServer           = (iParam && iParam.server) ? iParam.server : null,
+
       redirectUrl,
-      requestUrl
+      requestUrl,
+
+      configAuthClient  = (iConfig && iConfig.auth && iConfig.auth.oauth2Client) ? iConfig.auth.oauth2Client : null,
+      serverInfo        = (iServer && iServer.info) ? iServer.info : null
   ;
 
-  // Redirect url
-  if(!iConfig.auth.oauth2Client.redirectUrl) {
-    iConfig.auth.oauth2Client.redirectUrl = iServer.info.uri + '/auth/google/callback';
-  }
+  if(configAuthClient) {
 
-  // Request url
-  if(!iConfig.auth.oauth2Client.requestUrl) {
-    var oauth2Client = new mGoogleAPIs.OAuth2Client(iConfig.auth.oauth2Client.clientId, iConfig.auth.oauth2Client.clientSecret, iConfig.auth.oauth2Client.redirectUrl);
+    // Redirect url
+    if(!configAuthClient.redirectUrl) {
+      configAuthClient.redirectUrl = (serverInfo) ? serverInfo.uri + '/auth/google/callback' : null;
+    }
 
-    iConfig.auth.oauth2Client.requestUrl = oauth2Client.generateAuthUrl({
-      response_type: 'code',
-      access_type: 'offline',
-      approval_prompt: iConfig.auth.oauth2Client.approvalPrompt,
-      state: '/login',
-      scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
-    });
+    // Request url
+    if(!configAuthClient.requestUrl) {
+      var oauth2Client = new mGoogleAPIs.OAuth2Client(configAuthClient.clientId, configAuthClient.clientSecret, configAuthClient.redirectUrl);
+
+      configAuthClient.requestUrl = oauth2Client.generateAuthUrl({
+        response_type: 'code',
+        access_type: 'offline',
+        approval_prompt: configAuthClient.approvalPrompt,
+        state: '/login',
+        scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
+      });
+    }
   }
 
   // Returns redirect url
   redirectUrl = function() {
-    return iConfig.auth.oauth2Client.redirectUrl;
+    return (configAuthClient) ? configAuthClient.redirectUrl : null;
   };
 
   // Returns requestUrl url
   requestUrl = function() {
-    return iConfig.auth.oauth2Client.requestUrl;
+    return (configAuthClient) ? configAuthClient.requestUrl : null;
   };
 
   // Return
