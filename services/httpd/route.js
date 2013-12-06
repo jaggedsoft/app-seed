@@ -11,32 +11,34 @@
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var mOAuth2       = require('./oauth2'),  // oauth2 module
-      mHapi         = require('hapi'),      // hapi module
+  var mOAuth2           = require('./oauth2'),  // oauth2 module
+      mHapi             = require('hapi'),      // hapi module
 
-      iConfig       = (iParam && iParam.config)     ? iParam.config     : null,
-      iServer       = (iParam && iParam.server)     ? iParam.server     : null,
-      iPathScrDir   = (iParam && iParam.pathScrDir) ? iParam.pathScrDir : null,
-      oauth2,
-      defaultHandler,
-      sessIniter,
-      sessTasker
+      iConfig           = (iParam && iParam.config)     ? iParam.config : null,
+      iServer           = (iParam && iParam.server)     ? iParam.server : null,
+      iPathScrDir       = (iParam && iParam.pathScrDir) ? (iParam.pathScrDir + '') : null,
+
+      serverRoutes,     // route array for server
+      pathHandler,      // route handler function for app path
+      sessIniter,       // route session initializer function
+      sessTasker,       // route session tasker function
+
+      configHapiRoutes  = (iConfig && iConfig.hapi && iConfig.hapi.routes) ? iConfig.hapi.routes : null,
+      oauth2
   ;
 
-  // Check vars
-  if(iConfig && iServer) {
-    oauth2 = mOAuth2({config: iConfig, server:iServer});
-  }
+  // Init oauth2 helper
+  oauth2 = mOAuth2({config: iConfig, server:iServer});
 
-  // Route handler for default route
-  defaultHandler = function(request) {
+  // Route handler for app path
+  pathHandler = function(request) {
     
     // Check only if it is template
     if(((request.path + '').indexOf('/template/') === 0) === true) {
 
       // Init vars
       var reqPath       = (request.path + ''),
-          routeAuthCnt  = (iConfig.hapi.routes instanceof Array) ? iConfig.hapi.routes.length : 0
+          routeAuthCnt  = (configHapiRoutes instanceof Array) ? configHapiRoutes.length : 0
       ;
 
       // Init session
@@ -46,10 +48,10 @@ exports = module.exports = function(iParam) {
       for(var i = 0; i < routeAuthCnt; i++) {
 
         // If matches
-        if(iConfig.hapi.routes[i].match == reqPath) {
+        if(configHapiRoutes[i].match == reqPath) {
 
           // Init vars
-          var tMatch      = iConfig.hapi.routes[i],
+          var tMatch      = configHapiRoutes[i],
               tRoles      = (tMatch.auth && tMatch.auth.roles instanceof Array) ? tMatch.auth.roles : [],
               tNoIsLogin  = (tMatch.auth && tMatch.auth.noIsLogin === true)     ? true              : false,
               task        = request.session.get('task'),
@@ -231,9 +233,41 @@ exports = module.exports = function(iParam) {
     request.reply(requestReply);
   };
 
+  // Server routes
+  serverRoutes = [
+    {
+      method: 'GET',
+      path: '/{path*}',
+      handler: {
+        directory: {
+          listing: false,
+          index: true,
+          path: pathHandler
+        }
+      }
+    },
+    {
+      method: 'GET',
+      path: '/sess/init',
+      config: {
+        jsonp: 'callback',
+        handler: sessIniter
+      }
+    },
+    {
+      method: 'GET',
+      path: '/sess/tasker',
+      config: {
+        jsonp: 'callback',
+        handler: sessTasker
+      }
+    }
+  ];
+
   // Return
   return {
-    defaultHandler: defaultHandler,
+    serverRoutes: serverRoutes,
+    pathHandler: pathHandler,
     sessIniter: sessIniter,
     sessTasker: sessTasker
   };
