@@ -16,8 +16,8 @@ exports = module.exports = function(iParam) {
       iConfig           = (iParam && iParam.config) ? iParam.config : null,
       iServer           = (iParam && iParam.server) ? iParam.server : null,
 
-      redirectUrl,
-      requestUrl,
+      redirectUrl,      // redirection url for oauth2
+      requestUrl,       // request url for oauth2
 
       configAuthClient  = (iConfig && iConfig.auth && iConfig.auth.oauth2Client) ? iConfig.auth.oauth2Client : null,
       serverInfo        = (iServer && iServer.info) ? iServer.info : null
@@ -44,12 +44,12 @@ exports = module.exports = function(iParam) {
     }
   }
 
-  // Returns redirect url
+  // Returns redirection url
   redirectUrl = function() {
     return (configAuthClient) ? configAuthClient.redirectUrl : null;
   };
 
-  // Returns requestUrl url
+  // Returns request url
   requestUrl = function() {
     return (configAuthClient) ? configAuthClient.requestUrl : null;
   };
