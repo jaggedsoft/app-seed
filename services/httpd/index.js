@@ -27,7 +27,6 @@ var gPathSep        = mPath.sep,                // path separator
     gArgsCnt        = gArgs.length,             // arguments count
     gServer         = null,                     // http server
     gRoutes         = [],                       // routes
-    gRoutesOpts     = [],                       // routes options
     gSessIniter     = null,                     // session initializer function
     gSessTasker     = null,                     // session tasker function
     gOAuth2Client   = mGoogleAPIs.OAuth2Client, // oauth2 client
@@ -72,13 +71,13 @@ if(gConfigFile) {
 if(gConfigError === null) {
   
   // Check config
-  if(!gConfig.hapi || !gConfig.hapi.server) {
-    // hapi server
-    gConfigError = 'Invalid hapi server configuration (' + JSON.stringify(gConfig.hapi) + ')';
-  }
-  else if(!gConfig.auth || !gConfig.auth.oauth2Client) {
+  if(!gConfig.auth || !gConfig.auth.oauth2Client) {
     // oauth2
     gConfigError = 'Invalid oauth2 client configuration (' + JSON.stringify(gConfig.auth) + ')';
+  }
+  else if(!gConfig.hapi || !gConfig.hapi.server || !gConfig.hapi.yar || !gConfig.hapi.routes) {
+    // hapi server
+    gConfigError = 'Invalid hapi server configuration (' + JSON.stringify(gConfig.hapi) + ')';
   }
   else if(!gConfig.hapi.server.port || isNaN(gConfig.hapi.server.port) || gConfig.hapi.server.port <= 0) {
     // Server http port
@@ -103,34 +102,6 @@ gServer.pack.allow({ext: true}).require('yar', gConfig.hapi.yar.options, functio
 });
 
 // Init server routes
-
-// Routes options
-gRoutesOpts = [
-  {
-    route: '/home',
-    match: '/template/home.html',
-    auth: {
-      roles: [],
-      noIsLogin: false
-    }
-  },
-  {
-    route: '/login',
-    match: '/template/login.html',
-    auth: {
-      roles: [],
-      noIsLogin: true
-    }
-  },
-  {
-    route: '/account',
-    match: '/template/account.html',
-    auth: {
-      roles: ['user'],
-      noIsLogin: false
-    }
-  }
-];
 
 // Route handler for session initializer
 gSessIniter = function(request, next, isHandlerCall) {
@@ -262,7 +233,7 @@ gRoutes = [
 
             // Init vars
             var reqPath       = (request.path + ''),
-                routeAuthCnt  = (gRoutesOpts instanceof Array) ? gRoutesOpts.length : 0
+                routeAuthCnt  = (gConfig.hapi.routes instanceof Array) ? gConfig.hapi.routes.length : 0
             ;
 
             // Init session
@@ -272,10 +243,10 @@ gRoutes = [
             for(var i = 0; i < routeAuthCnt; i++) {
 
               // If matches
-              if(gRoutesOpts[i].match == reqPath) {
+              if(gConfig.hapi.routes[i].match == reqPath) {
 
                 // Init vars
-                var tMatch      = gRoutesOpts[i],
+                var tMatch      = gConfig.hapi.routes[i],
                     tRoles      = (tMatch.auth && tMatch.auth.roles instanceof Array) ? tMatch.auth.roles : [],
                     tNoIsLogin  = (tMatch.auth && tMatch.auth.noIsLogin === true)     ? true              : false,
                     task        = request.session.get('task'),

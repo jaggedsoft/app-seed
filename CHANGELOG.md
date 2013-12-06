@@ -3,6 +3,9 @@
 ### HEAD
 
 ```
+* 20131205 -  Improve modularity
+              util module for services/httpd
+              Moving routes to the config file
 * 20131204 -  Bootstrap removed
               CHANGELOG.md added
               Respond.js v1.4.0
