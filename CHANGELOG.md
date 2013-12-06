@@ -3,6 +3,7 @@
 ### HEAD
 
 ```
+* 20131206 -  event module for services/httpd
 * 20131205 -  Improve modularity
               Moving routes to the config file
               util module for services/httpd

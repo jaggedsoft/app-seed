@@ -13,7 +13,8 @@ var mFS             = require('fs'),            // fs module
 
     mUtil           = require('./util'),        // util module
     mRoute          = require('./route'),       // route module
-    mOAuth2         = require('./oauth2')       // oauth2 module
+    mOAuth2         = require('./oauth2'),      // oauth2 module
+    mEvent          = require('./event')        // event module
 ;
 
 // Init vars
@@ -28,6 +29,7 @@ var gPathSep        = mPath.sep,                // path separator
     gArgsCnt        = gArgs.length,             // arguments count
     gServer         = null,                     // http server
     gRoute          = null,                     // route helper
+    gEvent          = null,                     // event helper
     gEnvNode        = null                      // environment mode
 ;
 
@@ -103,30 +105,8 @@ gServer.pack.allow({ext: true}).require('yar', gConfig.hapi.yar.options, functio
 // Init route helper
 gRoute = mRoute({config: gConfig, server:gServer, pathScrDir: gPathScrDir});
 
-// Init server events
-//+++ Should be control by config
-
-gServer.on('log', function(event, tags) {
-  mUtil.tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
-});
-
-gServer.on('internalError', function(request, err) {
-  mUtil.tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
-});
-
-/*
-gServer.on('request', function(request, event, tags) {
-  if(tags.error) {
-    mUtil.tidyLog('gServer.on.request:error: ' + request.id + ' - ' + JSON.stringify(event));
-  }
-});
-*/
-
-/*
-gServer.on('response', function(request) {
-  mUtil.tidyLog('gServer.on.response: ' + request.id);
-});
-*/
+// Init event helper
+gEvent = mEvent({server:gServer, isOnLog: true, isOnInternalError: true, isOnRequest: false, isOnResponse: false});
 
 // Init server routes
 gServer.route(gRoute.serverRoutes);
