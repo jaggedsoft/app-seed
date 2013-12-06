@@ -34,7 +34,7 @@ exports = module.exports = function() {
     console.log('\u001B[2J\u001B[0;0f');
   };
 
- // Return
+  // Return
   return {
     tidyTime: tidyTime,
     tidyLog: tidyLog,
