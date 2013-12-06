@@ -119,7 +119,7 @@ chmod 755 app-seed/scripts/app.js
 
 ### Changelog
 
-For all notable changes see [CHANGELOG.md](CHANGELOG.md)
+For all notable changes see [CHANGELOG.md](https://github.com/cmfatih/app-seed/blob/master/CHANGELOG.md)
 
 ### License
 
