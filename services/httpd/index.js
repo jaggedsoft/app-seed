@@ -11,7 +11,7 @@ var mFS             = require('fs'),            // fs module
     mPath           = require('path'),          // path module
     mHapi           = require('hapi'),          // hapi module
 
-    mUtilex         = require('./utilex'),      // util module
+    mUtilex         = require('./utilex'),      // utilex module
     mRoute          = require('./route'),       // route module
     mOAuth2         = require('./oauth2'),      // oauth2 module
     mEvent          = require('./event')        // event module

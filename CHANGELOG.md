@@ -6,7 +6,7 @@
 * 20131206 -  event module for services/httpd
 * 20131205 -  Improve modularity
               Moving routes to the config file
-              util module for services/httpd
+              utilex module for services/httpd
               route module for services/httpd
               oauth2 module for services/httpd
 * 20131204 -  Bootstrap removed

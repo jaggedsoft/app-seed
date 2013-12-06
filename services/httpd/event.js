@@ -17,7 +17,7 @@
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var mUtilex             = require('./utilex'), // util module
+  var mUtilex             = require('./utilex'), // utilex module
 
       iServer             = (iParam && iParam.server) ? iParam.server : null,
       iIsOnLog            = (iParam && iParam.isOnLog === true)           ? true : false,
