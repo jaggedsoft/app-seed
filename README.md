@@ -59,12 +59,12 @@ npm start
 #### Permissions
 
 ```
-find . -type f -exec chmod 644 {} +
-find . -type d -exec chmod 755 {} +
-chmod 775 logs/
-chmod 664 logs/app.log
-chmod 755 scripts/app.sh
-chmod 755 scripts/app.js
+find app-seed/ -type f -exec chmod 644 {} +
+find app-seed/ -type d -exec chmod 755 {} +
+chmod 775 app-seed/logs/
+chmod 664 app-seed/logs/app.log
+chmod 755 app-seed/scripts/app.sh
+chmod 755 app-seed/scripts/app.js
 ```
 
 #### File Structure
