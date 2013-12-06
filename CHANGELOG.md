@@ -4,8 +4,10 @@
 
 ```
 * 20131205 -  Improve modularity
-              util module for services/httpd
               Moving routes to the config file
+              util module for services/httpd
+              route module for services/httpd
+              oauth2 module for services/httpd
 * 20131204 -  Bootstrap removed
               CHANGELOG.md added
               Respond.js v1.4.0
