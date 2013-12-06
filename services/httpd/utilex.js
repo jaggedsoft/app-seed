@@ -11,20 +11,20 @@
 exports = module.exports = function() {
 
   // Init vars
-  var mFS           = require('fs'),    // fs module
-      mPath         = require('path'),  // path module
+  var mFS         = require('fs'),    // fs module
+      mPath       = require('path'),  // path module
 
-      tidyTime,     // tidy time stamp
-      tidyLog,      // tidy log message
-      tidyClear,    // clear console
-      tidyArgs,     // tidy arguments
-      pathSep,      // system path separator
-      pathCur,      // current path
-      envMode,      // environment mode
+      tidyTime,   // tidy time stamp
+      tidyLog,    // tidy log message
+      tidyClear,  // clear console
+      tidyArgs,   // tidy arguments
+      pathSep,    // system path separator
+      pathCur,    // current path
+      envMode,    // environment mode
 
-      args          = process.argv,     // arguments
-      argsCnt       = args.length,      // arguments count
-      argsF         = {}
+      args        = process.argv, // arguments
+      argsCnt     = args.length,  // arguments count
+      argsF       = {}
   ;
 
   // Init arguments
