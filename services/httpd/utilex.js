@@ -17,10 +17,31 @@ exports = module.exports = function() {
       tidyTime,     // tidy time stamp
       tidyLog,      // tidy log message
       tidyClear,    // clear console
+      tidyArgs,     // tidy arguments
       pathSep,      // system path separator
-      pathCur,       // current path
-      envMode       // environment mode
+      pathCur,      // current path
+      envMode,      // environment mode
+
+      args          = process.argv,     // arguments
+      argsCnt       = args.length,      // arguments count
+      argsF         = {}
   ;
+
+  // Init arguments
+  if(argsCnt > 2) {
+    for(var i = 2; i < argsCnt; i++) {
+      switch(args[i]) {
+        case "-c":
+        case "--configFile":
+          argsF.c           = (args[++i] + '').trim();
+          argsF.configFile  = argsF.c;
+          break;
+        default:
+          console.log("Invalid argument! (" + args[i] + ")");
+          break;
+      }
+    }
+  }
 
   // Returns tidy time stamp
   tidyTime = function tidyTime() {
@@ -38,6 +59,11 @@ exports = module.exports = function() {
   // Clear console
   tidyClear = function tidyClear() {
     console.log('\u001B[2J\u001B[0;0f');
+  };
+
+  // Returns tidy arguments
+  tidyArgs = function tidyArgs() {
+    return argsF;
   };
 
   // Returns system path separator
@@ -60,6 +86,7 @@ exports = module.exports = function() {
     tidyTime: tidyTime,
     tidyLog: tidyLog,
     tidyClear: tidyClear,
+    tidyArgs: tidyArgs,
     pathSep: pathSep,
     pathCur: pathCur,
     envMode: envMode

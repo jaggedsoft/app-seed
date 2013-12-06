@@ -20,46 +20,28 @@ var mFS             = require('fs'),            // fs module
 // Init vars
 var gConfig         = {},                       // config
     gConfigError    = null,                     // config error
-    gConfigFile     = null,                     // config file
-    gArgs           = process.argv,             // arguments
-    gArgsCnt        = gArgs.length,             // arguments count
+    gArgs           = mUtilex.tidyArgs(),       // arguments
     gServer         = null,                     // http server
     gRoute          = null,                     // route helper
     gEvent          = null                      // event helper
 ;
 
-// Init Argv
-if(gArgsCnt > 2) {
-  for(var i = 2; i < gArgsCnt; i++) {
-    switch(gArgs[i]) {
-      case "-c":
-      case "--configFile":
-        gConfigFile  = (gArgs[++i] + '').trim();
-        break;
-      default:
-        console.log("Invalid argument! (" + gArgs[i] + ")");
-        process.exit(0);
-        break;
-    }
-  }
-}
-
 // Check config
-if(!gConfigFile) {
-  gConfigFile       = __dirname + mUtilex.pathSep + 'def-config.json';
+if(!gArgs.configFile) {
+  gArgs.configFile = __dirname + mUtilex.pathSep + 'def-config.json';
 }
 
-if(gConfigFile) {
-  if(mFS.existsSync(gConfigFile)) {
+if(gArgs.configFile) {
+  if(mFS.existsSync(gArgs.configFile)) {
     try {
-      gConfig       = JSON.parse(mFS.readFileSync(gConfigFile));
+      gConfig       = JSON.parse(mFS.readFileSync(gArgs.configFile));
     }
     catch(e) {
-      gConfigError  = 'Invalid configuration file. (' + gConfigFile + ') (' + e + ')';
+      gConfigError  = 'Invalid configuration file. (' + gArgs.configFile + ') (' + e + ')';
     }
   }
   else {
-    gConfigError    = 'Configuration file could not be read. (' + gConfigFile + ')';
+    gConfigError    = 'Configuration file could not be read. (' + gArgs.configFile + ')';
   }
 }
 
