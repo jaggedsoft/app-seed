@@ -7,14 +7,15 @@
 // Init reqs
 'use strict';
 
+var mFS     = require('fs'),      // fs module
+    mUtilex = require('./utilex') // utilex module
+;
+
 // Init the module
 exports = module.exports = function() {
 
   // Init vars
-  var mFS           = require('fs'),        // fs module
-      mUtilex       = require('./utilex'),  // utilex module
-
-      configData,   // config data
+  var configData,   // config data
       configError,  // config error
 
       args          = mUtilex.tidyArgs()    // arguments

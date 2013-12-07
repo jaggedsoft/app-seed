@@ -7,13 +7,13 @@
 // Init reqs
 'use strict';
 
+var mGoogleAPIs = require('googleapis'); // googleapis module
+
 // Init the module
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var mGoogleAPIs         = require('googleapis'), // googleapis module
-
-      iConfig             = (iParam && iParam.config) ? iParam.config : null,
+  var iConfig             = (iParam && iParam.config) ? iParam.config : null,
       iServer             = (iParam && iParam.server) ? iParam.server : null,
 
       googleAPIs,         // Google APIs - function

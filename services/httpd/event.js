@@ -13,13 +13,13 @@
 // Init reqs
 'use strict';
 
+var mUtilex = require('./utilex'); // utilex module
+
 // Init the module
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var mUtilex         = require('./utilex'), // utilex module
-
-      iServer         = (iParam && iParam.server)                     ? iParam.server : null,
+  var iServer         = (iParam && iParam.server)                     ? iParam.server : null,
       iIsOnLog        = (iParam && iParam.isOnLog === true)           ? true : false,
       iIsOnIntrlError = (iParam && iParam.isOnInternalError === true) ? true : false,
       iIsOnRequest    = (iParam && iParam.isOnRequest === true)       ? true : false,

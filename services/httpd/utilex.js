@@ -7,14 +7,15 @@
 // Init reqs
 'use strict';
 
+var mFS   = require('fs'),  // fs module
+    mPath = require('path') // path module
+;
+
 // Init the module
 exports = module.exports = function() {
 
   // Init vars
-  var mFS         = require('fs'),    // fs module
-      mPath       = require('path'),  // path module
-
-      tidyTime,   // tidy time stamp - function
+  var tidyTime,   // tidy time stamp - function
       tidyLog,    // tidy log message - function
       tidyClear,  // clear console - function
       tidyArgs,   // tidy arguments - function

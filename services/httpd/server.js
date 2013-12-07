@@ -7,13 +7,13 @@
 // Init reqs
 'use strict';
 
+var mHapi = require('hapi'); // hapi module
+
 // Init the module
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var mHapi         = require('hapi'), // hapi module
-
-      iConfig       = (iParam && iParam.config) ? iParam.config : null,
+  var iConfig       = (iParam && iParam.config) ? iParam.config : null,
 
       serverInst,   // server instance
       serverError,  // server error
