@@ -6,6 +6,7 @@
 * 20131206 -  event module for services/httpd
               config module for services/httpd
               server module for services/httpd
+              Google OAuth2 callback support
 * 20131205 -  Improve modularity
               Moving routes to the config file
               utilex module for services/httpd

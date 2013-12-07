@@ -19,16 +19,17 @@ exports = module.exports = function(iParam) {
       iPathScrDir       = (iParam && iParam.pathScrDir) ? (iParam.pathScrDir + '') : null,
 
       serverRoutes,     // route array for server
-      pathHandler,      // route handler function for app path
-      sessIniter,       // route session initializer function
-      sessTasker,       // route session tasker function
+      pathHandler,      // route handler for app path - function
+      sessIniter,       // route handler for session initializer - function
+      sessTasker,       // route handler for session tasker - function
+      oauth2CB,         // route handler for oauth2 callback - function
 
       configHapiRoutes  = (iConfig && iConfig.hapi && iConfig.hapi.routes) ? iConfig.hapi.routes : null,
       oauth2
   ;
 
   // Init oauth2 helper
-  oauth2 = mOAuth2({config: iConfig, server:iServer});
+  oauth2 = mOAuth2({config: iConfig, server: iServer});
 
   // Route handler for app path
   pathHandler = function(request) {
@@ -48,7 +49,7 @@ exports = module.exports = function(iParam) {
       for(var i = 0; i < routeAuthCnt; i++) {
 
         // If matches
-        if(configHapiRoutes[i].match == reqPath) {
+        if(configHapiRoutes[i].match === reqPath) {
 
           // Init vars
           var tMatch      = configHapiRoutes[i],
@@ -233,6 +234,118 @@ exports = module.exports = function(iParam) {
     request.reply(requestReply);
   };
 
+  // Route handler for oauth2 callback
+  oauth2CB = function(request) {
+
+    // Init vars
+    var requestReply  = {},
+        task          = request.session.get('task'),
+        queryState    = request.query.state,
+        queryCode     = request.query.code,
+        queryError    = request.query.error
+    ;
+
+    // Check vars
+    task = (task instanceof Object) ? task : null; // Keep this for multi task
+
+    if(!queryError && queryCode) {
+      // Get tokens
+      oauth2.client.getToken(queryCode, function(err, tokens) {
+        if(!err) {
+          // Init vars
+          var token           = {};
+              token.access    = (tokens.access_token || null);
+              token.refresh   = (tokens.refresh_token || null);
+              token.type      = (tokens.token_type || null);
+              token.expiresIn = (tokens.expires_in || null);
+          //+++ Store token info somewhere
+
+          // Set credentials
+          oauth2.client.credentials = {access_token: token.access, refresh_token: token.refresh};
+
+          // Execute API request
+          oauth2.googleAPIs.discover('oauth2', 'v2').execute(function(err, client) {
+              if(!err) {
+                // Get user info
+                client.oauth2.userinfo.get().withAuthClient(oauth2.client).execute(function(err, results) {
+                  
+                  if(!err) {
+                    // Init vars
+                    var ui                = {};
+                        ui.id             = (results.id || null);
+                        ui.email          = (results.email || null);
+                        ui.emailVerified  = (results.verified_email || null);
+                        ui.name           = (results.name || null);
+                        ui.nameFirst      = (results.given_name || null);
+                        ui.nameLast       = (results.family_name || null);
+                        ui.locale         = (results.locale || null);
+                    //+++ Store user info somewhere
+
+                    // Set session vars
+                    request.session.set('user.isLogin', true);
+                    request.session.set('user.id', ui.id);
+                    request.session.set('user.email', ui.email);
+                    request.session.set('user.name.full', ui.name);
+                    request.session.set('user.roles', ['user']);
+
+                    request.reply.redirect('/#/');
+                  }
+                  else {
+                    // API get error
+                    task = {
+                      "type": "alert",
+                      "option": {
+                        "kind": "error",
+                        "message": "App approval error. (" + err + ")"
+                      }
+                    };
+                    request.session.set('task', task);
+                    request.reply.redirect('/#/login');
+                  }
+                });
+              }
+              else {
+                // API error
+                task = {
+                  "type": "alert",
+                  "option": {
+                    "kind": "error",
+                    "message": "App approval error. (" + err + ")"
+                  }
+                };
+                request.session.set('task', task);
+                request.reply.redirect('/#/login');
+              }
+          });
+        }
+        else {
+          // Token error
+          task = {
+            "type": "alert",
+            "option": {
+              "kind": "error",
+              "message": "App approval error. (" + err + ")"
+            }
+          };
+          request.session.set('task', task);
+          request.reply.redirect('/#/login');
+        }
+      });
+    }
+    else {
+      // Access denied due approval
+      task = {
+        "type": "alert",
+        "option": {
+          "kind": "error",
+          "message": "App approval required. (" + queryError + ")"
+        }
+      };
+      request.session.set('task', task);
+      request.reply.redirect('/#/login');
+    }
+  };
+
   // Server routes
   serverRoutes = [
     {
@@ -260,6 +373,14 @@ exports = module.exports = function(iParam) {
       config: {
         jsonp: 'callback',
         handler: sessTasker
+      }
+    },
+    {
+      method: 'GET',
+      path: '/auth/google/callback',
+      config: {
+        jsonp: 'callback',
+        handler: oauth2CB
       }
     }
   ];
