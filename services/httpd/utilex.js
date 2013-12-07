@@ -14,13 +14,13 @@ exports = module.exports = function() {
   var mFS         = require('fs'),    // fs module
       mPath       = require('path'),  // path module
 
-      tidyTime,   // tidy time stamp
-      tidyLog,    // tidy log message
-      tidyClear,  // clear console
-      tidyArgs,   // tidy arguments
-      pathSep,    // system path separator
-      pathCur,    // current path
-      envMode,    // environment mode
+      tidyTime,   // tidy time stamp - function
+      tidyLog,    // tidy log message - function
+      tidyClear,  // clear console - function
+      tidyArgs,   // tidy arguments - function
+      pathSep,    // system path separator - function
+      pathCur,    // current path - function
+      envMode,    // environment mode - function
 
       args        = process.argv, // arguments
       argsCnt     = args.length,  // arguments count
