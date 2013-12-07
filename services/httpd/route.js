@@ -145,7 +145,7 @@ exports = module.exports = function(iParam) {
         userEmail       = request.session.get('user.email'),
         userNameFull    = request.session.get('user.name.full'),
         userRoles       = request.session.get('user.roles'),
-        userLoginUrl    = null,
+        userLoginUrl,
 
         iIsHandlerCall  = (iParam && iParam.isHandlerCall === false)  ? true : false
     ;
