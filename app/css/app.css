@@ -33,3 +33,35 @@ body {
     padding-left: 5px;
   }
 }
+
+/* navbar */
+.navbar {
+  float: left;
+  margin: 0;
+  width: 100%;
+  border-bottom: 1px solid #CCC;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0px;
+}
+
+.navbar li {
+  float: left;
+  display: list-item;
+  padding-left: 20px;
+}
+
+/* content */
+.content {
+  float: left;
+  width: 100%;
+}
+
+/* others */
+.wrapper {
+  float: left;
+  padding: 10px;
+}
