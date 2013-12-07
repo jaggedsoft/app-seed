@@ -16,11 +16,12 @@ exports = module.exports = function(iParam) {
       iConfig             = (iParam && iParam.config) ? iParam.config : null,
       iServer             = (iParam && iParam.server) ? iParam.server : null,
 
+      googleAPIs,         // Google APIs - function
       client,             // client for oauth2 - function
       redirectUrl,        // redirection url for oauth2 - function
       requestUrl,         // request url for oauth2 - function
 
-      oauth2Client        = null,
+      oauth2Client,
       oauth2ClientConfig  = (iConfig && iConfig.auth && iConfig.auth.oauth2Client) ? iConfig.auth.oauth2Client : null,
       serverInfo          = (iServer && iServer.info) ? iServer.info : null
   ;
@@ -46,10 +47,15 @@ exports = module.exports = function(iParam) {
     }
   }
 
+  // Returns Google APIs module
+  googleAPIs = function() {
+    return mGoogleAPIs;
+  }();
+
   // Returns oauth2 client
   client = function() {
     return (oauth2ClientConfig) ? oauth2Client : null;
-  };
+  }();
 
   // Returns redirection url
   redirectUrl = function() {
@@ -63,6 +69,7 @@ exports = module.exports = function(iParam) {
 
   // Return
   return {
+    googleAPIs: googleAPIs,
     client: client,
     redirectUrl: redirectUrl,
     requestUrl: requestUrl
