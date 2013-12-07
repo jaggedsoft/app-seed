@@ -288,7 +288,7 @@ exports = module.exports = function(iParam) {
                     request.session.set('user.name.full', ui.name);
                     request.session.set('user.roles', ['user']);
 
-                    request.reply.redirect('/#/');
+                    request.reply.redirect('/#/account');
                   }
                   else {
                     // API get error
