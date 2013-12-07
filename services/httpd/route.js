@@ -117,7 +117,7 @@ exports = module.exports = function(iParam) {
               "option": {
                 "kind": "warning",
                 "message": "You are already login.",
-                "url": "/"
+                "url": "/account"
               }
             };
 
