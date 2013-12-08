@@ -115,7 +115,6 @@ angular.module('app.services').factory('appServSess', ['$injector', '$http', '$l
           }
         }).
         error(function(data, status) {
-
           // Set error
           sessData    = null;
           sessErr     = 'Request error! (' + status + ')';
@@ -133,52 +132,42 @@ angular.module('app.services').factory('appServSess', ['$injector', '$http', '$l
     // Session de-initializer
     deinit: function(iCallback) {
       // Init vars
-      var returnData,
-          returnErr
-      ;
+      var this_ = this;
 
       // Request for session initialization
       $http({method: 'JSONP', url: deinitUrl, cache: false, timeout: 10000}).
         success(function(data, status) {
           // Set data
-          returnData = data;
+          sessData = data;
 
-          if(returnData) {
-            // Check de-initialization
-            if(returnData.deinited !== undefined) {
-              returnErr   = null;
+          if(sessData) {
+            // Check initialization
+            if(sessData.inited !== undefined) {
+              sessErr     = null;
+              sessInited  = true;
             }
-            else {
-              // Set error
-              returnData  = null;
-              returnErr   = 'Unexpected error! Session could not be de-initialized.';
-            }
-          }
-          else {
-            // Set error
-            returnData    = null;
-            returnErr     = 'Request error! (' + status + ')';
           }
 
           // Callback or return
           if(iCallback && typeof iCallback === 'function') {
-            return iCallback(returnErr, returnData);
+            return iCallback(sessErr, sessData);
           }
           else {
-            return returnData;
+            return sessData;
           }
         }).
         error(function(data, status) {
           // Set error
-          returnData  = null;
-          returnErr   = 'Request error! (' + status + ')';
+          sessData    = null;
+          sessErr     = 'Request error! (' + status + ')';
+          sessInited  = false;
 
           // Callback or return
           if(iCallback && typeof iCallback === 'function') {
-            return iCallback(returnErr, returnData);
+            return iCallback(sessErr, sessData);
           }
           else {
-            return returnData;
+            return sessErr;
           }
       });
     },
