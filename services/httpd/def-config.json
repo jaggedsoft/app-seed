@@ -32,14 +32,6 @@
     },
     "routes": [
       {
-        "route": "/home",
-        "match": "/template/home.html",
-        "auth": {
-          "roles": [],
-          "noIsLogin": false
-        }
-      },
-      {
         "route": "/login",
         "match": "/template/login.html",
         "auth": {

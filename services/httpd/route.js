@@ -22,6 +22,7 @@ exports = module.exports = function(iParam) {
       serverRoutes,     // route array for server
       pathHandler,      // route handler for app path - function
       sessIniter,       // route handler for session initializer - function
+      sessDeiniter,     // route handler for de-initializer - function
       sessTasker,       // route handler for session tasker - function
       oauth2CB,         // route handler for oauth2 callback - function
 
@@ -33,8 +34,7 @@ exports = module.exports = function(iParam) {
   oauth2 = mOAuth2({config: iConfig, server: iServer});
 
   // Route handler for app path
-  pathHandler = function(request) {
-    
+  pathHandler = function(request) {  
     // Check only if it is template
     if(((request.path + '').indexOf('/template/') === 0) === true) {
 
@@ -199,10 +199,42 @@ exports = module.exports = function(iParam) {
       }
     };
 
-    // Reply
     if(iIsHandlerCall === false) {
       request.reply(requestReply);
     }
+  };
+
+  // Route handler for de-initialization
+  sessDeiniter = function(request) {
+    // Init vars
+    var requestReply    = {},
+        task            = request.session.get('task'),
+        userIsLogin     = request.session.get('user.isLogin')
+    ;
+
+    // Set session vars
+    request.session.set('inited', false);
+    request.session.set('hit', null);
+
+    if(userIsLogin == true) {
+      request.session.set('task', task);
+
+      request.session.set('user.isLogin', false);
+      request.session.set('user.id', null);
+      request.session.set('user.email', null);
+      request.session.set('user.name.full', null);
+      request.session.set('user.roles', null);
+
+      requestReply.deinited = true;
+      requestReply.message  = 'You have successfully signed out.';
+    }
+    else {
+      requestReply.deinited = true;
+      requestReply.message  = 'You have already signed out.';
+    }
+
+    // Reply
+    request.reply(requestReply);
   };
 
   // Route handler for session tasker
@@ -237,7 +269,6 @@ exports = module.exports = function(iParam) {
 
   // Route handler for oauth2 callback
   oauth2CB = function(request) {
-
     // Init vars
     var requestReply  = {},
         task          = request.session.get('task'),
@@ -372,6 +403,14 @@ exports = module.exports = function(iParam) {
     },
     {
       method: 'GET',
+      path: '/sess/deinit',
+      config: {
+        jsonp: 'callback',
+        handler: sessDeiniter
+      }
+    },
+    {
+      method: 'GET',
       path: '/sess/tasker',
       config: {
         jsonp: 'callback',
@@ -390,9 +429,11 @@ exports = module.exports = function(iParam) {
 
   // Return
   return {
-    serverRoutes: serverRoutes,
     pathHandler: pathHandler,
     sessIniter: sessIniter,
-    sessTasker: sessTasker
+    sessDeiniter: sessDeiniter,
+    sessTasker: sessTasker,
+    oauth2CB: oauth2CB,
+    serverRoutes: serverRoutes
   };
 };

@@ -3,11 +3,14 @@
 ### HEAD
 
 ```
+* 20131207 -  directives module (front-end)
+              Improvement for navigation
+              login / logout implementation
 * 20131206 -  event module for services/httpd
               config module for services/httpd
               server module for services/httpd
               Google OAuth2 callback support
-* 20131205 -  Improve modularity
+* 20131205 -  Improvement for modularity
               Moving routes to the config file
               utilex module for services/httpd
               route module for services/httpd

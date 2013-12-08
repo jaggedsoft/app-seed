@@ -11,7 +11,7 @@
 angular.module('app.services', []);
 
 // Util service
-angular.module('app.services').factory('appUtil', function() {
+angular.module('app.services').factory('appServUtil', function() {
   // return for factory
   return {
     
@@ -66,13 +66,14 @@ angular.module('app.services').factory('appUtil', function() {
 });
 
 // Session service
-angular.module('app.services').factory('appSess', ['$injector', '$http', '$location', function($injector, $http, $location) {
+angular.module('app.services').factory('appServSess', ['$injector', '$http', '$location', function($injector, $http, $location) {
   // Init vars
   var sessData      = null,
       sessErr       = null,
       sessInited    = false,
       hit1Trig      = false,
       initUrl       = '/sess/init?callback=JSON_CALLBACK',
+      deinitUrl     = '/sess/deinit?callback=JSON_CALLBACK',
       taskerUrl     = '/sess/tasker?callback=JSON_CALLBACK'
       //$http       = $http || $injector.get('$http'),
       //$location   = $location || $injector.get('$location')
@@ -82,14 +83,12 @@ angular.module('app.services').factory('appSess', ['$injector', '$http', '$locat
   return {
     // Session initializer
     init: function(iCallback) {
-
       // Init vars
       var this_ = this;
 
       // Request for session initialization
       $http({method: 'JSONP', url: initUrl, cache: false, timeout: 10000}).
         success(function(data, status) {
-
           // Set data
           sessData = data;
 
@@ -131,24 +130,60 @@ angular.module('app.services').factory('appSess', ['$injector', '$http', '$locat
           }
       });
     },
-    // Session data
-    data: function() {
-      // return data
-      return sessData;
-    },
-    // Session error
-    error: function() {
-      // Check session initialization
-      if(sessInited === false && sessErr === undefined) {
-        sessErr = 'Session could not be initialized!';
-      }
+    // Session de-initializer
+    deinit: function(iCallback) {
+      // Init vars
+      var returnData,
+          returnErr
+      ;
 
-      // return error
-      return sessErr;
+      // Request for session initialization
+      $http({method: 'JSONP', url: deinitUrl, cache: false, timeout: 10000}).
+        success(function(data, status) {
+          // Set data
+          returnData = data;
+
+          if(returnData) {
+            // Check de-initialization
+            if(returnData.deinited !== undefined) {
+              returnErr   = null;
+            }
+            else {
+              // Set error
+              returnData  = null;
+              returnErr   = 'Unexpected error! Session could not be de-initialized.';
+            }
+          }
+          else {
+            // Set error
+            returnData    = null;
+            returnErr     = 'Request error! (' + status + ')';
+          }
+
+          // Callback or return
+          if(iCallback && typeof iCallback === 'function') {
+            return iCallback(returnErr, returnData);
+          }
+          else {
+            return returnData;
+          }
+        }).
+        error(function(data, status) {
+          // Set error
+          returnData  = null;
+          returnErr   = 'Request error! (' + status + ')';
+
+          // Callback or return
+          if(iCallback && typeof iCallback === 'function') {
+            return iCallback(returnErr, returnData);
+          }
+          else {
+            return returnData;
+          }
+      });
     },
-    // Tasker
+    // Session tasker
     tasker: function(iCallback) {
-
       // Init vars
       var returnData,
           returnErr
@@ -157,12 +192,10 @@ angular.module('app.services').factory('appSess', ['$injector', '$http', '$locat
       // Request for session initialization
       $http({method: 'JSONP', url: taskerUrl, cache: false, timeout: 10000}).
         success(function(data, status) {
-
           // Set data
           returnData = data;
 
           if(returnData) {
-
             // Check tasks
             if(returnData.task) {
 
@@ -189,7 +222,6 @@ angular.module('app.services').factory('appSess', ['$injector', '$http', '$locat
           }
         }).
         error(function(data, status) {
-          
           // Set error
           returnData  = null;
           returnErr   = 'Request error! (' + status + ')';
@@ -202,6 +234,21 @@ angular.module('app.services').factory('appSess', ['$injector', '$http', '$locat
             return returnData;
           }
       });
+    },
+    // Session data
+    data: function() {
+      // return data
+      return sessData;
+    },
+    // Session error
+    error: function() {
+      // Check session initialization
+      if(sessInited === false && sessErr === undefined) {
+        sessErr = 'Session could not be initialized!';
+      }
+
+      // return error
+      return sessErr;
     }
   };
 }]);

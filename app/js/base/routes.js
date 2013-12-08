@@ -23,6 +23,11 @@ angular.module('app.routes').constant('appRoutes', [
     controller: 'appLoginCtrl'
   },
   {
+    route: '/logout',
+    templateUrl: 'template/logout.html',
+    controller: 'appLogoutCtrl'
+  },
+  {
     route: '/account',
     templateUrl: 'template/account.html',
     controller: 'appAccountCtrl'
@@ -32,15 +37,15 @@ angular.module('app.routes').constant('appRoutes', [
 // Routes resolves
 angular.module('app.routes').constant('appRoutesResolves', [
   {
-    key: 'sessInit',
-    factory: ['$http', '$q', '$location', 'appSess', function($http, $q, $location, appSess) {
+    key: 'sessIniter',
+    factory: ['$http', '$q', '$location', 'appServSess', function($http, $q, $location, appServSess) {
       // Init vars
       var defer = $q.defer();
      
       // Init session
-      appSess.init(function(err, data) {
+      appServSess.init(function(err, data) {
         if(!err) {
-          appSess.tasker(function(err, data) {
+          appServSess.tasker(function(err, data) {
             if(!err) {
               defer.resolve();
             }

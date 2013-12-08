@@ -12,6 +12,7 @@ angular.module('app', [
   'ngRoute',
   'app.routes',
   'app.services',
+  'app.directives',
   'app.controllers'
 ]).config(['$routeProvider', 'appRoutes', 'appRoutesResolves', function($routeProvider, appRoutes, appRoutesResolves) {
 
@@ -41,8 +42,10 @@ angular.module('app', [
       // Route resolves
       for(var j = 0; j < tResolvesCnt; j++) {
         if(tResolves[j].key && tResolves[j].factory) {
-          if(tRouteOpt.resolve === undefined) tRouteOpt.resolve = {};
-          tRouteOpt.resolve[tResolves[j].key] = tResolves[j].factory;
+          if(!tResolves[j].route || (tResolves[j].route && tResolves[j].route === tRoute)) {
+            if(tRouteOpt.resolve === undefined) tRouteOpt.resolve = {};
+            tRouteOpt.resolve[tResolves[j].key] = tResolves[j].factory;
+          }
         }
       }
 

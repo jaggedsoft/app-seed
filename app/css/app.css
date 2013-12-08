@@ -1,5 +1,4 @@
 /* common */
-
 body {
   margin: 0;
 }
@@ -35,33 +34,39 @@ body {
 }
 
 /* navbar */
-.navbar {
+.navBar {
   float: left;
   margin: 0;
   width: 100%;
   border-bottom: 1px solid #CCC;
 }
 
-.navbar ul {
+.navBar ul {
   list-style-type: none;
   margin: 0;
-  padding-left: 0px;
+  padding-left: 0;
 }
 
-.navbar li {
+.navBar li {
   float: left;
   display: list-item;
   padding-left: 20px;
 }
 
-/* content */
-.content {
+/* misc */
+.pageBar {
   float: left;
+  margin: 0;
   width: 100%;
+  border-bottom: 1px solid #CCC;
 }
 
-/* others */
 .wrapper {
   float: left;
   padding: 10px;
+}
+
+.content {
+  float: left;
+  width: 100%;
 }
