@@ -80,6 +80,7 @@ chmod 755 app-seed/scripts/app.js
 |   |- js                     : JS files
 |   |   |- base               : base modules
 |   |   |-  |- controller.js  : module for controllers
+|   |   |-  |- directives.js  : module for direcgtives
 |   |   |-  |- routes.js      : module for routes
 |   |   |-  |- services.js    : module for services
 |   |   |- app.js             : default JS file
