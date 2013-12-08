@@ -3,7 +3,7 @@
 ### HEAD
 
 ```
-* 20131207 -  directives module (front-end)
+* 20131208 -  directives module (front-end)
               Improvement for navigation
               login / logout implementation
 * 20131206 -  event module for services/httpd
