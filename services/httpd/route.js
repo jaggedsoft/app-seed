@@ -283,6 +283,8 @@ exports = module.exports = function(iParam) {
                     //+++ Store user info somewhere
 
                     // Set session vars
+                    
+                    //+++ Update this code block after user db implementation
                     request.session.set('user.isLogin', true);
                     request.session.set('user.id', ui.id);
                     request.session.set('user.email', ui.email);
