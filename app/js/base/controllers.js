@@ -28,8 +28,6 @@ angular.module('app.controllers').controller('appLogoutCtrl', ['$scope', 'appSer
   var sessData = (!appServSess.error()) ? appServSess.data() : null;
 
   $scope.logoutMessage = 'You have successfully signed out.';
-
-  //$scope.$broadcast('someEvent', [1,2,3]);
 }]);
 
 // Account controller
