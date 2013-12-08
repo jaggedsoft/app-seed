@@ -6,6 +6,7 @@
 * 20131208 -  directives module (front-end)
               Improvement for navigation
               login / logout implementation
+              jQuery removed
 * 20131206 -  event module for services/httpd
               config module for services/httpd
               server module for services/httpd
