@@ -11,9 +11,7 @@
 angular.module('app.controllers', []);
 
 // Home controller
-angular.module('app.controllers').controller('appHomeCtrl', ['$scope', 'appServSess', function($scope, appServSess) {
-  // Init vars
-  var sessData = (!appServSess.error()) ? appServSess.data() : null;
+angular.module('app.controllers').controller('appHomeCtrl', ['$scope', function($scope) {
 }]);
 
 // Login controller
@@ -26,12 +24,13 @@ angular.module('app.controllers').controller('appLoginCtrl', ['$scope', 'appServ
 
 // Logout controller
 angular.module('app.controllers').controller('appLogoutCtrl', ['$scope', 'appServSess', function($scope, appServSess) {
+  // De-initialize session
   appServSess.deinit(function(err, data) {
     if(!err) {
-      $scope.message = data.message;
+      $scope.logoutMessage = data.message;
     }
     else {
-      $scope.message = err;
+      $scope.logoutMessage = err;
     }
   });
 }]);
@@ -41,7 +40,7 @@ angular.module('app.controllers').controller('appAccountCtrl', ['$scope', 'appSe
   // Init vars
   var sessData = (!appServSess.error()) ? appServSess.data() : null;
 
-  $scope.tidySData = JSON.stringify(sessData, null, 2);
+  $scope.accSessData = JSON.stringify(sessData, null, 2);
 }]);
 
 // Nav controller
@@ -51,13 +50,13 @@ angular.module('app.controllers').controller('appNavCtrl', ['$scope', 'appServSe
   var isLogin  = (sessData && sessData.user && sessData.user.isLogin === true) ? true : false;
 
   if(isLogin === true) {
-    $scope.user   = '(' + sessData.user.email + ')';
-    $scope.llUrl  = '#/logout';
-    $scope.llText = 'Sign out';
+    $scope.navSSNote  = '(' + sessData.user.email + ')';
+    $scope.navSSUrl   = '#/logout';
+    $scope.navSSText  = 'Sign out';
   }
   else {
-    $scope.user   = '';
-    $scope.llUrl  = '#/login';
-    $scope.llText = 'Sign in';
+    $scope.navSSNote  = '';
+    $scope.navSSUrl   = '#/login';
+    $scope.navSSText  = 'Sign in';
   }
 }]);
