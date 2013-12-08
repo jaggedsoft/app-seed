@@ -24,15 +24,12 @@ angular.module('app.controllers').controller('appLoginCtrl', ['$scope', 'appServ
 
 // Logout controller
 angular.module('app.controllers').controller('appLogoutCtrl', ['$scope', 'appServSess', function($scope, appServSess) {
-  // De-initialize session
-  appServSess.deinit(function(err, data) {
-    if(!err) {
-      $scope.logoutMessage = data.message;
-    }
-    else {
-      $scope.logoutMessage = err;
-    }
-  });
+  // Init vars
+  var sessData = (!appServSess.error()) ? appServSess.data() : null;
+
+  $scope.logoutMessage = 'You have successfully signed out.';
+
+  //$scope.$broadcast('someEvent', [1,2,3]);
 }]);
 
 // Account controller
