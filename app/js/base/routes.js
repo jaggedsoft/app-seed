@@ -63,5 +63,34 @@ angular.module('app.routes').constant('appRoutesResolves', [
 
       return defer.promise;
     }]
+  },
+  {
+    key: 'sessDeiniter',
+    route: '/logout',
+    factory: ['$http', '$q', '$location', 'appServSess', function($http, $q, $location, appServSess) {
+      // Init vars
+      var defer = $q.defer();
+     
+      // Init session
+      appServSess.deinit(function(err, data) {
+        if(!err) {
+          appServSess.tasker(function(err, data) {
+            if(!err) {
+              defer.resolve();
+            }
+            else {
+              $location.path('error/sess/tasker/unexpected');
+              defer.reject();
+            }
+          });
+        }
+        else {
+          $location.path('error/sess/deinit/unexpected');
+          defer.reject();
+        }
+      });
+
+      return defer.promise;
+    }]
   }
 ]);
