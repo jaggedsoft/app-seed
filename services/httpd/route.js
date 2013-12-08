@@ -209,14 +209,20 @@ exports = module.exports = function(iParam) {
     // Init vars
     var requestReply    = {},
         task            = request.session.get('task'),
-        userIsLogin     = request.session.get('user.isLogin')
+        userIsLogin     = request.session.get('user.isLogin'),
+        userLoginUrl
     ;
+
+    // Check vars
+    if(oauth2 && oauth2.requestUrl && typeof oauth2.requestUrl === 'function') {
+      userLoginUrl = oauth2.requestUrl();
+    }
 
     // Set session vars
     request.session.set('inited', false);
     request.session.set('hit', null);
 
-    if(userIsLogin == true) {
+    if(userIsLogin === true) {
       request.session.set('task', task);
 
       request.session.set('user.isLogin', false);
@@ -224,16 +230,23 @@ exports = module.exports = function(iParam) {
       request.session.set('user.email', null);
       request.session.set('user.name.full', null);
       request.session.set('user.roles', null);
-
-      requestReply.deinited = true;
-      requestReply.message  = 'You have successfully signed out.';
-    }
-    else {
-      requestReply.deinited = true;
-      requestReply.message  = 'You have already signed out.';
     }
 
     // Reply
+    requestReply = {
+      "inited": false,
+      "hit": null,
+      "task": task,
+      "user": {
+        "isLogin": false,
+        "id": null,
+        "email": null,
+        "nameFull": null,
+        "roles": null,
+        "loginUrl": userLoginUrl
+      }
+    };
+
     request.reply(requestReply);
   };
 
