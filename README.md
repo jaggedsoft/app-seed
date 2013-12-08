@@ -84,10 +84,11 @@ chmod 755 app-seed/scripts/app.js
 |   |   |-  |- services.js    : module for services
 |   |   |- app.js             : default JS file
 |   |- lib                    : 3rd party libraries
-|   |   |- angular
-|   |   |- jquery
+|   |   |- angular            : AngularJS library
+|   |   |- jquery             : jQuery library
 |   |   |- misc               : html5shiv, respond.js
 |   |- template               : template files
+|   |   |- account.html       : partial HTML file for account page
 |   |   |- home.html          : partial HTML file for home page
 |   |   |- login.html         : partial HTML file for login page
 |   |- favicon.ico            : icon file for browser / bookmarks
