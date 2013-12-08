@@ -57,7 +57,7 @@ angular.module('app.services').factory('appServUtil', function() {
         window.open(iUrl, '_blank');
       }
       else {
-        document.location.href = iUrl;
+        window.location.href = iUrl;
       }
 
       return true;
