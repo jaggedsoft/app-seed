@@ -31,12 +31,18 @@ angular.module('app.controllers').controller('appLogoutCtrl', ['$scope', 'appSer
 }]);
 
 // Account controller
-angular.module('app.controllers').controller('appAccountCtrl', ['$scope', 'appServSess', function($scope, appServSess) {
+angular.module('app.controllers').controller('appAccountCtrl', ['$scope', 'appServSess', 'appServUtil', function($scope, appServSess, appServUtil) {
   // Init vars
   var sessData = (!appServSess.error()) ? appServSess.data() : null;
   var isLogin  = (sessData && sessData.user && sessData.user.isLogin === true) ? true : false;
 
-  $scope.accSessData = JSON.stringify(sessData, null, 2);
+  if(isLogin === true) {
+    $scope.accSessData = JSON.stringify(sessData, null, 2);
+  }
+  else {
+    $scope.accSessData = 'You are not signed in.';
+    appServUtil.gotoUrl('#/login');
+  }
 }]);
 
 // Nav controller
