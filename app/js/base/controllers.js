@@ -34,6 +34,7 @@ angular.module('app.controllers').controller('appLogoutCtrl', ['$scope', 'appSer
 angular.module('app.controllers').controller('appAccountCtrl', ['$scope', 'appServSess', function($scope, appServSess) {
   // Init vars
   var sessData = (!appServSess.error()) ? appServSess.data() : null;
+  var isLogin  = (sessData && sessData.user && sessData.user.isLogin === true) ? true : false;
 
   $scope.accSessData = JSON.stringify(sessData, null, 2);
 }]);
