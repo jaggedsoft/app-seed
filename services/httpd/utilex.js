@@ -34,7 +34,7 @@ exports = module.exports = function() {
       switch(args[i]) {
         case "-c":
         case "--configFile":
-          argsF.c           = (args[++i] + '').trim();
+          argsF.c           = ('' + args[++i]).trim();
           argsF.configFile  = argsF.c;
           break;
         default:

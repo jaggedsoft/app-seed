@@ -50,7 +50,7 @@ npm start
   * "t" prefix used for temp (has generic name) variables.
   * "i" prefix used for function (global) arguments.
   * to string:
-    - `(var + '')`
+    - `('' + var)`
     - `.toString()`
   * is array:
     - `!(var instanceof Array)`

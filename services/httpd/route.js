@@ -17,7 +17,7 @@ exports = module.exports = function(iParam) {
   // Init vars
   var iConfig           = (iParam && iParam.config)     ? iParam.config : null,
       iServer           = (iParam && iParam.server)     ? iParam.server : null,
-      iPathScrDir       = (iParam && iParam.pathScrDir) ? (iParam.pathScrDir + '') : null,
+      iPathScrDir       = (iParam && iParam.pathScrDir) ? ('' + iParam.pathScrDir) : null,
 
       serverRoutes,     // route array for server
       pathHandler,      // route handler for app path - function
@@ -36,10 +36,10 @@ exports = module.exports = function(iParam) {
   // Route handler for app path
   pathHandler = function(request) {  
     // Check only if it is template
-    if(((request.path + '').indexOf('/template/') === 0) === true) {
+    if((('' + request.path).indexOf('/template/') === 0) === true) {
 
       // Init vars
-      var reqPath       = (request.path + ''),
+      var reqPath       = ('' + request.path),
           routeAuthCnt  = (configHapiRoutes instanceof Array) ? configHapiRoutes.length : 0
       ;
 
@@ -157,9 +157,9 @@ exports = module.exports = function(iParam) {
     hit           = (!isNaN(hit) && hit > 0)      ? hit+1               : 1;
     task          = (task instanceof Object)      ? task                : null;
     userIsLogin   = (userIsLogin === true)        ? true                : false;
-    userId        = (userId)                      ? (userId + '')       : null;
-    userEmail     = (userEmail)                   ? (userEmail + '')    : null;
-    userNameFull  = (userNameFull)                ? (userNameFull + '') : null;
+    userId        = (userId)                      ? ('' + userId)       : null;
+    userEmail     = (userEmail)                   ? ('' + userEmail)    : null;
+    userNameFull  = (userNameFull)                ? ('' + userNameFull) : null;
     userRoles     = (userRoles instanceof Array)  ? userRoles           : null;
 
     // If not login
