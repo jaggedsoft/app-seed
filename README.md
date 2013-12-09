@@ -2,13 +2,13 @@
 
   [app-seed](http://github.com/cmfatih/app-seed) is an application skeleton for web apps.  
 
-  app-seed on [NPM Registry](http://npmjs.org/package/app-seed)
-
-  **!!! APP-SEED IS STILL UNDER HEAVY DEVELOPMENT !!!**  
+  It uses [AngularJS](http://angularjs.org/) for front-end and [hapi](http://spumko.github.io/) for back-end. 
+  It is suitable for Single Page Application (SPA) and provides user authentication 
+  with [Google OAuth 2.0](https://developers.google.com/accounts/docs/OAuth2WebServer)
 
 ### Installation
 
-For latest published version
+For latest published version. (app-seed on [npm registery](http://npmjs.org/package/app-seed))
 ```
 npm install app-seed
 ```
@@ -18,11 +18,42 @@ or for HEAD version
 git clone https://github.com/cmfatih/app-seed.git
 ```
 
+Create a copy of default config file. (the new config file will be ignored by git)
+```
+cp config/app.json config/test.json
+```
+
+Update `config/test.json` for Google OAuth2 authentication. 
+```
+"auth": {
+  "oauth2Client": {
+    "clientId": "CLIENTID",
+    "clientSecret": "CLIENTSECRET",
+    ...
+    ...
+```
+
+For getting client id and client secret (if don't have any);  
+
+1. Go to [Using OAuth 2.0 to Access Google APIs](https://developers.google.com/accounts/docs/OAuth2#basicsteps) and read basic steps.
+2. Go to [Google Cloud Console](https://cloud.google.com/console) and create a project.
+3. Go to Project Name > APIs & auth > Registered apps and register new app. (Select *Web Applicaton* for platform.)
+4. Go to Project Name > APIs & auth > Registered apps > Your App Name and click *OAuth 2.0 Client ID* tab.
+5. Type `http://localhost:12080/` to *web origin* and `http://localhost:12080/auth/google/callback` to *redirect uri*
+6. Click to *Generate* button. (It will update client secret)
+7. Update *CLIENT ID* and *CLIENT SECRET* at `config/test.json`
+
 ### Usage
 
 ```
-npm start
+npm test
 ```
+or
+```
+node ./services/httpd/index.js -c config/test.json
+```
+
+Go to [http://localhost:12080/](http://localhost:12080/)
 
 ### Notes
 
@@ -73,49 +104,49 @@ chmod 755 app-seed/scripts/app.js
 
 ```
 |- app
-|   |- css                    : CSS files
-|   |   |- app.css            : default CSS file
-|   |- img                    : image files
-|   |   |- favicon.ico        : icon file for browser / bookmarks
-|   |- js                     : JS files
-|   |   |- base               : base modules
-|   |   |-  |- controller.js  : module for controllers
-|   |   |-  |- directives.js  : module for direcgtives
-|   |   |-  |- routes.js      : module for routes
-|   |   |-  |- services.js    : module for services
-|   |   |- app.js             : default JS file
-|   |- lib                    : 3rd party libraries
-|   |   |- angular            : AngularJS library
-|   |   |- misc               : html5shiv, respond.js
-|   |- template               : template files
-|   |   |- account.html       : partial HTML file for account page
-|   |   |- home.html          : partial HTML file for home page
-|   |   |- login.html         : partial HTML file for login page
-|   |- favicon.ico            : icon file for browser / bookmarks
-|   |- index.html             : index HTML file for app layout
-|- config                     : config files
-|   |- app.json               : default config file
-|- logs                       : log files
-|   |- app.log                : default log file
-|- scripts                    : script files for shell, cron, js, etc...
-|   |- app.bat                : default shell script for WIN platform
-|   |- app.js                 : default shell script for Node.js
-|   |- app.sh                 : default shell script for POSIX platforms
-|- services                   : services
-|   |- httpd                  : httpd service
-|- test                       : test files
-|   |- test-all.js            : default test file
-|- .gitattributes             : attributes for GIT
-|- .gitignore                 : ignore settings for GIT
-|- .jshintrc                  : config for JSHint
-|- .npmignore                 : ignore settings for NPM
-|- package.json               : package file for NPM
-|- CHANGELOG.md               : changelog file
-|- LICENSE.txt                : license file
-|- README.md                  : readme file
-|- template-CHANGELOG.md      : template changelog file
-|- template-LICENSE.txt       : template license file
-|- template-README.md         : template readme file
+|   |- css                      : CSS files
+|   |   |- app.css              : default CSS file
+|   |- img                      : image files
+|   |   |- favicon.ico          : icon file for browser / bookmarks
+|   |- js                       : JS files
+|   |   |- base                 : base modules
+|   |   |-  |- controller.js    : module for controllers
+|   |   |-  |- directives.js    : module for directives
+|   |   |-  |- routes.js        : module for routes
+|   |   |-  |- services.js      : module for services
+|   |   |- app.js               : default JS file
+|   |- lib                      : 3rd party libraries
+|   |   |- angular              : AngularJS library
+|   |   |- misc                 : html5shiv, respond.js
+|   |- template                 : template files
+|   |   |- account.html         : partial HTML file for account page
+|   |   |- home.html            : partial HTML file for home page
+|   |   |- login.html           : partial HTML file for login page
+|   |- favicon.ico              : icon file for browser / bookmarks
+|   |- index.html               : index HTML file for app layout
+|- config                       : config files
+|   |- app.json                 : default config file
+|- logs                         : log files
+|   |- app.log                  : default log file
+|- scripts                      : script files for shell, cron, js, etc...
+|   |- app.bat                  : default shell script for WIN platform
+|   |- app.js                   : default shell script for Node.js
+|   |- app.sh                   : default shell script for POSIX platforms
+|- services                     : services
+|   |- httpd                    : httpd service
+|- test                         : test files
+|   |- test-all.js              : default test file
+|- .gitattributes               : attributes for GIT
+|- .gitignore                   : ignore settings for GIT
+|- .jshintrc                    : config for JSHint
+|- .npmignore                   : ignore settings for NPM
+|- package.json                 : package file for NPM
+|- CHANGELOG.md                 : changelog file
+|- LICENSE.txt                  : license file
+|- README.md                    : readme file
+|- template-CHANGELOG.md        : template changelog file
+|- template-LICENSE.txt         : template license file
+|- template-README.md           : template readme file
 ```
 
 ### Changelog

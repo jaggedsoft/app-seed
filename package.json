@@ -1,13 +1,16 @@
 {
   "name": "app-seed",
   "version": "0.0.1",
-  "description": "App Seed is an application skeleton for web apps. It is still under heavy development.",
+  "description": "app-seed is an application skeleton for web apps. It uses AngularJS for front-end and hapi for back-end. It is suitable for Single Page Application (SPA) and provides user authentication with Google OAuth 2.0",
   "keywords": [
     "web",
     "app",
     "angularjs",
-    "bootstrap",
-    "jquery"
+    "hapi",
+    "google",
+    "oauth2",
+    "spa",
+    "seed"
   ],
   "homepage": "http://github.com/cmfatih/app-seed",
   "repository": {
@@ -26,7 +29,7 @@
   "contributors": [],
   "scripts": {
     "start": "node ./services/httpd/index.js -c config/app.json",
-    "test": "node ./test/test-all.js"
+    "test": "node ./services/httpd/index.js -c config/test.json"
   },
   "engines": [
     "node >= 1.10.21"
