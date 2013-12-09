@@ -7,7 +7,7 @@
 /*
  * Notes:
  * 
- *  - Add callback feature for events instead of output. //+++
+ *  - Add callback feature for events instead of output. // TODO:
  */
 
 // Init reqs

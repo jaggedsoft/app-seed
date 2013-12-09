@@ -303,7 +303,7 @@ exports = module.exports = function(iParam) {
               token.refresh   = (tokens.refresh_token || null);
               token.type      = (tokens.token_type || null);
               token.expiresIn = (tokens.expires_in || null);
-          //+++ Store token info somewhere
+          // TODO: Store token info somewhere
 
           // Set credentials
           oauth2.client.credentials = {access_token: token.access, refresh_token: token.refresh};
@@ -324,11 +324,11 @@ exports = module.exports = function(iParam) {
                         ui.nameFirst      = (results.given_name || null);
                         ui.nameLast       = (results.family_name || null);
                         ui.locale         = (results.locale || null);
-                    //+++ Store user info somewhere
+                    // TODO: Store user info somewhere
 
                     // Set session vars
                     
-                    //+++ Update this code block after user db implementation
+                    // TODO: Update this code block after user db implementation
                     request.session.set('user.isLogin', true);
                     request.session.set('user.id', ui.id);
                     request.session.set('user.email', ui.email);

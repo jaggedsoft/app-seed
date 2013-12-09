@@ -196,7 +196,7 @@ angular.module('app.services').factory('appServSess', ['$injector', '$http', '$l
               }
               else if(returnData.task.type == 'alert') {
                 if(returnData.task.option && returnData.task.option.message) {
-                  alert(returnData.task.option.message); //+++ change this to modal
+                  alert(returnData.task.option.message); // TODO: change this to modal
                 }
               }
             }
