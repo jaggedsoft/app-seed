@@ -107,7 +107,6 @@ chmod 755 app-seed/scripts/app.js
 |   |- css                      : CSS files
 |   |   |- app.css              : default CSS file
 |   |- img                      : image files
-|   |   |- favicon.ico          : icon file for browser / bookmarks
 |   |- js                       : JS files
 |   |   |- base                 : base modules
 |   |   |-  |- controller.js    : module for controllers
