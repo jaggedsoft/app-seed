@@ -5,7 +5,7 @@
 ```
 ```
 
-### 0.0.1 (20131208)
+### 0.0.1 (2013-12-08)
 
 * login / logout implementation
 * event module for services/httpd
