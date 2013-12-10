@@ -6,9 +6,11 @@
   It is suitable for Single Page Application (SPA) and provides user authentication 
   with [Google OAuth 2.0](https://developers.google.com/accounts/docs/OAuth2WebServer)
 
+  app-seed on [npm registery](http://npmjs.org/package/app-seed)
+
 ### Installation
 
-For latest published version. (app-seed on [npm registery](http://npmjs.org/package/app-seed))
+For latest published version.
 ```
 npm install app-seed
 ```
