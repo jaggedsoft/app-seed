@@ -34,6 +34,11 @@ exports = module.exports = function(iParam) {
     // log
     if(iIsOnLog === true) {
       server.on('log', function(event, tags) {
+
+        if(tags.error) {
+
+        }
+        
         mUtilex.tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
       });
     }
