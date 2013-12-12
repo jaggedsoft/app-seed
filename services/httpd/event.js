@@ -11,6 +11,7 @@
  */
 
 // Init reqs
+/* jslint node: true */
 'use strict';
 
 var mUtilex = require('./utilex'); // utilex module

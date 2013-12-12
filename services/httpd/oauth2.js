@@ -5,6 +5,7 @@
  */
 
 // Init reqs
+/* jslint node: true */
 'use strict';
 
 var mGoogleAPIs = require('googleapis'); // googleapis module
