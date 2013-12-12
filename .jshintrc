@@ -6,9 +6,13 @@
   "trailing": true,
   "strict": false,
   
-  "sub": true,        // Tolerate using `[]` notation
-  "laxbreak": true,   // Tolerate possibly unsafe line breakings
+  "sub": true,            // Tolerate using `[]` notation
+  "laxbreak": true,       // Tolerate possibly unsafe line breakings
 
-  "-W065": false,     // Missing radix parameter.
-  "-W110": false      // Mixed double and single quotes.
+  "-W065": false,         // Missing radix parameter.
+  "-W110": false,         // Mixed double and single quotes.
+
+  "globals": {
+    "angular": false      // Ignore undefined warning
+  }
 }
