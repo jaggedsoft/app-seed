@@ -35,7 +35,7 @@ exports = module.exports = function(iParam) {
   oauth2 = mOAuth2({config: iConfig, server: iServer});
 
   // Route handler for app path
-  pathHandler = function(request) {  
+  pathHandler = function(request) {
     // Check only if it is template
     if((('' + request.path).indexOf('/template/') === 0) === true) {
 
