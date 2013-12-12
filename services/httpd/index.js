@@ -8,10 +8,8 @@
 /* jslint node: true */
 'use strict';
 
-var mHapi     = require('hapi'),      // hapi module
-    mUtilex   = require('./utilex'),  // utilex module
+var mUtilex   = require('./utilex'),  // utilex module
     mConfig   = require('./config'),  // config module
-    mOAuth2   = require('./oauth2'),  // oauth2 module
     mServer   = require('./server'),  // server module
     mRoute    = require('./route'),   // route module
     mEvent    = require('./event')    // event module
