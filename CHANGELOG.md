@@ -4,7 +4,7 @@
 
 ```
 * 2013-12-11 - Improvement for jslint settings
-* 2013-12-08 - v0.0.2
+* 2013-12-08 - package.json / version 0.0.2
 ```
 
 ### 0.0.1 (2013-12-08)
