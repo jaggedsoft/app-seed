@@ -8,8 +8,8 @@
 #   /symlink*
 #
 node_modules/
-npm-debug.log
 sources/
+npm-debug.log
 
 logs/*
 !logs/.gitkeep
