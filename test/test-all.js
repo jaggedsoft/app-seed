@@ -1,4 +1,5 @@
 // Init reqs
+/* jslint node: true */
 'use strict';
 
 // Tests
