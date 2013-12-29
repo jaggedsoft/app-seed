@@ -16,10 +16,10 @@ var mUtilex   = require('./utilex'),  // utilex module
 ;
 
 // Init vars
-var gServer   = null, // http server
-    gConfig   = null, // config helper
-    gRoute    = null, // route helper
-    gEvent    = null  // event helper
+var gServer,  // http server
+    gConfig,  // config helper
+    gRoute,   // route helper
+    gEvent    // event helper
 ;
 
 // Check config
