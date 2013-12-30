@@ -8,8 +8,7 @@
 /* jslint node: true */
 'use strict';
 
-var mUtilex   = require('./utilex'),  // utilex module
-    mConfig   = require('./config'),  // config module
+var mUtilex   = require('utilex'),    // utilex module
     mServer   = require('./server'),  // server module
     mRoute    = require('./route'),   // route module
     mEvent    = require('./event')    // event module
@@ -23,8 +22,12 @@ var gServer,  // http server
 ;
 
 // Check config
-if(mConfig.error || !mConfig.config) throw (mConfig.error || "Unexpected error! (config)");
-gConfig = mConfig.config;
+if(mUtilex.tidyConfig().error) throw (mUtilex.tidyConfig().error || "Unexpected error! (config)");
+
+gConfig = mUtilex.tidyConfig().config;
+if(!gConfig.auth || !gConfig.auth.oauth2Client)                                                   throw 'Invalid oauth2 client configuration! (' + JSON.stringify(gConfig.auth) + ')';
+if(!gConfig.hapi || !gConfig.hapi.server || !gConfig.hapi.yar || !gConfig.hapi.routes)            throw 'Invalid hapi server configuration! (' + JSON.stringify(gConfig.hapi) + ')';
+if(!gConfig.hapi.server.port || isNaN(gConfig.hapi.server.port) || gConfig.hapi.server.port <= 0) throw 'Invalid http port! (' + gConfig.hapi.server.port + ')';
 
 // Init server
 gServer = mServer({config: gConfig});

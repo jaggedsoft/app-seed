@@ -14,7 +14,7 @@
 /* jslint node: true */
 'use strict';
 
-var mUtilex = require('./utilex'); // utilex module
+var mUtilex = require('utilex'); // utilex module
 
 // Init the module
 exports = module.exports = function(iParam) {
