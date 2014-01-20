@@ -8,7 +8,7 @@
 /* jslint node: true */
 'use strict';
 
-var mHapi = require('hapi'); // hapi module
+var mHapi = require('hapi');
 
 // Init the module
 exports = module.exports = function(iParam) {

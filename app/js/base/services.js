@@ -25,7 +25,18 @@ angular.module('app.services').factory('appServUtil', function() {
       var returnRes         = {"time": this.tidyTime(), "message": null};
           returnRes.message = (iStr && typeof console !== "undefined") ? iStr : null;
 
-      return (iOut === undefined || iOut === true) ? console.log(returnRes) : returnRes;
+      if(iOut === undefined || iOut === true) {
+        return console.log(returnRes);
+      }
+      else if(iOut === 'JSON') {
+        return console.log(JSON.stringify(returnRes));
+      }
+      else if(iOut === 'JSONT') {
+        return console.log(JSON.stringify(returnRes, null, 2));
+      }
+      else {
+        return returnRes;
+      }
     },
 
     // Goto url

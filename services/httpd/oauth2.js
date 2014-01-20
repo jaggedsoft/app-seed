@@ -8,40 +8,40 @@
 /* jslint node: true */
 'use strict';
 
-var mGoogleAPIs = require('googleapis'); // googleapis module
+var mGoogleAPIs = require('googleapis');
 
 // Init the module
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var iConfig             = (iParam && iParam.config) ? iParam.config : null,
-      iServer             = (iParam && iParam.server) ? iParam.server : null,
+  var iConfig         = (iParam && iParam.config) ? iParam.config : null,
+      iServer         = (iParam && iParam.server) ? iParam.server : null,
 
-      googleAPIs,         // Google APIs - function
-      client,             // client for oauth2 - function
-      redirectUrl,        // redirection url for oauth2 - function
-      requestUrl,         // request url for oauth2 - function
+      googleAPIs,     // Google APIs - function
+      client,         // client for oauth2 - function
+      redirectUrl,    // redirection url for oauth2 - function
+      requestUrl,     // request url for oauth2 - function
 
       oauth2Client,
-      oauth2ClientConfig  = (iConfig && iConfig.auth && iConfig.auth.oauth2Client) ? iConfig.auth.oauth2Client : null,
-      serverInfo          = (iServer && iServer.info) ? iServer.info : null
+      oauth2ClientCfg = (iConfig && iConfig.auth && iConfig.auth.oauth2Client) ? iConfig.auth.oauth2Client : null,
+      serverInfo      = (iServer && iServer.info) ? iServer.info : null
   ;
 
-  if(oauth2ClientConfig) {
+  if(oauth2ClientCfg) {
     // Redirect url
-    if(!oauth2ClientConfig.redirectUrl) {
-      oauth2ClientConfig.redirectUrl = (serverInfo) ? serverInfo.uri + '/auth/google/callback' : null;
+    if(!oauth2ClientCfg.redirectUrl) {
+      oauth2ClientCfg.redirectUrl = (serverInfo) ? serverInfo.uri + '/auth/google/callback' : null;
     }
 
     // oauth2 client
-    oauth2Client = new mGoogleAPIs.OAuth2Client(oauth2ClientConfig.clientId, oauth2ClientConfig.clientSecret, oauth2ClientConfig.redirectUrl);
+    oauth2Client = new mGoogleAPIs.OAuth2Client(oauth2ClientCfg.clientId, oauth2ClientCfg.clientSecret, oauth2ClientCfg.redirectUrl);
 
     // Request url
-    if(!oauth2ClientConfig.requestUrl) {
-      oauth2ClientConfig.requestUrl = oauth2Client.generateAuthUrl({
+    if(!oauth2ClientCfg.requestUrl) {
+      oauth2ClientCfg.requestUrl = oauth2Client.generateAuthUrl({
         response_type: 'code',
         access_type: 'offline',
-        approval_prompt: oauth2ClientConfig.approvalPrompt,
+        approval_prompt: oauth2ClientCfg.approvalPrompt,
         state: '/login',
         scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
       });
@@ -55,17 +55,17 @@ exports = module.exports = function(iParam) {
 
   // Returns oauth2 client
   client = function() {
-    return (oauth2ClientConfig) ? oauth2Client : null;
+    return (oauth2ClientCfg) ? oauth2Client : null;
   }();
 
   // Returns redirection url
   redirectUrl = function() {
-    return (oauth2ClientConfig) ? oauth2ClientConfig.redirectUrl : null;
+    return (oauth2ClientCfg) ? oauth2ClientCfg.redirectUrl : null;
   };
 
   // Returns request url
   requestUrl = function() {
-    return (oauth2ClientConfig) ? oauth2ClientConfig.requestUrl : null;
+    return (oauth2ClientCfg) ? oauth2ClientCfg.requestUrl : null;
   };
 
   // Return

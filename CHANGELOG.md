@@ -5,6 +5,10 @@
 ```
 ```
 
+### 0.1.1 (2014-01-19)
+
+* Tidy changes
+
 ### 0.1.0 (2013-12-29)
 
 * Use utilex for config operations
@@ -25,7 +29,7 @@
 * Session service (back-end)
 * services/httpd
 * package.json
-* Default config files.
+* Default config files
 * AngularJS 1.2.3
 * Respond.js v1.4.0
 * html5shiv

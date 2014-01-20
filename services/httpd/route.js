@@ -8,8 +8,8 @@
 /* jslint node: true */
 'use strict';
 
-var mHapi   = require('hapi'),    // hapi module
-    mOAuth2 = require('./oauth2') // oauth2 module
+var mHapi   = require('hapi'),
+    mOAuth2 = require('./oauth2')
 ;
 
 // Init the module

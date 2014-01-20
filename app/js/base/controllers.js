@@ -16,7 +16,7 @@ angular.module('app.controllers').controller('appHomeCtrl', ['$scope', function(
 
 // Login controller
 angular.module('app.controllers').controller('appLoginCtrl', ['$scope', 'appServSess', function($scope, appServSess) {
-  // Session de-initialization
+  // Init vars
   var sessData = (!appServSess.error()) ? appServSess.data() : null;
 
   $scope.loginUrl = (sessData && sessData.user && sessData.user.loginUrl) ? sessData.user.loginUrl : '#/error/login/url/unexpected';

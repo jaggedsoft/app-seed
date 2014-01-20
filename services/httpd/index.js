@@ -8,38 +8,37 @@
 /* jslint node: true */
 'use strict';
 
-var mUtilex   = require('utilex'),    // utilex module
-    mServer   = require('./server'),  // server module
-    mRoute    = require('./route'),   // route module
-    mEvent    = require('./event')    // event module
+var mUtilex = require('utilex'),
+    mServer = require('./server'),
+    mRoute  = require('./route'),
+    mEvent  = require('./event')
 ;
 
 // Init vars
 var gServer,  // http server
-    gConfig,  // config helper
-    gRoute,   // route helper
-    gEvent    // event helper
+    gConfig,  // config
+    gRoute,   // route
+    gEvent    // event
 ;
 
-// Check config
-if(mUtilex.tidyConfig().error) throw (mUtilex.tidyConfig().error || "Unexpected error! (config)");
-
+// Init config
 gConfig = mUtilex.tidyConfig().config;
-if(!gConfig.auth || !gConfig.auth.oauth2Client)                                                   throw 'Invalid oauth2 client configuration! (' + JSON.stringify(gConfig.auth) + ')';
-if(!gConfig.hapi || !gConfig.hapi.server || !gConfig.hapi.yar || !gConfig.hapi.routes)            throw 'Invalid hapi server configuration! (' + JSON.stringify(gConfig.hapi) + ')';
-if(!gConfig.hapi.server.port || isNaN(gConfig.hapi.server.port) || gConfig.hapi.server.port <= 0) throw 'Invalid http port! (' + gConfig.hapi.server.port + ')';
+
+if(mUtilex.tidyConfig().error)                  throw (mUtilex.tidyConfig().error || "Unexpected error! (config)");
+if(!gConfig.auth || !gConfig.auth.oauth2Client) throw 'Invalid oauth2 client configuration! (' + JSON.stringify(gConfig.auth) + ')';
+if(!gConfig.hapi || !gConfig.hapi.server)       throw 'Invalid hapi server configuration! (' + JSON.stringify(gConfig.hapi) + ')';
+if(!gConfig.hapi || !gConfig.hapi.yar)          throw 'Invalid hapi yar configuration! (' + JSON.stringify(gConfig.hapi) + ')';
+if(!gConfig.hapi || !gConfig.hapi.routes)       throw 'Invalid hapi routes configuration! (' + JSON.stringify(gConfig.hapi) + ')';
 
 // Init server
 gServer = mServer({config: gConfig});
-
-// Check server
 if(gServer.error || !gServer.server) throw (gServer.error || "Unexpected error! (server)");
 
-// Init route helper
-gRoute  = mRoute({config: gConfig, server: gServer.server, pathScrDir: __dirname});
+// Init route
+gRoute = mRoute({config: gConfig, server: gServer.server, pathScrDir: __dirname});
 
-// Init event helper
-gEvent  = mEvent({server: gServer.server, isOnLog: true, isOnInternalError: true, isOnRequest: false, isOnResponse: false});
+// Init event
+gEvent = mEvent({server: gServer.server, isOnLog: true, isOnInternalError: true, isOnRequest: false, isOnResponse: false});
 
 // Init server routes and start
 gServer.server.route(gRoute.serverRoutes);
