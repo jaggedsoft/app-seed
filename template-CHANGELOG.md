@@ -3,7 +3,7 @@
 ### HEAD
 
 ```
-* (date) -  A notable change
+* (date) - A notable change
 ```
 
 ### version (date)
