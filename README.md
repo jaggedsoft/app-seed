@@ -1,12 +1,11 @@
 ## App Seed
 
-  [app-seed](http://github.com/cmfatih/app-seed) is an application skeleton for web apps.  
+  [app-seed](http://github.com/cmfatih/app-seed) is an application skeleton for web apps.
+  It uses [AngularJS](http://angularjs.org/) for front-end and [Node.js](http://nodejs.org/) 
+  (with [hapi](http://hapijs.com/)) for back-end. It is suitable for Single Page Application (SPA) 
+  and provides user authentication with [Google OAuth 2.0](https://developers.google.com/accounts/docs/OAuth2WebServer)
 
-  It uses [AngularJS](http://angularjs.org/) for front-end and [hapi](http://spumko.github.io/) for back-end. 
-  It is suitable for Single Page Application (SPA) and provides user authentication 
-  with [Google OAuth 2.0](https://developers.google.com/accounts/docs/OAuth2WebServer)
-
-  app-seed on [npm registery](http://npmjs.org/package/app-seed)
+  app-seed on [npm registry](http://npmjs.org/package/app-seed)
 
 ### Installation
 
@@ -47,10 +46,12 @@ For getting client id and client secret (if don't have any);
 
 ### Usage
 
+#### Test
 ```
 npm test
 ```
-or
+
+#### Example
 ```
 node ./services/httpd/index.js -c config/test.json
 ```
@@ -94,12 +95,12 @@ Go to [http://localhost:12080/](http://localhost:12080/)
 #### Permissions
 
 ```
-find app-seed/ -type f -exec chmod 644 {} +
-find app-seed/ -type d -exec chmod 755 {} +
-chmod 775 app-seed/logs/
-chmod 664 app-seed/logs/app.log
-chmod 755 app-seed/scripts/app.sh
-chmod 755 app-seed/scripts/app.js
+find ../app-seed/ -type f -exec chmod 644 {} +
+find ../app-seed/ -type d -exec chmod 755 {} +
+chmod 775 ../app-seed/logs/
+chmod 664 ../app-seed/logs/app.log
+chmod 755 ../app-seed/scripts/app.sh
+chmod 755 ../app-seed/scripts/app.js
 ```
 
 #### File Structure
@@ -123,6 +124,8 @@ chmod 755 app-seed/scripts/app.js
 |   |   |- account.html         : partial HTML file for account page
 |   |   |- home.html            : partial HTML file for home page
 |   |   |- login.html           : partial HTML file for login page
+|   |   |- logout.html          : partial HTML file for logout page
+|   |   |- nav.html             : partial HTML file for navigation
 |   |- favicon.ico              : icon file for browser / bookmarks
 |   |- index.html               : index HTML file for app layout
 |- config                       : config files
@@ -142,9 +145,9 @@ chmod 755 app-seed/scripts/app.js
 |- .jshintrc                    : config for JSHint
 |- .npmignore                   : ignore settings for NPM
 |- package.json                 : package file for NPM
+|- README.md                    : readme file
 |- CHANGELOG.md                 : changelog file
 |- LICENSE.txt                  : license file
-|- README.md                    : readme file
 |- template-CHANGELOG.md        : template changelog file
 |- template-LICENSE.txt         : template license file
 |- template-README.md           : template readme file
