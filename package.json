@@ -1,7 +1,7 @@
 {
   "name": "app-seed",
-  "version": "0.1.1",
-  "description": "app-seed is an application skeleton for web apps. It uses AngularJS for front-end and hapi for back-end. It is suitable for Single Page Application (SPA) and provides user authentication with Google OAuth 2.0",
+  "version": "0.2.0",
+  "description": "app-seed is an application skeleton for web apps. It uses AngularJS for front-end and Node.js (with hapi) for back-end. It is suitable for Single Page Application (SPA) and provides user authentication with Google OAuth 2.0",
   "keywords": [
     "web",
     "app",
@@ -10,7 +10,8 @@
     "google",
     "oauth2",
     "spa",
-    "seed"
+    "seed",
+    "html5"
   ],
   "homepage": "http://github.com/cmfatih/app-seed",
   "repository": {
@@ -36,8 +37,8 @@
   ],
   "dependencies": {
     "utilex": "0.2.x",
-    "hapi": "1.x",
-    "yar": "0.4.x",
-    "googleapis": "0.4.x"
+    "hapi": "2.x",
+    "yar": "1.x",
+    "googleapis": "0.6.x"
   }
 }

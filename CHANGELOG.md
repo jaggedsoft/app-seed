@@ -5,6 +5,14 @@
 ```
 ```
 
+### 0.2.0 (2014-01-26)
+
+* AngularJS 1.2.10
+* Respond.js v1.4.2
+* hapi 2.x
+* yar 1.x
+* googleapis 0.6.x
+
 ### 0.1.1 (2014-01-19)
 
 * Tidy changes
