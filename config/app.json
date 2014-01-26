@@ -10,6 +10,7 @@
   },
   "hapi": {
     "server": {
+      "host": "localhost",
       "port": 12080,
       "options": {
         "state": {

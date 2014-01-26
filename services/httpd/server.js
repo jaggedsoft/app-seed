@@ -14,18 +14,17 @@ var mHapi = require('hapi');
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var iConfig       = (iParam && iParam.config) ? iParam.config : null,
+  var iConfig     = (iParam && iParam.config) ? iParam.config : null,
+      configHapi  = (iConfig && iConfig.hapi) ? iConfig.hapi : null,
 
-      serverInst,   // server instance
-      serverError,  // server error
-
-      configHapi    = (iConfig && iConfig.hapi) ? iConfig.hapi : null
+      serverInst, // server instance
+      serverError // server error
   ;
 
   // Init server
-  serverInst = new mHapi.createServer('localhost', configHapi.server.port, configHapi.server.options);
+  serverInst = new mHapi.createServer(configHapi.server.host, configHapi.server.port, configHapi.server.options);
   
-  serverInst.pack.allow({ext: true}).require('yar', configHapi.yar.options, function(err) {
+  serverInst.pack.require('yar', configHapi.yar.options, function(err) {
     if(err) serverError = (err || "Unexpected error! (hapi.yar)");
   });
 
