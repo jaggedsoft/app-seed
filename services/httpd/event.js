@@ -4,11 +4,7 @@
  * For the full copyright and license information, please view the LICENSE.txt file.
  */
 
-/*
- * Notes:
- * 
- *  - Add callback feature for events instead of output. // TODO:
- */
+// TODO: Add callback feature for events instead of output.
 
 // Init reqs
 /* jslint node: true */
@@ -20,13 +16,13 @@ var mUtilex = require('utilex');
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var iServer         = (iParam && iParam.server)                     ? iParam.server : null,
-      iIsOnLog        = (iParam && iParam.isOnLog === true)           ? true : false,
-      iIsOnIntrlError = (iParam && iParam.isOnInternalError === true) ? true : false,
-      iIsOnRequest    = (iParam && iParam.isOnRequest === true)       ? true : false,
-      iIsOnResponse   = (iParam && iParam.isOnResponse === true)      ? true : false,
+  var iServer       = (iParam && iParam.server)                     ? iParam.server : null,
+      iIsOnLog      = (iParam && iParam.isOnLog === true)           ? true : false,
+      iIsOnIntrlErr = (iParam && iParam.isOnInternalError === true) ? true : false,
+      iIsOnRequest  = (iParam && iParam.isOnRequest === true)       ? true : false,
+      iIsOnResponse = (iParam && iParam.isOnResponse === true)      ? true : false,
 
-      server          = (iServer && iServer.on) ? iServer : null
+      server        = (iServer && iServer.on) ? iServer : null
   ;
 
   // Init server events
@@ -34,17 +30,14 @@ exports = module.exports = function(iParam) {
     // log
     if(iIsOnLog === true) {
       server.on('log', function(event, tags) {
-
-        if(tags.error) {
-
-        }
+        if(tags.error) {}
         
         mUtilex.tidyLog('gServer.on.log: ' + (event.data || 'unspecified'));
       });
     }
 
     // internal error
-    if(iIsOnIntrlError === true) {
+    if(iIsOnIntrlErr === true) {
       server.on('internalError', function(request, err) {
         mUtilex.tidyLog('gServer.on.internalError: ' + request.id + ' - ' + err.message);
       });
