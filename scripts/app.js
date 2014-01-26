@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 // Init reqs
-var mFS           = require('fs'),    // fs module
-    mPath         = require('path')   // path module
+var mFS   = require('fs'),
+    mPath = require('path')
 ;
 
 // Init vars
@@ -12,4 +12,4 @@ var gPathSep      = mPath.sep,              // path separator
     gPathScrDir   = __dirname               // script path
 ;
 
-console.log('\u001B[2J\u001B[0;0f');        // clear console
+console.log('\u001B[2J\u001B[0;0f'); // clear console
