@@ -4,6 +4,8 @@
  * For the full copyright and license information, please view the LICENSE.txt file.
  */
 
+// TODO: Implement a better solution for `routeForbdn`
+
 // Init reqs
 /* jslint node: true */
 'use strict';
@@ -16,19 +18,21 @@ var mHapi   = require('hapi'),
 exports = module.exports = function(iParam) {
 
   // Init vars
-  var iConfig           = (iParam && iParam.config)     ? iParam.config : null,
-      iServer           = (iParam && iParam.server)     ? iParam.server : null,
-      iPathScrDir       = (iParam && iParam.pathScrDir) ? ('' + iParam.pathScrDir) : null,
+  var iConfig       = (iParam && iParam.config)     ? iParam.config : null,
+      iServer       = (iParam && iParam.server)     ? iParam.server : null,
+      iPathScrDir   = (iParam && iParam.pathScrDir) ? ('' + iParam.pathScrDir) : null,
 
-      serverRoutes,     // route array for server
-      pathHandler,      // route handler for app path - function
-      sessIniter,       // route handler for session initializer - function
-      sessDeiniter,     // route handler for de-initializer - function
-      sessTasker,       // route handler for session tasker - function
-      oauth2CB,         // route handler for oauth2 callback - function
+      cfgHapiRoutes = (iConfig && iConfig.hapi && iConfig.hapi.routes) ? iConfig.hapi.routes : null,
+      oauth2,       // oauth2 helper
 
-      configHapiRoutes  = (iConfig && iConfig.hapi && iConfig.hapi.routes) ? iConfig.hapi.routes : null,
-      oauth2
+      serverRoutes, // route array for server
+      pathHandler,  // route handler for app path - function
+      sessIniter,   // route handler for session initializer - function
+      sessDeiniter, // route handler for de-initializer - function
+      sessTasker,   // route handler for session tasker - function
+      oauth2CB,     // route handler for oauth2 callback - function
+      
+      routeForbdn   // for forbidden route
   ;
 
   // Init oauth2 helper
@@ -36,25 +40,26 @@ exports = module.exports = function(iParam) {
 
   // Route handler for app path
   pathHandler = function(request) {
+
+    // Init session
+    if(request.session.get('inited') === undefined) sessIniter(request, null, {isHandlerCall: false});
+
     // Check only if it is template
     if((('' + request.path).indexOf('/template/') === 0) === true) {
 
       // Init vars
       var reqPath       = ('' + request.path),
-          routeAuthCnt  = (configHapiRoutes instanceof Array) ? configHapiRoutes.length : 0
+          routeAuthCnt  = (cfgHapiRoutes instanceof Array) ? cfgHapiRoutes.length : 0
       ;
-
-      // Init session
-      if(request.session.get('inited') === undefined) sessIniter(request, null, {isHandlerCall: false});
 
       // Check route auths
       for(var i = 0; i < routeAuthCnt; i++) {
 
         // If matches
-        if(configHapiRoutes[i].match === reqPath) {
+        if(cfgHapiRoutes[i].match === reqPath) {
 
           // Init vars
-          var tMatch      = configHapiRoutes[i],
+          var tMatch      = cfgHapiRoutes[i],
               tRoles      = (tMatch.auth && tMatch.auth.roles instanceof Array) ? tMatch.auth.roles : [],
               tNoIsLogin  = (tMatch.auth && tMatch.auth.noIsLogin === true)     ? true              : false,
               task        = request.session.get('task'),
@@ -63,7 +68,7 @@ exports = module.exports = function(iParam) {
           ;
 
           // Check vars
-          task        = (task instanceof Object)      ? task      : null;   // Keep this for multi task
+          task        = (task instanceof Object)      ? task      : null; // Keep this for multi task
           userIsLogin = (userIsLogin === true)        ? true      : false;
           userRoles   = (userRoles instanceof Array)  ? userRoles : [];
 
@@ -83,16 +88,18 @@ exports = module.exports = function(iParam) {
 
               // Access denied due role
               if(tErrTrig === true) {
-                // Set session task for client side
+                // Set session task
                 task = {
                   "type": "alert",
                   "option": {
                     "kind": "error",
+                    "caption": "Access denied",
                     "message": "You don't have access to the page."
                   }
                 };
                 request.session.set('task', task);
-                request.reply(mHapi.error.forbidden('Access denied'));
+
+                routeForbdn = task.option.caption;
               }
             }
             else {
@@ -102,12 +109,14 @@ exports = module.exports = function(iParam) {
                 "type": "redirect",
                 "option": {
                   "kind": "error",
+                  "caption": "Login required",
                   "message": "Login required.",
                   "url": "/login"
                 }
               };
               request.session.set('task', task);
-              request.reply(mHapi.error.forbidden('Login required'));
+
+              routeForbdn = task.option.caption;
             }
           }
 
@@ -118,13 +127,14 @@ exports = module.exports = function(iParam) {
               "type": "redirect",
               "option": {
                 "kind": "warning",
+                "caption": "Already login",
                 "message": "You are already login.",
                 "url": "/account"
               }
             };
-
             request.session.set('task', task);
-            request.reply(mHapi.error.forbidden('You are already login.'));
+
+            routeForbdn = task.option.caption;
           }
 
           break;
@@ -136,9 +146,10 @@ exports = module.exports = function(iParam) {
   };
 
   // Route handler for session initializer
-  sessIniter = function(request, next, iParam) {
+  sessIniter = function(request, reply, iParam) {
+
     // Init vars
-    var requestReply    = {},
+    var reqReply        = {},
         inited          = request.session.get('inited'),
         hit             = request.session.get('hit'),
         task            = request.session.get('task'),
@@ -186,7 +197,7 @@ exports = module.exports = function(iParam) {
     }
 
     // Reply
-    requestReply = {
+    reqReply = {
       "inited": inited,
       "hit": hit,
       "task": task,
@@ -200,17 +211,16 @@ exports = module.exports = function(iParam) {
       }
     };
 
-    if(iIsHandlerCall === false) {
-      request.reply(requestReply);
-    }
+    if(iIsHandlerCall === false) reply(reqReply);
   };
 
   // Route handler for de-initialization
-  sessDeiniter = function(request) {
+  sessDeiniter = function(request, reply) {
+
     // Init vars
-    var requestReply    = {},
-        task            = request.session.get('task'),
-        userIsLogin     = request.session.get('user.isLogin'),
+    var reqReply      = {},
+        task          = request.session.get('task'),
+        userIsLogin   = request.session.get('user.isLogin'),
         userLoginUrl
     ;
 
@@ -234,7 +244,7 @@ exports = module.exports = function(iParam) {
     }
 
     // Reply
-    requestReply = {
+    reqReply = {
       "inited": false,
       "hit": null,
       "task": task,
@@ -248,16 +258,17 @@ exports = module.exports = function(iParam) {
       }
     };
 
-    request.reply(requestReply);
+    reply(reqReply);
   };
 
   // Route handler for session tasker
-  sessTasker = function(request) {
+  sessTasker = function(request, reply) {
+
     // Init vars
-    var requestReply  = {},
-        inited        = request.session.get('inited'),
-        hit           = request.session.get('hit'),
-        task          = request.session.get('task')
+    var reqReply  = {},
+        inited    = request.session.get('inited'),
+        hit       = request.session.get('hit'),
+        task      = request.session.get('task')
     ;
 
     // Check vars
@@ -276,19 +287,20 @@ exports = module.exports = function(iParam) {
     }
 
     // Reply
-    requestReply = {"task": task};
+    reqReply = {"task": task};
 
-    request.reply(requestReply);
+    reply(reqReply);
   };
 
   // Route handler for oauth2 callback
-  oauth2CB = function(request) {
+  oauth2CB = function(request, reply) {
+
     // Init vars
-    var requestReply  = {},
-        task          = request.session.get('task'),
-        queryState    = request.query.state,
-        queryCode     = request.query.code,
-        queryError    = request.query.error
+    var reqReply    = {},
+        task        = request.session.get('task'),
+        queryState  = request.query.state,
+        queryCode   = request.query.code,
+        queryError  = request.query.error
     ;
 
     // Check vars
@@ -336,7 +348,7 @@ exports = module.exports = function(iParam) {
                     request.session.set('user.name.full', ui.name);
                     request.session.set('user.roles', ['user']);
 
-                    request.reply.redirect('/#/account');
+                    reply().redirect('/#/account');
                   }
                   else {
                     // API get error
@@ -344,11 +356,12 @@ exports = module.exports = function(iParam) {
                       "type": "alert",
                       "option": {
                         "kind": "error",
+                        "caption": "Approval error",
                         "message": "App approval error. (" + err + ")"
                       }
                     };
                     request.session.set('task', task);
-                    request.reply.redirect('/#/login');
+                    reply().redirect('/#/login');
                   }
                 });
               }
@@ -358,11 +371,12 @@ exports = module.exports = function(iParam) {
                   "type": "alert",
                   "option": {
                     "kind": "error",
+                    "caption": "Approval error",
                     "message": "App approval error. (" + err + ")"
                   }
                 };
                 request.session.set('task', task);
-                request.reply.redirect('/#/login');
+                reply().redirect('/#/login');
               }
           });
         }
@@ -372,11 +386,12 @@ exports = module.exports = function(iParam) {
             "type": "alert",
             "option": {
               "kind": "error",
+              "caption": "Approval error",
               "message": "App approval error. (" + err + ")"
             }
           };
           request.session.set('task', task);
-          request.reply.redirect('/#/login');
+          reply().redirect('/#/login');
         }
       });
     }
@@ -390,9 +405,23 @@ exports = module.exports = function(iParam) {
         }
       };
       request.session.set('task', task);
-      request.reply.redirect('/#/login');
+      reply().redirect('/#/login');
     }
   };
+
+  // Init server onPreResponse event
+  iServer.ext('onPreResponse', function(request, reply) {
+
+    // Init vars
+    //var isBoom = (request.response && request.response.isBoom) ? request.response.isBoom : null;
+
+    if(routeForbdn) {
+      routeForbdn = null;
+      return reply(mHapi.error.forbidden(routeForbdn));
+    }
+
+    return reply();
+  });
 
   // Server routes
   serverRoutes = [
