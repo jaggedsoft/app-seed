@@ -87,7 +87,7 @@ Go to [http://localhost:12080/](http://localhost:12080/)
     - `('' + var)`
     - `.toString()`
   * is array:
-    - `!(var instanceof Array)`
+    - `(var instanceof Array)`
     - `(Object.prototype.toString.call(var) === '[object Array]')`
   * is object:
     - `(var && typeof var === 'object')`
