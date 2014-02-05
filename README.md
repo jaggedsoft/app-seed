@@ -60,7 +60,7 @@ Go to [http://localhost:12080/](http://localhost:12080/)
 
 ### Notes
 
-#### App Design goals
+#### App Design Goals
 
   * Use JavaScript
   * Use Node.js
