@@ -1,11 +1,11 @@
 ## App Seed
 
-  [app-seed](http://github.com/cmfatih/app-seed) is an application skeleton for web apps.
-  It uses [AngularJS](http://angularjs.org/) for front-end and [Node.js](http://nodejs.org/) 
-  (with [hapi](http://hapijs.com/)) for back-end. It is suitable for Single Page Application (SPA) 
-  and provides user authentication with [Google OAuth 2.0](https://developers.google.com/accounts/docs/OAuth2WebServer)
+[app-seed](http://github.com/cmfatih/app-seed) is an application skeleton for web apps.
+It uses [AngularJS](http://angularjs.org/) for front-end and [Node.js](http://nodejs.org/) 
+(with [hapi](http://hapijs.com/)) for back-end. It is suitable for Single Page Application (SPA) 
+and provides user authentication with [Google OAuth 2.0](https://developers.google.com/accounts/docs/OAuth2WebServer)
 
-  app-seed on [npm registry](http://npmjs.org/package/app-seed)
+app-seed on [npm registry](http://npmjs.org/package/app-seed)
 
 ### Installation
 

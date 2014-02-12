@@ -3,9 +3,8 @@
 ### HEAD
 
 ```
-* (date) - A notable change
 ```
 
-### version (date)
+### 0.1.0 (YYYY-MM-DD)
 
-* A notable change
+* Initial release
