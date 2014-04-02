@@ -90,9 +90,9 @@ Go to [http://localhost:12080/](http://localhost:12080/)
     - `(var instanceof Array)`
     - `(Object.prototype.toString.call(var) === '[object Array]')`
   * is object:
-    - `(var && typeof var === 'object')`
+    - `(typeof var === 'object')`
   * is function:
-    - `(var && typeof var === 'function')`
+    - `(typeof var === 'function')`
 
 #### Permissions
 
@@ -142,14 +142,6 @@ chmod 755 ../app-seed/scripts/app.js
 |   |- httpd                    : httpd service
 |- test                         : test files
 |   |- test-all.js              : default test file
-|- .gitattributes               : attributes for GIT
-|- .gitignore                   : ignore settings for GIT
-|- .jshintrc                    : config for JSHint
-|- .npmignore                   : ignore settings for NPM
-|- package.json                 : package file for NPM
-|- README.md                    : readme file
-|- CHANGELOG.md                 : changelog file
-|- LICENSE.txt                  : license file
 |- template-CHANGELOG.md        : template changelog file
 |- template-LICENSE.txt         : template license file
 |- template-README.md           : template readme file
