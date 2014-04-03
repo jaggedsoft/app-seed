@@ -29,8 +29,8 @@
   },
   "contributors": [],
   "scripts": {
-    "start": "node ./services/httpd/index.js -c config/app.json",
-    "test": "node ./services/httpd/index.js -c config/test.json"
+    "start": "node ./app/httpd/index.js -c config/app.json",
+    "test": "node ./app/httpd/index.js -c config/test.json"
   },
   "engines": [
     "node >= 0.10.21"

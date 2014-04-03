@@ -142,7 +142,7 @@ exports = module.exports = function(iParam) {
       }
     }
 
-    return iPathScrDir + '/../../app';
+    return iPathScrDir + '/../www';
   };
 
   // Route handler for session initializer

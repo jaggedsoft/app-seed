@@ -3,6 +3,7 @@
 ### HEAD
 
 ```
+* Moving services/httpd directory
 ```
 
 ### 0.2.0 (2014-01-26)

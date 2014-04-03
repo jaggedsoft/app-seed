@@ -81,42 +81,42 @@ chmod 755 ../app-seed/scripts/app.js
 
 ```
 |- app
-|   |- css                      : CSS files
-|   |   |- app.css              : default CSS file
-|   |- img                      : image files
-|   |- js                       : JS files
-|   |   |- base                 : base modules
-|   |   |-  |- controller.js    : module for controllers
-|   |   |-  |- directives.js    : module for directives
-|   |   |-  |- routes.js        : module for routes
-|   |   |-  |- services.js      : module for services
-|   |   |- app.js               : default JS file
-|   |- lib                      : 3rd party libraries
-|   |   |- angular              : AngularJS library
-|   |   |- misc                 : html5shiv, respond.js
-|   |- template                 : template files
-|   |   |- account.html         : partial HTML file for account page
-|   |   |- home.html            : partial HTML file for home page
-|   |   |- login.html           : partial HTML file for login page
-|   |   |- logout.html          : partial HTML file for logout page
-|   |   |- nav.html             : partial HTML file for navigation
-|   |- favicon.ico              : icon file for browser / bookmarks
-|   |- index.html               : index HTML file for app layout
-|- config                       : config files
-|   |- app.json                 : default config file
-|- logs                         : log files
-|   |- app.log                  : default log file
-|- scripts                      : script files for shell, cron, js, etc...
-|   |- app.bat                  : default shell script for WIN platform
-|   |- app.js                   : default shell script for Node.js
-|   |- app.sh                   : default shell script for POSIX platforms
-|- services                     : services
-|   |- httpd                    : httpd service
-|- test                         : test files
-|   |- test-all.js              : default test file
-|- template-CHANGELOG.md        : template changelog file
-|- template-LICENSE.txt         : template license file
-|- template-README.md           : template readme file
+|   |- httpd                        : httpd service
+|   |- www                          : www
+|   |   |- css                      : CSS files
+|   |   |   |- app.css              : default CSS file
+|   |   |- img                      : image files
+|   |   |- js                       : JS files
+|   |   |   |- base                 : base modules
+|   |   |   |-  |- controller.js    : module for controllers
+|   |   |   |-  |- directives.js    : module for directives
+|   |   |   |-  |- routes.js        : module for routes
+|   |   |   |-  |- services.js      : module for services
+|   |   |   |- app.js               : default JS file
+|   |   |- lib                      : 3rd party libraries
+|   |   |   |- angular              : AngularJS library
+|   |   |   |- misc                 : html5shiv, respond.js
+|   |   |- template                 : template files
+|   |   |   |- account.html         : partial HTML file for account page
+|   |   |   |- home.html            : partial HTML file for home page
+|   |   |   |- login.html           : partial HTML file for login page
+|   |   |   |- logout.html          : partial HTML file for logout page
+|   |   |   |- nav.html             : partial HTML file for navigation
+|   |   |- favicon.ico              : icon file for browser / bookmarks
+|   |   |- index.html               : index HTML file for app layout
+|- config                           : config files
+|   |- app.json                     : default config file
+|- logs                             : log files
+|   |- app.log                      : default log file
+|- scripts                          : script files for shell, cron, js, etc...
+|   |- app.bat                      : default shell script for WIN platform
+|   |- app.js                       : default shell script for Node.js
+|   |- app.sh                       : default shell script for POSIX platforms
+|- test                             : test files
+|   |- test-all.js                  : default test file
+|- template-CHANGELOG.md            : template changelog file
+|- template-LICENSE.txt             : template license file
+|- template-README.md               : template readme file
 ```
 
 ### Changelog
