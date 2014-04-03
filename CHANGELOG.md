@@ -3,8 +3,13 @@
 ### HEAD
 
 ```
-* Moving services/httpd directory
 ```
+
+### 0.3.0 (2014-01-26)
+
+* AngularJS 1.2.15
+* Cleanup for unused AngularJS files
+* Moving services/httpd directory
 
 ### 0.2.0 (2014-01-26)
 
