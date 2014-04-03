@@ -17,6 +17,7 @@ npm install app-seed
 For HEAD
 ```
 git clone https://github.com/cmfatih/app-seed.git
+npm install
 ```
 
 #### Config
