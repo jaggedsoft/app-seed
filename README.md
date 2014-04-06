@@ -47,6 +47,17 @@ For getting client id and client secret (if don't have any);
 6. Click to *Generate* button. (It will update client secret)
 7. Update *CLIENT ID* and *CLIENT SECRET* at `config/test.json`
 
+#### Permissions
+
+```
+find ../app-seed/ -type f -exec chmod 644 {} +
+find ../app-seed/ -type d -exec chmod 755 {} +
+chmod 775 ../app-seed/logs/
+chmod 664 ../app-seed/logs/app.log
+chmod 755 ../app-seed/scripts/app.sh
+chmod 755 ../app-seed/scripts/app.js
+```
+
 ### Usage
 
 #### Test
@@ -65,17 +76,6 @@ Go to [http://localhost:12080/](http://localhost:12080/)
 
 * For issues see [Issues](https://github.com/cmfatih/app-seed/issues)
 * For coding and design goals see [CODING.md](https://github.com/cmfatih/app-seed/blob/master/CODING.md)
-
-#### Permissions
-
-```
-find ../app-seed/ -type f -exec chmod 644 {} +
-find ../app-seed/ -type d -exec chmod 755 {} +
-chmod 775 ../app-seed/logs/
-chmod 664 ../app-seed/logs/app.log
-chmod 755 ../app-seed/scripts/app.sh
-chmod 755 ../app-seed/scripts/app.js
-```
 
 #### File Structure
 
