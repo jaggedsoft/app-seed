@@ -20,6 +20,16 @@ git clone https://github.com/cmfatih/app-seed.git
 npm install
 ```
 
+Permissions
+```
+find ../app-seed/ -type f -exec chmod 644 {} +
+find ../app-seed/ -type d -exec chmod 755 {} +
+chmod 775 ../app-seed/logs/
+chmod 664 ../app-seed/logs/app.log
+chmod 755 ../app-seed/scripts/app.sh
+chmod 755 ../app-seed/scripts/app.js
+```
+
 #### Config
 
 Create a copy of default config file. (the new config file will be ignored by git)
@@ -46,36 +56,6 @@ For getting client id and client secret (if don't have any);
 5. Type `http://localhost:12080/` to *web origin* and `http://localhost:12080/auth/google/callback` to *redirect uri*
 6. Click to *Generate* button. (It will update client secret)
 7. Update *CLIENT ID* and *CLIENT SECRET* at `config/test.json`
-
-#### Permissions
-
-```
-find ../app-seed/ -type f -exec chmod 644 {} +
-find ../app-seed/ -type d -exec chmod 755 {} +
-chmod 775 ../app-seed/logs/
-chmod 664 ../app-seed/logs/app.log
-chmod 755 ../app-seed/scripts/app.sh
-chmod 755 ../app-seed/scripts/app.js
-```
-
-### Usage
-
-#### Test
-```
-npm test
-```
-
-#### Starting server
-```
-node ./services/httpd/index.js -c config/test.json
-```
-
-Go to [http://localhost:12080/](http://localhost:12080/)
-
-### Notes
-
-* For issues see [Issues](https://github.com/cmfatih/app-seed/issues)
-* For coding and design goals see [CODING.md](https://github.com/cmfatih/app-seed/blob/master/CODING.md)
 
 #### File Structure
 
@@ -118,6 +98,25 @@ Go to [http://localhost:12080/](http://localhost:12080/)
 |- template-LICENSE.txt             : template license file
 |- template-README.md               : template readme file
 ```
+
+### Usage
+
+#### Test
+```
+npm test
+```
+
+#### Starting server
+```
+node ./services/httpd/index.js -c config/test.json
+```
+
+Go to [http://localhost:12080/](http://localhost:12080/)
+
+### Notes
+
+* For issues see [Issues](https://github.com/cmfatih/app-seed/issues)
+* For coding and design goals see [CODING.md](https://github.com/cmfatih/app-seed/blob/master/CODING.md)
 
 ### Changelog
 

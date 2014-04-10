@@ -23,6 +23,7 @@
 * "g" prefix used for global variables.
 * "t" prefix used for temp (has generic name) variables.
 * "i" prefix used for function (global) arguments.
+* "p" prefix used for parameter variables.
 * to string:
   - `('' + var)`
   - `.toString()`
@@ -33,3 +34,5 @@
   - `(typeof var === 'object')`
 * is function:
   - `(typeof var === 'function')`
+* check callback
+  - `if(typeof iCB !== 'function') { var iCB = function(err) { return err; }; }`
