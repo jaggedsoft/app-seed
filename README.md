@@ -17,8 +17,6 @@ npm install app-seed
 For HEAD
 ```
 git clone https://github.com/cmfatih/app-seed.git
-cd app-seed/
-npm install
 ```
 
 Permissions
@@ -29,6 +27,11 @@ chmod 775 ../app-seed/logs/
 chmod 664 ../app-seed/logs/app.log
 chmod 755 ../app-seed/scripts/app.sh
 chmod 755 ../app-seed/scripts/app.js
+```
+
+Install packages
+```
+npm install
 ```
 
 #### Config
