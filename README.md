@@ -112,7 +112,7 @@ npm test
 
 #### Starting server
 ```
-node ./services/httpd/index.js -c config/test.json
+node ./app/httpd/index.js -c config/test.json
 ```
 
 Go to [http://localhost:12080/](http://localhost:12080/)
