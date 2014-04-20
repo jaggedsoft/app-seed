@@ -120,7 +120,7 @@ Go to [http://localhost:12080/](http://localhost:12080/)
 ### Notes
 
 * For issues see [Issues](https://github.com/cmfatih/app-seed/issues)
-* For coding and design goals see [CODING.md](https://github.com/cmfatih/app-seed/blob/master/CODING.md)
+* For design goals and coding see [coding](https://github.com/cmfatih/coding)
 
 ### Changelog
 
