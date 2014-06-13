@@ -1,11 +1,12 @@
 ## App Seed
 
 [app-seed](http://github.com/cmfatih/app-seed) is an application skeleton for web apps.
-It uses [AngularJS](http://angularjs.org/) for front-end and [Node.js](http://nodejs.org/) 
-(with [hapi](http://hapijs.com/)) for back-end. It is suitable for Single Page Application (SPA) 
-and provides user authentication with [Google OAuth 2.0](https://developers.google.com/accounts/docs/OAuth2WebServer)
+It uses AngularJS for front-end and Node.js (hapi framework) for back-end. 
+It is suitable for Single Page Application (SPA) and provides user authentication with Google OAuth 2.0  
 
-app-seed on [npm registry](http://npmjs.org/package/app-seed)
+[![NPM][npm-image]][npm-url]
+
+**!!! THIS APP DEPRECATED !!!**  
 
 ### Installation
 
@@ -19,36 +20,11 @@ For HEAD
 git clone https://github.com/cmfatih/app-seed.git
 ```
 
-Permissions
-```
-find ../app-seed/ -type f -exec chmod 644 {} +
-find ../app-seed/ -type d -exec chmod 755 {} +
-chmod 775 ../app-seed/logs/
-chmod 664 ../app-seed/logs/app.log
-chmod 755 ../app-seed/scripts/app.sh
-chmod 755 ../app-seed/scripts/app.js
-```
-
-Install packages
-```
-npm install
-```
-
 #### Config
 
 Create a copy of default config file. (the new config file will be ignored by git)
 ```
 cp config/app.json config/test.json
-```
-
-Update `config/test.json` for Google OAuth2 authentication. 
-```
-"auth": {
-  "oauth2Client": {
-    "clientId": "CLIENTID",
-    "clientSecret": "CLIENTSECRET",
-    ...
-    ...
 ```
 
 For getting client id and client secret (if don't have any);  
@@ -60,6 +36,36 @@ For getting client id and client secret (if don't have any);
 5. Type `http://localhost:12080/` to *web origin* and `http://localhost:12080/auth/google/callback` to *redirect uri*
 6. Click to *Generate* button. (It will update client secret)
 7. Update *CLIENT ID* and *CLIENT SECRET* at `config/test.json`
+
+Update `config/test.json` for Google OAuth2 authentication. 
+```
+"auth": {
+  "oauth2Client": {
+    "clientId": "CLIENTID",
+    "clientSecret": "CLIENTSECRET",
+    ...
+    ...
+```
+
+### Usage
+
+#### Starting app
+
+Default config file (config/app.json)
+```
+npm start
+```
+
+Custom config file
+```
+node ./app/httpd/index.js -c config/test.json
+```
+
+See `http://localhost:12080/`
+
+### Notes
+
+* For issues see [Issues](https://github.com/cmfatih/app-seed/issues)
 
 #### File Structure
 
@@ -103,25 +109,6 @@ For getting client id and client secret (if don't have any);
 |- template-README.md               : template readme file
 ```
 
-### Usage
-
-#### Test
-```
-npm test
-```
-
-#### Starting server
-```
-node ./app/httpd/index.js -c config/test.json
-```
-
-Go to [http://localhost:12080/](http://localhost:12080/)
-
-### Notes
-
-* For issues see [Issues](https://github.com/cmfatih/app-seed/issues)
-* For design goals and coding see [coding](https://github.com/cmfatih/coding)
-
 ### Changelog
 
 For all notable changes see [CHANGELOG.md](https://github.com/cmfatih/app-seed/blob/master/CHANGELOG.md)
@@ -131,3 +118,6 @@ For all notable changes see [CHANGELOG.md](https://github.com/cmfatih/app-seed/b
 Copyright (c) 2013 Fatih Cetinkaya (http://github.com/cmfatih/app-seed)  
 For the full copyright and license information, please view the LICENSE.txt file.  
 Licensed under The MIT License (MIT)
+
+[npm-url]: http://npmjs.org/package/app-seed
+[npm-image]: https://badge.fury.io/js/app-seed.png
