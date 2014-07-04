@@ -1,6 +1,6 @@
 {
   "name": "app-seed",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "app-seed is an application skeleton for web apps. It uses AngularJS for front-end and Node.js (hapi framework) for back-end. It is suitable for Single Page Application (SPA) and provides user authentication with Google OAuth 2.0",
   "keywords": [
     "web",
@@ -32,7 +32,7 @@
     "test": "node ./app/httpd/index.js -c config/test.json"
   },
   "engines": [
-    "node >= 0.10.21"
+    "node >= 0.10.20"
   ],
   "dependencies": {
     "utilex": "0.2.x",

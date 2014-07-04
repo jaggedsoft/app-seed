@@ -1,12 +1,11 @@
-## !!! DEPRECATED - NO LONGER DEVELOPED !!!  
+#### ! DEPRECATED - NO LONGER DEVELOPED !  
 
 ## App Seed
+[![NPM][npm-image]][npm-url]
 
 [app-seed](http://github.com/cmfatih/app-seed) is an application skeleton for web apps.
 It uses AngularJS for front-end and Node.js (hapi framework) for back-end. 
 It is suitable for Single Page Application (SPA) and provides user authentication with Google OAuth 2.0  
-
-[![NPM][npm-image]][npm-url]
 
 ### Installation
 

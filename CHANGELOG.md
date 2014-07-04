@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.3.4 (2014-07-04)
+
+* Misc. updates
+
 ### 0.3.3 (2014-07-01)
 
 * Add larger `deprecated` note!
